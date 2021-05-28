@@ -111,16 +111,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="item : ${loais}">
+                                <tr th:each="item : ${xes}">
                                     <td th:text="${item.getId()}"></td>
                                     <td th:text="${item.getTen()}"></td>
-                                    <td th:text="${item.getGia()}"></td>
-                                    <td th:text="${item.getDate()}"></td>
+                                    <td th:text="${item.getSoghe()}"></td>
+                                    <td th:text="${item.getLoai().getTen()}"></td>
+                                    <td th:text="${item.getTrangthai()} ? 'Rảnh' : 'Không rảnh'"></td>
                                     <td class="d-flex justify-content-end">
                                         <div class="btn-toolbar" role="group" aria-label="Basic example">
-                                            <a class="btn btn-primary mb-4 mr-4" th:href="@{/loai/sua-loai/{id}(id=${item.getId()})}" role="button">Sửa</a>
+                                            <a class="btn btn-primary mb-4 mr-4" th:href="@{/xe/sua-xe/{id}(id=${item.getId()})}" role="button">Sửa</a>
                                             <a class="btn btn-danger mb-4"
-                                               th:href="@{/loai/xoa-loai/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>
+                                               th:href="@{/xe/xoa-xe/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -137,22 +138,25 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <h1>Sửa loại</h1>
-                            <form th:action="@{/loai/sua-loai}" method="post" th:object="${loai}">
-                                <input hidden=""/>
+                            <h1>Sửa xe</h1>
+                            <form th:action="@{/xe/sua-xe}" method="post" th:object="${xe}">
                                 <div class="form-group">
                                     <input th:field="*{id}" hidden/>
-                                    <label class="control-label" for="firstName"> Tên loại </label>
+                                    <label class="control-label" for="firstName"> Tên xe </label>
                                     <input id="firstName" class="form-control" th:field="*{ten}"
                                            required autofocus="autofocus"/>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Giá</label>
-                                    <input type="number" class="form-control" th:field="*{gia}">
+                                    <label class="form-label">Số ghế</label>
+                                    <input type="number" class="form-control" th:field="*{soghe}">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Ngày</label>
-                                    <input type="date" class="form-control" th:field="*{date}">
+                                    <label class="form-label">Loại</label>
+                                    <input type="date" class="form-control" th:field="*{loai.getTen()}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Trạng thái</label>
+                                    <input type="checkbox" class="form-control" th:field="*{trangthai}">
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Sửa</button>
@@ -166,21 +170,25 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <h1>Thêm loại</h1>
-                            <form th:action="@{/loai/them-loai}" method="post" th:object="${loai}">
+                            <h1>Thêm xe</h1>
+                            <form th:action="@{/xe/them-xe}" method="post" th:object="${xe}">
                                 <div class="form-group">
-                                    <label class="control-label" for="firstName"> Tên loại</label>
+                                    <label class="control-label" for="firstName"> Tên xe</label>
                                     <input  class="form-control" th:field="*{ten}"
                                             required autofocus="autofocus"/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Giá</label>
-                                    <input  type="number" class="form-control" th:field="*{gia}"
+                                    <label class="control-label">Số ghế</label>
+                                    <input  type="number" class="form-control" th:field="*{soghe}"
                                             required autofocus="autofocus"/>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Ngày</label>
-                                    <input type="date" class="form-control" th:field="*{date}">
+                                    <label class="form-label">Loại</label>
+                                    <input type="text" class="form-control" th:text="${xe.getLoai().getTen()}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Trạng thái</label>
+                                    <input type="checkbox" class="form-control" th:field="*{trangthai}">
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Thêm</button>

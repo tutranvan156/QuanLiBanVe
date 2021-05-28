@@ -165,15 +165,20 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <h1>Thêm loại</h1>
-                            <form th:action="@{/loai/them-loai}" method="post" th:object="${loai}">
+                            <h1>Thêm chuyến</h1>
+                            <form th:action="@{/chuyen/them-chuyen}" method="post" th:object="${chuyen}">
                                 <div class="form-group">
-                                    <label class="control-label" for="firstName"> Tên loại</label>
-                                    <input  class="form-control" th:field="*{ten}"
+                                    <label class="control-label" for="firstName"> Tên chuyến</label>
+                                    <input  class="form-control" th:field="*{matuyen}"
                                             required autofocus="autofocus"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Giá</label>
+                                    <input  type="number" class="form-control" th:field="*{gia}"
+                                            required autofocus="autofocus"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">S</label>
                                     <input  type="number" class="form-control" th:field="*{gia}"
                                             required autofocus="autofocus"/>
                                 </div>

@@ -27,6 +27,7 @@ public class LoaiServiceImpl implements LoaiService {
         Integer id = loai.getId();
         Loai loaiTemp = timLoai(id);
         loaiTemp.setId(id);
+        loaiTemp.setTen(loai.getTen());
         loaiTemp.setDate(loai.getDate());
         loaiTemp.setGia(loai.getGia());
         return this.loaiRepository.save(loaiTemp);

@@ -19,7 +19,7 @@ public class Xe {
     @Column(name = "ten")
     private String ten;
     @Column(name = "soghe")
-    private int soghe;
+    private Integer soghe;
 
     @ManyToOne
     @JoinColumn(name = "maloai")
