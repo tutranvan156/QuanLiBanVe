@@ -12,20 +12,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
             crossorigin="anonymous"></script>
 </head>
-<body>
-<form th:action="@{/user/dang-nhap}" method="post" th:object="${user}">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label>Tên đăng nhâp</label>
-            <input type="text" class="form-control" th:field="*{username}">
-        </div>
-        <div class="form-group col-md-6">
-            <label>Mật khẩu</label>
-            <input type="password" class="form-control" th:field="*{password}">
-        </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Đăng nhập</button>
-    </div>
-</form>
+<body>
+<br><br>
+<h2 style="text-align: center">ĐĂNG NHẬP</h2>
+ <div class="container" style="padding: 50px 0 0 280px">
+     <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 15px; padding-left: 50px" th:action="@{/user/dang-nhap}" method="post" th:object="${user}">
+         <div class="form-row">
+             <div class="form-group" >
+                 <label>Tên đăng nhâp</label>
+                 <input type="text" class="form-control" th:field="*{username}">
+             </div>
+             <br>
+             <div class="form-group">
+                 <label>Mật khẩu</label>
+                 <input type="password" class="form-control" th:field="*{password}">
+             </div>
+
+             <button type="submit" class="btn btn-primary mt-4">Đăng nhập</button>
+             <a class="btn btn-warning mt-4 ml-3" th:href="@{/mat-khau}" role="button">Quên mật khẩu ?</a>
+
+             <div style="float: right; padding-top: 30px">
+                 <span>Nếu chưa có tài khoản, mời bạn đăng kí tại đây!!</span>
+                 <a href="http://localhost:8080/user/dang-ky">ĐĂNG KÍ</a>
+             </div>
+         </div>
+     </form>
+ </div>
 </body>
 </html>

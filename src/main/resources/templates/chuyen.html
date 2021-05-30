@@ -7,7 +7,6 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Thông tin chuyến xe</title>
-    <link rel="stylesheet" href="dist/css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
@@ -51,19 +50,19 @@
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link" href="../TuyenXe/Tuyen">
+                    <a class="nav-link" th:href="@{/tuyen}">
                         <i class="fas fa-chart-area"></i>
                         Thông tin tuyến xe
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link  " href="Ve/ve.html">
+                    <a class="nav-link  " th:href="@{/ve}">
                         <i class="fas fa-table"></i>
                         Thông tin vé
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link  " href="khachhang.html/khachhang.html">
+                    <a class="nav-link  " th:href="@{/khachhang}">
                         <i class="fas fa-chart-area"></i>
                         Thông tin khách hàng
                     </a>
@@ -76,7 +75,7 @@
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link" th:href="@{/gia}">
+                    <a class="nav-link" th:href="@{/loai}">
                         <i class="fas fa-table"></i>
                         Thiết lập giá vé
                     </a>
@@ -95,8 +94,8 @@
 
         <div th:switch="${mode}">
 
-            <div th:case = "MAIN">
-                <a class="btn btn-primary mb-4" href="chuyen/them-chuyen" role="button">Thêm chuyến xe</a>
+            <div th:case="MAIN">
+                <a class="btn btn-primary mb-4" href="chuyen/them-chuyen" role="button">Thêm chuyến</a>
                 <div class="card mb-4 w-100">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -104,22 +103,29 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">STT</th>
-                                    <th scope="col">Tên chuyến</th>
-                                    <th scope="col">Giá vé</th>
-                                    <th scope="col">Thời gian</th>
+                                    <th scope="col">Tên chuyến xe</th>
+                                    <th scope="col">Tên xe</th>
+                                    <th scope="col">Giá tiền</th>
+                                    <th scope="col">Số ghế</th>
+                                    <th scope="col">Ngày</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 <tr th:each="item : ${chuyens}">
                                     <td th:text="${item.getId()}"></td>
                                     <td th:text="${item.getTuyen().getTentuyen()}"></td>
+                                    <td th:text="${item.getXe().getTen()}"></td>
                                     <td th:text="${item.getXe().getLoai().getGia()}"></td>
+                                    <td th:text="${item.getXe().getSoghe()}"></td>
                                     <td th:text="${item.getDate()}"></td>
                                     <td class="d-flex justify-content-end">
                                         <div class="btn-toolbar" role="group" aria-label="Basic example">
-                                            <a class="btn btn-primary mb-4 mr-4" th:href="@{/chuyen/sua-chuyen/{id}(id=${item.getId()})}" role="button">Sửa</a>
-                                            <a class="btn btn-danger mb-4"
-                                               th:href="@{/chuyen/xoa-chuyen/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>
+                                            <a class="btn btn-primary mb-4 mr-4"
+                                               th:href="@{/chuyen/sua-chuyen/{id}(id=${item.getId()})}" role="button">Sửa</a>
+                                            <!--                                            <a class="btn btn-danger mb-4"-->
+                                            <!--                                               th:href="@{/chuyen/xoa-chuyen/{id}(id=${item.getId()})}" role="button"-->
+                                            <!--                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>-->
                                         </div>
                                     </td>
                                 </tr>
@@ -130,57 +136,67 @@
                 </div>
 
             </div>
-
-            <div th:case = "SUA">
-
+            <div th:case="SUA">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <h1>Sửa chuyến</h1>
+                            <h1>Sửa xe</h1>
                             <form th:action="@{/chuyen/sua-chuyen}" method="post" th:object="${chuyen}">
-                                <input hidden=""/>
+                                <input th:field="*{id}" hidden/>
+
+
+
+
+
                                 <div class="form-group">
-                                    <input th:field="*{id}" hidden/>
-                                    <label class="control-label" for="firstName"> Tên chuyến </label>
-                                    <input id="firstName" class="form-control" th:field="*{ngay}"
-                                           required autofocus="autofocus"/>
+                                    <label class="control-label">Tên chuyến xe</label>
+                                    <input class="form-control"  th:value="${chuyen.getTuyen().getTentuyen()}"
+                                           required autofocus="autofocus" disabled/>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Giá</label>
-                                    <input type="number" class="form-control" th:field="*{gia}">
+                                <div class="form-group">
+                                    <label class="form-label">Tên xe</label>
+                                    <input type="text" class="form-control"  th:value="${chuyen.getXe().getTen()}"
+                                           disabled >
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Ngày</label>
+                                <div class="form-group">
+                                    <label class="form-label">Giá tiền</label>
+                                    <input type="number" class="form-control"
+                                           th:value="${chuyen.getXe().getLoai().getGia()}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Số ghế</label>
+                                    <input type="number" class="form-control" th:value="${chuyen.getXe().getSoghe()}"
+                                           disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">ngày</label>
                                     <input type="date" class="form-control" th:field="*{date}">
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Sửa</button>
-                                <a class="btn btn-danger" href="back" role="button">Trở về</a>
+                                <a class="btn btn-danger ml-3" href="back" role="button">Trở về</a>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div th:case = "THEM">
+            <div th:case="THEM">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <h1>Thêm chuyến</h1>
+                            <h1>Thêm chuyến xe</h1>
                             <form th:action="@{/chuyen/them-chuyen}" method="post" th:object="${chuyen}">
                                 <div class="form-group">
-                                    <label class="control-label" for="firstName"> Tên chuyến</label>
-                                    <input  class="form-control" th:field="*{matuyen}"
-                                            required autofocus="autofocus"/>
+                                    <select th:field="*{tuyen}" class="form-control text-secondary">
+                                        <option th:each="item : ${tuyens}" th:value="${item.getId()}"
+                                                th:text="${item.getTentuyen()}"/>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Giá</label>
-                                    <input  type="number" class="form-control" th:field="*{gia}"
-                                            required autofocus="autofocus"/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">S</label>
-                                    <input  type="number" class="form-control" th:field="*{gia}"
-                                            required autofocus="autofocus"/>
+                                    <select th:field="*{xe}" class="form-control text-secondary">
+                                        <option th:each="item : ${xes}" th:value="${item.getId()}"
+                                                th:text="${item.getTen()}"/>
+                                    </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Ngày</label>
@@ -188,8 +204,9 @@
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Thêm</button>
-                                <a class="btn btn-danger" href="back" role="button">Trở về</a>
+                                <a class="btn btn-danger ml-3" href="them-chuyen/back" role="button">Trở về</a>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -200,13 +217,4 @@
 </div>
 
 </body>
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-<script src="dist/js/scripts.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="dist/assets/demo/datatables-demo.js"></script>
 </html>
-

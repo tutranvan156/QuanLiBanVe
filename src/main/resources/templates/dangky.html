@@ -1,51 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"h>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Tạo tài khoản</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-    <form th:action="@{/user/dang-ky}" method="post" th:object="${user}">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Tạo tài khoản</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<br>
+<h2 style="text-align: center">ĐĂNG KÍ</h2>
+<div class="container" style="padding: 0px 0 100px 280px">
+    <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 10px; padding-left: 50px" th:action="@{/user/dang-ky}" method="post" th:object="${user}">
         <div class="form-row">
             <input type="text" class="form-control " hidden th:field="*{id}">
-            <div class="form-group col-md-6">
+            <div class="form-group">
                 <label>Họ</label>
                 <input type="text" class="form-control" th:field="*{ho}">
             </div>
-            <div class="form-group col-md-6">
+            <br>
+            <div class="form-group">
                 <label>Tên</label>
                 <input type="text" class="form-control"th:field="*{ten}">
             </div>
-            <div class="form-group col-md-6">
+            <br>
+            <div class="form-group">
                 <label>Email</label>
                 <input type="email" class="form-control"th:field="*{email}">
             </div>
-            <div class="form-group col-md-6">
+            <br>
+            <div class="form-group">
                 <label>Số điện thoại</label>
                 <input type="number" class="form-control"th:field="*{sdt}">
             </div>
-            <div class="form-group col-md-6">
+            <br>
+            <div class="form-group">
                 <label>Tên đăng nhập</label>
-                <input  class="form-control"th:field="*{username}">
+                <input type="text" class="form-control"th:field="*{username}">
             </div>
-            <div class="form-group col-md-6">
+            <br>
+            <div class="form-group">
                 <label>Mật khẩu</label>
                 <input type="password" class="form-control"th:field="*{password}">
             </div>
+            <br>
+            <div class="form-group">
+                <label>Địa chỉ</label>
+                <input type="text" class="form-control" placeholder="some where in Phu Yen"th:field="*{diachi}">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Địa chỉ</label>
-            <input type="text" class="form-control" placeholder="some where in Phu Yen"th:field="*{diachi}">
+        <button type="submit" class="btn btn-primary mt-4">Đăng ký</button>
+        <div style="float: right; padding-top: 30px">
+            <span>Bạn đã có tài khoản?</span>
+            <a href="http://localhost:8080/user/dang-nhap">ĐĂNG NHẬP</a>
         </div>
-       <button type="submit" class="btn btn-primary mt-3">Đăng ký</button>
-
-        <p th:if="${message != null}">Vui Long nhap lai</p>
+<!--        <p th:if="${message != null}">Vui Long nhap lai</p>-->
     </form>
-    </body>
+</div>
+</body>
 </html>

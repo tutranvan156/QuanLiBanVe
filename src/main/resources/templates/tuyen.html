@@ -7,7 +7,6 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Thông tin tuyến xe</title>
-    <link rel="stylesheet" href="dist/css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
@@ -51,26 +50,26 @@
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link" href="../TuyenXe/Tuyen">
+                    <a class="nav-link" th:href="@{/tuyen}">
                         <i class="fas fa-chart-area"></i>
                         Thông tin tuyến xe
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link  " href="Ve/ve.html">
+                    <a class="nav-link  " th:href="@{/ve}">
                         <i class="fas fa-table"></i>
                         Thông tin vé
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link  " href="khachhang.html/khachhang.html">
+                    <a class="nav-link  " th:href="@{/khachhang}">
                         <i class="fas fa-chart-area"></i>
                         Thông tin khách hàng
                     </a>
                 </li>
                 <li class="nav-item active p-4">
 
-                    <a class="nav-link  " href="../ChuyenXe/Chuyen">
+                    <a class="nav-link  " th:href="@{/chuyen}">
                         <i class="fas fa-table"></i>
                         Thông tin chuyến xe
                     </a>
@@ -78,7 +77,13 @@
                 <li class="nav-item active p-4">
                     <a class="nav-link" th:href="@{/gia}">
                         <i class="fas fa-table"></i>
-                       Thiết lập giá vé
+                        Thiết lập giá vé
+                    </a>
+                </li>
+                <li class="nav-item active p-4">
+                    <a class="nav-link" th:href="@{/xe}">
+                        <i class="fas fa-table"></i>
+                        Thông tin xe
                     </a>
                 </li>
             </ul>
@@ -112,8 +117,8 @@
                                     <td class="d-flex justify-content-end">
                                         <div class="btn-toolbar" role="group" aria-label="Basic example">
                                             <a class="btn btn-primary mb-4 mr-4" th:href="@{/tuyen/sua-tuyen/{id}(id=${item.getId()})}" role="button">Sửa</a>
-                                            <a class="btn btn-danger mb-4"
-                                               th:href="@{/tuyen/xoa-tuyen/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>
+<!--                                            <a class="btn btn-danger mb-4"-->
+<!--                                               th:href="@{/tuyen/xoa-tuyen/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>-->
                                         </div>
                                     </td>
                                 </tr>
@@ -181,11 +186,4 @@
 
 </body>
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-<script src="dist/js/scripts.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="dist/assets/demo/datatables-demo.js"></script>
 </html>

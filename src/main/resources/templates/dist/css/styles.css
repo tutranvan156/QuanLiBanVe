@@ -1,8 +1,0 @@
-#layoutSidenav{
-    display:flex;
-    flex-direction: column;
-    background: red;
-}
-body{
-    background:black;
-}

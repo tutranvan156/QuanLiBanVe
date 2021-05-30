@@ -7,7 +7,6 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Chỉnh sửa giá xe</title>
-    <link rel="stylesheet" href="dist/css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
@@ -51,26 +50,26 @@
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link" href="../TuyenXe/Tuyen">
+                    <a class="nav-link" th:href="@{/tuyen}">
                         <i class="fas fa-chart-area"></i>
                         Thông tin tuyến xe
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link  " href="Ve/ve.html">
+                    <a class="nav-link  " th:href="@{/ve}">
                         <i class="fas fa-table"></i>
                         Thông tin vé
                     </a>
                 </li>
                 <li class="nav-item active p-4">
-                    <a class="nav-link  " href="khachhang.html/khachhang.html">
+                    <a class="nav-link  " th:href="@{/khachhang}">
                         <i class="fas fa-chart-area"></i>
                         Thông tin khách hàng
                     </a>
                 </li>
                 <li class="nav-item active p-4">
 
-                    <a class="nav-link  " href="../ChuyenXe/Chuyen">
+                    <a class="nav-link  " th:href="@{/chuyen}">
                         <i class="fas fa-table"></i>
                         Thông tin chuyến xe
                     </a>
@@ -95,7 +94,7 @@
 
         <div th:switch="${mode}">
 
-            <div th:case = "MAIN">
+            <div th:case="MAIN">
                 <a class="btn btn-primary mb-4" href="loai/them-loai" role="button">Thêm loại</a>
                 <div class="card mb-4 w-100">
                     <div class="card-body">
@@ -117,9 +116,12 @@
                                     <td th:text="${item.getDate()}"></td>
                                     <td class="d-flex justify-content-end">
                                         <div class="btn-toolbar" role="group" aria-label="Basic example">
-                                            <a class="btn btn-primary mb-4 mr-4" th:href="@{/loai/sua-loai/{id}(id=${item.getId()})}" role="button">Sửa</a>
-                                            <a class="btn btn-danger mb-4"
-                                               th:href="@{/loai/xoa-loai/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>
+                                            <a class="btn btn-primary mb-4 mr-4"
+                                               th:href="@{/loai/sua-loai/{id}(id=${item.getId()})}"
+                                               role="button">Sửa</a>
+<!--                                            <a class="btn btn-danger mb-4"-->
+<!--                                               th:href="@{/loai/xoa-loai/{id}(id=${item.getId()})}" role="button"-->
+<!--                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>-->
                                         </div>
                                     </td>
                                 </tr>
@@ -131,7 +133,7 @@
 
             </div>
 
-            <div th:case = "SUA">
+            <div th:case="SUA">
 
                 <div class="container-fluid">
                     <div class="row">
@@ -161,7 +163,7 @@
                     </div>
                 </div>
             </div>
-            <div th:case = "THEM">
+            <div th:case="THEM">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
@@ -169,13 +171,13 @@
                             <form th:action="@{/loai/them-loai}" method="post" th:object="${loai}">
                                 <div class="form-group">
                                     <label class="control-label" for="firstName"> Tên loại</label>
-                                    <input  class="form-control" th:field="*{ten}"
-                                            required autofocus="autofocus"/>
+                                    <input class="form-control" th:field="*{ten}"
+                                           required autofocus="autofocus"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Giá</label>
-                                    <input  type="number" class="form-control" th:field="*{gia}"
-                                            required autofocus="autofocus"/>
+                                    <input type="number" class="form-control" th:field="*{gia}"
+                                           required autofocus="autofocus"/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Ngày</label>
@@ -183,7 +185,7 @@
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Thêm</button>
-                                <a class="btn btn-danger" href="back" role="button">Trở về</a>
+                                <a class="btn btn-danger" href="them-loai/back" role="button">Trở về</a>
                             </form>
                         </div>
                     </div>
@@ -195,13 +197,5 @@
 </div>
 
 </body>
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-<script src="dist/js/scripts.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="dist/assets/demo/datatables-demo.js"></script>
 </html>
 
