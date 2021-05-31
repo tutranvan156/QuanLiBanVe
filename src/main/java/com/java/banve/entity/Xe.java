@@ -24,7 +24,7 @@ public class Xe {
     private Boolean trangthai;
 
     @ManyToOne
-    @JoinColumn(name = "maloai")
+    @JoinColumn(name = "loai_id")
     private Loai loai;
 
     @OneToMany(mappedBy = "xe", fetch = FetchType.EAGER)

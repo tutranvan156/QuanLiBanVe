@@ -21,10 +21,10 @@ public class Chuyen {
     private String date;
 
     @ManyToOne
-    @JoinColumn(name = "matuyen")
+    @JoinColumn(name = "tuyen_id")
     private Tuyen tuyen;
     @ManyToOne
-    @JoinColumn(name = "maxe")
+    @JoinColumn(name = "xe_id")
     private Xe xe;
 
     @OneToMany(mappedBy = "chuyen", fetch = FetchType.EAGER)

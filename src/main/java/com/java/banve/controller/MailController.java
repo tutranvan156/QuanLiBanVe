@@ -1,6 +1,6 @@
 package com.java.banve.controller;
 
-import com.java.banve.entity.KhachHang;
+import com.java.banve.entity.User;
 import com.java.banve.service.MailService;
 import com.java.banve.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ public class MailController {
 
     @GetMapping("mat-khau")
     public String matKhau(Model model) {
-        model.addAttribute("user", new KhachHang());
+        model.addAttribute("user", new User());
         return "matkhau";
     }
 
     @PostMapping("mat-khau")
-    public String matKhau(@ModelAttribute("user") KhachHang user) {
+    public String matKhau(@ModelAttribute("user") User user) {
 
         if (this.mailService.checkUserExit(user.getEmail()) == true) {
             String password = this.mailService.generateRandomPassword(8);

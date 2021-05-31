@@ -15,10 +15,10 @@ public class Ve {
     @Column(name = "id")
     private Integer id;
     @ManyToOne
-    @JoinColumn(name = "makhach")
-    private KhachHang khachHang;
+    @JoinColumn(name = "user_id")
+    private User user;
     @ManyToOne
-    @JoinColumn(name = "machuyen")
+    @JoinColumn(name = "chuyen_id")
     private Chuyen chuyen;
     @Column(name = "vitri")
     private String vitri;
