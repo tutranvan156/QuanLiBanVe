@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.math.BigDecimal;
 import java.util.Collection;
 
@@ -19,7 +20,7 @@ public class Loai {
     @Column(name = "ten")
     private String ten;
     @Column(name = "gia")
-    private BigDecimal gia;
+    private Integer gia;
     @Column(name = "ngay")
     private String date;
     @OneToMany(mappedBy = "loai", fetch = FetchType.EAGER)

@@ -39,7 +39,6 @@ public class User {
     @Column(name = "sdt")
     @NotEmpty(message = "Vui lòng điền số điện thoại")
     @Size(max = 10)
-
     private String sdt;
     @Column(name = "username", unique = true)
     @NotEmpty(message = "Vui lòng điền tên đăng nhập")

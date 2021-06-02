@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -27,19 +27,16 @@
 </style>
 <body class="sb-nav-fixed" style="height:100%">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="dist/index.html">Nhi Oanh</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
-    </button>
+    <a class="navbar-brand" th:href="@{/user}">Nhi Oanh</a>
+    <a class="navbar-brand text-light">Xin chào: </a>
     <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="KhachHang/login.html">Đăng xuất</a>
-            </div>
+        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+            <div sec:authentication="principal.fullName" class="navbar-brand"></div>
         </li>
+        <a class="btn btn-primary" th:href="@{/logout}" role="button">Đăng xuất</a>
     </ul>
 </nav>
+
 <div class="content d-flex justify-content-start w-100 ">
     <div class="left-content bg-dark" style="height:800px; width:300px">
         <nav class="navbar bg-dark navbar-dark" style="width:100%;">
@@ -55,12 +52,12 @@
                         Thông tin tuyến xe
                     </a>
                 </li>
-                <li class="nav-item active p-4">
-                    <a class="nav-link  " th:href="@{/ve}">
-                        <i class="fas fa-table"></i>
-                        Thông tin vé
-                    </a>
-                </li>
+<!--                <li class="nav-item active p-4">-->
+<!--                    <a class="nav-link  " th:href="@{/ve}">-->
+<!--                        <i class="fas fa-table"></i>-->
+<!--                        Thông tin vé-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li class="nav-item active p-4">
 
                     <a class="nav-link  " th:href="@{/chuyen}">
@@ -83,14 +80,11 @@
             </ul>
         </nav>
     </div>
-
-
-
     <div class="right-content w-75 ml-5 my-5">
 
         <div th:switch="${mode}">
 
-            <div th:case = "MAIN">
+            <div th:case="MAIN">
                 <a class="btn btn-primary mb-4" href="tuyen/them-tuyen/" role="button">Thêm tuyến xe</a>
                 <div class="card mb-4 w-100">
                     <div class="card-body">
@@ -110,9 +104,11 @@
                                     <td th:text="${item.getGio()}"></td>
                                     <td class="d-flex justify-content-end">
                                         <div class="btn-toolbar" role="group" aria-label="Basic example">
-                                            <a class="btn btn-primary mb-4 mr-4" th:href="@{/tuyen/sua-tuyen/{id}(id=${item.getId()})}" role="button">Sửa</a>
-<!--                                            <a class="btn btn-danger mb-4"-->
-<!--                                               th:href="@{/tuyen/xoa-tuyen/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>-->
+                                            <a class="btn btn-primary mb-4 mr-4"
+                                               th:href="@{/tuyen/sua-tuyen/{id}(id=${item.getId()})}"
+                                               role="button">Sửa</a>
+                                            <!--                                            <a class="btn btn-danger mb-4"-->
+                                            <!--                                               th:href="@{/tuyen/xoa-tuyen/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>-->
                                         </div>
                                     </td>
                                 </tr>
@@ -124,7 +120,7 @@
 
             </div>
 
-            <div th:case = "SUA">
+            <div th:case="SUA">
 
                 <div class="container-fluid">
                     <div class="row">
@@ -138,7 +134,7 @@
                                     <input id="firstName" class="form-control" th:field="*{tentuyen}"
                                            required autofocus="autofocus"/>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="form-label">Thời gian</label>
                                     <input type="time" class="form-control" th:field="*{gio}">
                                 </div>
@@ -150,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            <div th:case = "THEM">
+            <div th:case="THEM">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
@@ -158,10 +154,10 @@
                             <form th:action="@{/tuyen/them-tuyen}" method="post" th:object="${tuyen}">
                                 <div class="form-group">
                                     <label class="control-label" for="firstName"> Tên tuyến </label>
-                                    <input  class="form-control" th:field="*{tentuyen}"
+                                    <input class="form-control" th:field="*{tentuyen}"
                                            required autofocus="autofocus"/>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="form-label">Thời gian</label>
                                     <input type="time" class="form-control" th:field="*{gio}">
                                 </div>

@@ -3,6 +3,7 @@ package com.java.banve.controller;
 import com.java.banve.entity.User;
 import com.java.banve.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -19,16 +20,19 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("message", null);
         return "user";
     }
+
     @GetMapping("dang-ky")
     public String dangKy(@ModelAttribute("user") User user, ModelMap model, @ModelAttribute("message") String message) {
         model.addAttribute("user", user);
         return "dangky";
     }
+
     @PostMapping("dang-ky")
     public String dangKy(@Valid User user, BindingResult bindingResult, Model model) {
         if (userService.checkIfEmailExist(user.getEmail())) {
@@ -41,20 +45,15 @@ public class UserController {
             model.addAttribute("user", user);
             return "dangky";
         }
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         this.userService.dangKy(user);
-        return "user";
-    }
-    @GetMapping("dang-nhap")
-    public String dangNhap(ModelMap model) {
-        model.addAttribute("user", new User());
         return "dangnhap";
     }
-    @PostMapping("dang-nhap")
-    public String dangNhap(@ModelAttribute("user") User user) {
-        if (this.userService.dangNhap(user.getUsername(), user.getPassword()) == false) {
-            return "redirect:/user/dang-nhap";
-        } else {
-            return "redirect:/user";
-        }
+
+    @GetMapping("dang-nhap")
+    public String dangNhap() {
+        return "dangnhap";
     }
 }

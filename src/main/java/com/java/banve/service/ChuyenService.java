@@ -1,18 +1,21 @@
 package com.java.banve.service;
 
 import com.java.banve.entity.Chuyen;
+import com.java.banve.model.ChuyenDTO;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public interface ChuyenService {
 
     List<Chuyen> tatCaChuyen();
 
-    void themChuyen(Chuyen chuyen);
+    void themChuyen(ChuyenDTO chuyenDTO);
 
-    Chuyen suaChuyen(Chuyen chuyen);
+    void suaChuyen(ChuyenDTO chuyenDTO);
 
     void xoaChuyen(Integer id);
 
     Chuyen timChuyen(Integer id);
+    ChuyenDTO timChuyenDTO(Integer id);
 }

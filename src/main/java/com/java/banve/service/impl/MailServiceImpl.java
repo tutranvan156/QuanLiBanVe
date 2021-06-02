@@ -6,6 +6,7 @@ import com.java.banve.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -29,7 +30,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public String generateRandomPassword(int len) {
-        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder();
@@ -53,7 +54,8 @@ public class MailServiceImpl implements MailService {
     public void thayMatKhau(String email, String password) {
         User user = new User();
         user = this.userRepository.findUserByEmail(email);
-        user.setPassword(password);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(bCryptPasswordEncoder.encode(password));
         this.userRepository.save(user);
     }
 }

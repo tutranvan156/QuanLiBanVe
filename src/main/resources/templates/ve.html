@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Thông tin vé</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+          crossorigin="anonymous"></script>
+
+</head>
+<style>
+  #layoutSidenav_nav .nav {
+    display: flex;
+    flex-direction: column;
+    background: black;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+</style>
+<body class="sb-nav-fixed" style="height:100%">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+  <a class="navbar-brand" th:href="@{/user}">Nhi Oanh</a>
+  <a class="navbar-brand text-light">Xin chào: </a>
+  <ul class="navbar-nav ml-auto ml-md-0">
+    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+      <div sec:authentication="principal.fullName" class="navbar-brand"></div>
+    </li>
+    <a class="btn btn-primary" th:href="@{/logout}" role="button">Đăng xuất</a>
+  </ul>
+</nav>
+<div class="content d-flex justify-content-start w-100 ">
+  <div class="left-content bg-dark" style="height:800px; width:300px">
+    <nav class="navbar bg-dark navbar-dark" style="width:100%;">
+      <ul class="navbar-nav flex-column">
+        <li class="nav-item active p-4">
+          <a class="nav-link  " th:href="@{/user}">
+            <i class="fas fa-tachometer-alt"></i> Trang chủ
+          </a>
+        </li>
+        <li class="nav-item active p-4">
+          <a class="nav-link" th:href="@{/tuyen}">
+            <i class="fas fa-chart-area"></i>
+            Thông tin tuyến xe
+          </a>
+        </li>
+        <li class="nav-item active p-4">
+          <a class="nav-link  " th:href="@{/ve}">
+            <i class="fas fa-table"></i>
+            Thông tin vé
+          </a>
+        </li>
+        <li class="nav-item active p-4">
+
+          <a class="nav-link  " th:href="@{/chuyen}">
+            <i class="fas fa-table"></i>
+            Thông tin chuyến xe
+          </a>
+        </li>
+        <li class="nav-item active p-4">
+          <a class="nav-link" th:href="@{/loai}">
+            <i class="fas fa-table"></i>
+            Thiết lập giá vé
+          </a>
+        </li>
+        <li class="nav-item active p-4">
+          <a class="nav-link" th:href="@{/xe}">
+            <i class="fas fa-table"></i>
+            Thông tin xe
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="right-content w-75 ml-5 my-5">
+
+    <div th:switch="${mode}">
+
+      <div th:case="MAIN">
+        <a class="btn btn-primary mb-4" href="chuyen/them-chuyen" role="button">Thêm chuyến</a>
+        <div class="card mb-4 w-100">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th scope="col">STT</th>
+                  <th scope="col">Tên chuyến xe</th>
+                  <th scope="col">Tên xe</th>
+                  <th scope="col">Giá tiền</th>
+                  <th scope="col">Số ghế</th>
+                  <th scope="col">Ngày</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="item : ${chuyens}">
+                  <td th:text="${item.getId()}"></td>
+                  <td th:text="${item.getTuyen().getTentuyen()}"></td>
+                  <td th:text="${item.getXe().getTen()}"></td>
+                  <td th:text="${item.getXe().getLoai().getGia()}"></td>
+                  <td th:text="${item.getXe().getSoghe()}"></td>
+                  <td th:text="${item.getDate()}"></td>
+                  <td class="d-flex justify-content-end">
+                    <div class="btn-toolbar" role="group" aria-label="Basic example">
+                      <a class="btn btn-primary mb-4 mr-4"
+                         th:href="@{/chuyen/sua-chuyen/{id}(id=${item.getId()})}" role="button">Sửa</a>
+                      <!--                                            <a class="btn btn-danger mb-4"-->
+                      <!--                                               th:href="@{/chuyen/xoa-chuyen/{id}(id=${item.getId()})}" role="button"-->
+                      <!--                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>-->
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div th:case="SUA">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <h1>Sửa xe</h1>
+              <form th:action="@{/chuyen/sua-chuyen}" method="post" th:object="${chuyen}">
+                <input th:field="*{id}" hidden/>
+
+
+
+
+
+                <div class="form-group">
+                  <label class="control-label">Tên chuyến xe</label>
+                  <input class="form-control"  th:value="${chuyen.getTuyen().getTentuyen()}"
+                         required autofocus="autofocus" disabled/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tên xe</label>
+                  <input type="text" class="form-control"  th:value="${chuyen.getXe().getTen()}"
+                         disabled >
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Giá tiền</label>
+                  <input type="number" class="form-control"
+                         th:value="${chuyen.getXe().getLoai().getGia()}" disabled>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Số ghế</label>
+                  <input type="number" class="form-control" th:value="${chuyen.getXe().getSoghe()}"
+                         disabled>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">ngày</label>
+                  <input type="date" class="form-control" th:field="*{date}">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success" value="Submit">Sửa</button>
+                <a class="btn btn-danger ml-3" href="back" role="button">Trở về</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div th:case="THEM">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <h1>Thêm chuyến xe</h1>
+              <form th:action="@{/chuyen/them-chuyen}" method="post" th:object="${chuyen}">
+                <div class="form-group">
+                  <select th:field="*{tuyen}" class="form-control text-secondary">
+                    <option th:each="item : ${tuyens}" th:value="${item.getId()}"
+                            th:text="${item.getTentuyen()}"/>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <select th:field="*{xe}" class="form-control text-secondary">
+                    <option th:each="item : ${xes}" th:value="${item.getId()}"
+                            th:text="${item.getTen()}"/>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Ngày</label>
+                  <input type="date" class="form-control" th:field="*{date}">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success" value="Submit">Thêm</button>
+                <a class="btn btn-danger ml-3" href="them-chuyen/back" role="button">Trở về</a>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

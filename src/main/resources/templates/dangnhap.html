@@ -17,16 +17,16 @@
 <br><br>
 <h2 style="text-align: center">ĐĂNG NHẬP</h2>
  <div class="container" style="padding: 50px 0 0 280px">
-     <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 15px; padding-left: 50px" th:action="@{/user/dang-nhap}" method="post" th:object="${user}">
+     <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 15px; padding-left: 50px" th:action="@{/j_spring_security_check}" method="post">
          <div class="form-row">
              <div class="form-group" >
                  <label>Tên đăng nhâp</label>
-                 <input type="text" class="form-control" th:field="*{username}">
+                 <input type="text" class="form-control" name="username">
              </div>
              <br>
              <div class="form-group">
                  <label>Mật khẩu</label>
-                 <input type="password" class="form-control" th:field="*{password}">
+                 <input type="password" class="form-control" name="password">
              </div>
 
              <button type="submit" class="btn btn-primary mt-4">Đăng nhập</button>

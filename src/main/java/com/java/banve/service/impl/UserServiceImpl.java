@@ -1,5 +1,6 @@
 package com.java.banve.service.impl;
 import com.java.banve.entity.User;
+import com.java.banve.model.MyUserDetail;
 import com.java.banve.repository.UserRepository;
 import com.java.banve.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,15 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public MyUserDetail findUserDetailByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        MyUserDetail myUserDetail = new MyUserDetail();
+        myUserDetail.setUser(user);
+        myUserDetail.setFullName(user.getHo() + " " + user.getTen());
+        return myUserDetail;
     }
 
 }

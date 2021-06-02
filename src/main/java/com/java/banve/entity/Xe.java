@@ -22,11 +22,9 @@ public class Xe {
     private Integer soghe;
     @Column(name = "trangthai")
     private Boolean trangthai;
-
     @ManyToOne
     @JoinColumn(name = "loai_id")
     private Loai loai;
-
     @OneToMany(mappedBy = "xe", fetch = FetchType.EAGER)
     private Collection<Chuyen> chuyen;
 }

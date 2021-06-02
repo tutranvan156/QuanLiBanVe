@@ -1,6 +1,8 @@
 package com.java.banve.service.impl;
 
 import com.java.banve.entity.Xe;
+import com.java.banve.model.XeDTO;
+import com.java.banve.repository.LoaiRepository;
 import com.java.banve.repository.XeRepository;
 import com.java.banve.service.XeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,23 +16,28 @@ public class XeServiceImpl implements XeService {
 
     @Autowired
     XeRepository xeRepository;
+    @Autowired
+    LoaiRepository loaiRepository;
 
     @Override
-    public void themXe(Xe xe) {
+    public void themXe(XeDTO xeDTO) {
+        Xe xe = new Xe();
+        xe.setTen(xeDTO.getTen());
+        xe.setSoghe(xeDTO.getSoghe());
+        xe.setTrangthai(xeDTO.getTrangthai());
+        xe.setLoai(this.loaiRepository.findById(Integer.parseInt(xeDTO.getLoai())).get());
         this.xeRepository.save(xe);
     }
 
     @Override
-    public Xe suaXe(Xe xe) {
-
-        Integer id = xe.getId();
-        Xe xeTemp = timXe(id);
-        xeTemp.setTen(xe.getTen());
-        xeTemp.setSoghe(xe.getSoghe());
-        xeTemp.setChuyen(xe.getChuyen());
-        xeTemp.setTrangthai(xe.getTrangthai());
-        xeTemp.setLoai(xe.getLoai());
-        return this.xeRepository.save(xeTemp);
+    public void suaXe(XeDTO xeDTO) {
+        Xe xe = new Xe();
+        xe.setId(xeDTO.getId());
+        xe.setTen(xeDTO.getTen());
+        xe.setSoghe(xeDTO.getSoghe());
+        xe.setLoai(this.loaiRepository.findById(Integer.parseInt(xeDTO.getLoai())).get());
+        xe.setTrangthai(xeDTO.getTrangthai());
+        xeRepository.save(xe);
     }
 
     @Override
@@ -45,8 +52,20 @@ public class XeServiceImpl implements XeService {
     }
 
     @Override
+    public XeDTO timXeDTO(Integer id) {
+        Xe xe = new Xe();
+        xe = timXe(id);
+        XeDTO xeDTO = new XeDTO();
+        xeDTO.setId(xe.getId());
+        xeDTO.setTen(xe.getTen());
+        xeDTO.setSoghe(xe.getSoghe());
+        xeDTO.setLoai(String.valueOf(xe.getLoai().getId()));
+        xeDTO.setTrangthai(xe.getTrangthai());
+        return xeDTO;
+    }
+
+    @Override
     public List<Xe> tatCaXe() {
         return (List<Xe>) this.xeRepository.findAll();
-
     }
 }

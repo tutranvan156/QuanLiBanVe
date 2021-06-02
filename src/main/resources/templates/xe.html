@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -27,17 +27,13 @@
 </style>
 <body class="sb-nav-fixed" style="height:100%">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="dist/index.html">Nhi Oanh</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
-    </button>
+    <a class="navbar-brand" th:href="@{/user}">Nhi Oanh</a>
+    <a class="navbar-brand text-light">Xin chào: </a>
     <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="KhachHang/login.html">Đăng xuất</a>
-            </div>
+        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+            <div sec:authentication="principal.fullName" class="navbar-brand"></div>
         </li>
+        <a class="btn btn-primary" th:href="@{/logout}" role="button">Đăng xuất</a>
     </ul>
 </nav>
 <div class="content d-flex justify-content-start w-100 ">
@@ -55,12 +51,12 @@
                         Thông tin tuyến xe
                     </a>
                 </li>
-                <li class="nav-item active p-4">
-                    <a class="nav-link  " th:href="@{/ve}">
-                        <i class="fas fa-table"></i>
-                        Thông tin vé
-                    </a>
-                </li>
+<!--                <li class="nav-item active p-4">-->
+<!--                    <a class="nav-link  " th:href="@{/ve}">-->
+<!--                        <i class="fas fa-table"></i>-->
+<!--                        Thông tin vé-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li class="nav-item active p-4">
 
                     <a class="nav-link  " th:href="@{/chuyen}">
@@ -134,12 +130,12 @@
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
                             <h1>Sửa xe</h1>
-                            <form th:action="@{/xe/sua-xe}" method="post" th:object="${xe}">
+                            <form th:action="@{/xe/sua-xe}" method="post" th:object="${xeDTO}">
+                                <input th:field="*{id}" hidden/>
                                 <div class="form-group">
-                                    <input th:field="*{id}" hidden/>
-                                    <label class="control-label" for="firstName"> Tên xe </label>
-                                    <input id="firstName" class="form-control" th:field="*{ten}"
-                                           required autofocus="autofocus"/>
+                                    <label class="control-label">  Tên xe </label>
+                                    <input class="form-control" th:field="*{ten}" type="text"
+                                           required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Số ghế</label>
@@ -147,12 +143,12 @@
                                 </div>
                                 <div class="form-group">
                                     <select th:field="*{loai}" name = "test" class="form-control text-secondary">
-                                        <option th:each="item : ${loais}" th:value="${item.getId()}" th:text="${item.getGia()}"/>
+                                        <option th:each="item : ${loais}" th:value="${item.getId()}" th:text="${item.getGia()}">
                                     </select>
                                 </div>
                                 <div class="form-check form-switch mt-3">
-                                    <input class="form-check-input" th:field = "*{trangthai}" type="checkbox" id="flexSwitchCheckCheckedSua" checked>
-                                    <label class="form-check-label" for="flexSwitchCheckCheckedSua">Trạng thái rảnh</label>
+                                    <input class="form-check-input" th:field = "*{trangthai}" type="checkbox" checked>
+                                    <label class="form-check-label">Trạng thái rảnh</label>
                                 </div>
 
 
@@ -169,9 +165,9 @@
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
                             <h1>Thêm xe</h1>
-                            <form th:action="@{/xe/them-xe}" method="post" th:object="${xe}">
+                            <form th:action="@{/xe/them-xe}" method="post" th:object="${xeDTO}">
                                 <div class="form-group">
-                                    <label class="control-label" for="firstName"> Tên xe</label>
+                                    <label class="control-label"> Tên xe</label>
                                     <input class="form-control" th:field="*{ten}"
                                            required autofocus="autofocus"/>
                                 </div>
@@ -181,13 +177,16 @@
                                            required autofocus="autofocus"/>
                                 </div>
                                 <div class="form-group">
-                                    <select th:field="*{loai}" name = "test" class="form-control text-secondary">
-                                        <option th:each="item : ${loais}" th:value="${item.getId()}" th:text="${item.getGia()}"/>
+                                    <label class="control-label">Giá chuyến xe</label>
+                                    <select th:field="*{loai}" class="form-control text-secondary" required>
+                                        <th:block th:each="item : ${loais}">
+                                            <option th:text="${item.getTen()}" th:value="${item.getId()}"/>
+                                        </th:block>
                                     </select>
                                 </div>
                                 <div class="form-check form-switch mt-3">
-                                    <input class="form-check-input" th:field = "*{trangthai}" type="checkbox" id="flexSwitchCheckChecked" checked>
-                                    <label class="form-check-label" for="flexSwitchCheckChecked">Trạng thái rảnh</label>
+                                    <input class="form-check-input" th:field="*{trangthai}" checked type="checkbox"  >
+                                    <label class="form-check-label">Trạng thái rảnh</label>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Thêm</button>
