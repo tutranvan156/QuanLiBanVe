@@ -10,4 +10,5 @@ public interface TuyenService {
     Tuyen suaTuyenXe(Tuyen tuyen);
     void xoaTuyenXe(Integer id);
     List<Tuyen> tatCaTuyenXe();
+    List<Tuyen> findTuyenLimit();
 }

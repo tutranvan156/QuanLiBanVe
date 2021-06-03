@@ -68,4 +68,9 @@ public class XeServiceImpl implements XeService {
     public List<Xe> tatCaXe() {
         return (List<Xe>) this.xeRepository.findAll();
     }
+
+    @Override
+    public List<Xe> findXeLimit() {
+        return this.xeRepository.findXeLimit();
+    }
 }

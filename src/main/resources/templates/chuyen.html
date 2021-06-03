@@ -24,6 +24,13 @@
         padding: 0;
         margin: 0;
     }
+
+    a:hover {
+        border-radius: 5px;
+        border: solid 1px azure;
+        font-size: 110%;
+    }
+
 </style>
 <body class="sb-nav-fixed" style="height:100%">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -36,13 +43,14 @@
         <a class="btn btn-primary" th:href="@{/logout}" role="button">Đăng xuất</a>
     </ul>
 </nav>
+
 <div class="content d-flex justify-content-start w-100 ">
     <div class="left-content bg-dark" style="height:800px; width:300px">
         <nav class="navbar bg-dark navbar-dark" style="width:100%;">
             <ul class="navbar-nav flex-column">
                 <li class="nav-item active p-4">
-                    <a class="nav-link  " th:href="@{/user}">
-                        <i class="fas fa-tachometer-alt"></i> Trang chủ
+                    <a class="nav-link" th:href="@{/user}" >
+                        <i class="fas fa-tachometer-alt"></i>Trang chủ
                     </a>
                 </li>
                 <li class="nav-item active p-4">
@@ -51,12 +59,12 @@
                         Thông tin tuyến xe
                     </a>
                 </li>
-<!--                <li class="nav-item active p-4">-->
-<!--                    <a class="nav-link  " th:href="@{/ve}">-->
-<!--                        <i class="fas fa-table"></i>-->
-<!--                        Thông tin vé-->
-<!--                    </a>-->
-<!--                </li>-->
+                <!--                <li class="nav-item active p-4">-->
+                <!--                    <a class="nav-link  " th:href="@{/ve}">-->
+                <!--                        <i class="fas fa-table"></i>-->
+                <!--                        Thông tin vé-->
+                <!--                    </a>-->
+                <!--                </li>-->
                 <li class="nav-item active p-4">
 
                     <a class="nav-link  " th:href="@{/chuyen}">
@@ -79,7 +87,6 @@
             </ul>
         </nav>
     </div>
-
     <div class="right-content w-75 ml-5 my-5">
 
         <div th:switch="${mode}">

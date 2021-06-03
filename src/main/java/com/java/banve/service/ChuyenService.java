@@ -18,4 +18,5 @@ public interface ChuyenService {
 
     Chuyen timChuyen(Integer id);
     ChuyenDTO timChuyenDTO(Integer id);
+    List<Chuyen> findChuyenLimit();
 }

@@ -17,4 +17,5 @@ public interface XeService {
 
     Xe timXe(Integer id);
     XeDTO timXeDTO(Integer id);
+    List<Xe> findXeLimit();
 }

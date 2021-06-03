@@ -47,4 +47,9 @@ public class TuyenServiceImpl implements TuyenService {
         return (List<Tuyen>) this.tuyenRepository.findAll();
 
     }
+
+    @Override
+    public List<Tuyen> findTuyenLimit() {
+        return this.tuyenRepository.findTuyenLimit();
+    }
 }

@@ -46,4 +46,9 @@ public class LoaiServiceImpl implements LoaiService {
     public List<Loai> tatCaLoai() {
         return (List<Loai>) this.loaiRepository.findAll();
     }
+
+    @Override
+    public List<Loai> findLoaiLimit() {
+        return this.loaiRepository.findLoaiLimit();
+    }
 }

@@ -15,4 +15,5 @@ public interface LoaiService {
     void xoaLoai(Integer id);
 
     Loai timLoai(Integer id);
+    List<Loai> findLoaiLimit();
 }

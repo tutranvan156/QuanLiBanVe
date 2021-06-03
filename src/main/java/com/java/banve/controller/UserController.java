@@ -1,7 +1,7 @@
 package com.java.banve.controller;
 
 import com.java.banve.entity.User;
-import com.java.banve.service.UserService;
+import com.java.banve.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,10 +20,22 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    TuyenService tuyenService;
+    @Autowired
+    ChuyenService chuyenService;
+    @Autowired
+    LoaiService  loaiService;
+    @Autowired
+    XeService xeService;
 
     @RequestMapping("")
-    public String index(Model model) {
+    public String index(ModelMap model) {
         model.addAttribute("message", null);
+        model.addAttribute("tuyens", this.tuyenService.findTuyenLimit());
+        model.addAttribute("chuyens", this.chuyenService.findChuyenLimit());
+        model.addAttribute("loais", this.loaiService.findLoaiLimit());
+        model.addAttribute("xes", this.xeService.findXeLimit());
         return "user";
     }
 

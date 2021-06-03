@@ -70,4 +70,9 @@ public class ChuyenServiceImpl implements ChuyenService {
     public List<Chuyen> tatCaChuyen() {
         return (List<Chuyen>) this.chuyenRepository.findAll();
     }
+
+    @Override
+    public List<Chuyen> findChuyenLimit() {
+        return this.chuyenRepository.findChuyenLimit();
+    }
 }
