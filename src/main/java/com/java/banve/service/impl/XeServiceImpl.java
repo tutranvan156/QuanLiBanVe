@@ -41,8 +41,9 @@ public class XeServiceImpl implements XeService {
     }
 
     @Override
-    public void xoaXe(Integer id) {
-        this.xeRepository.deleteById(id);
+    public void xoaXe(Integer id){
+        Xe xe = xeRepository.findById(id).get();
+        xe.setStatus(false);
     }
 
     @Override

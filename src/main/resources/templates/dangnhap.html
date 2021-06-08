@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" h>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -16,8 +16,10 @@
 <body>
 <br><br>
 <h2 style="text-align: center">ĐĂNG NHẬP</h2>
+<!--<div sec:authorize="hasAnyAuthority('USER', 'ADMIN', 'EMPLOYEE')"></div>-->
  <div class="container" style="padding: 50px 0 0 280px">
-     <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 15px; padding-left: 50px" th:action="@{/j_spring_security_check}" method="post">
+     <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 15px;
+      padding-left: 50px" th:action="@{/j_spring_security_check}" method="post">
          <div class="form-row">
              <div class="form-group" >
                  <label>Tên đăng nhâp</label>

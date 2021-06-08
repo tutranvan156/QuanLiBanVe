@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="left-content bg-dark" style="height:800px; width:300px">
+    <nav class="navbar bg-dark navbar-dark" style="width:100%;">
+        <ul class="navbar-nav flex-column">
+            <li class="nav-item active p-4">
+                <a class="nav-link" th:href="@{/admin}" >
+                    <i class="fas fa-tachometer-alt"></i>Trang chủ
+                </a>
+            </li>
+            <li class="nav-item active p-4">
+                <a class="nav-link" th:href="@{/tuyen}">
+                    <i class="fas fa-chart-area"></i>
+                    Thông tin tuyến xe
+                </a>
+            </li>
+            <!--                <li class="nav-item active p-4">-->
+            <!--                    <a class="nav-link  " th:href="@{/ve}">-->
+            <!--                        <i class="fas fa-table"></i>-->
+            <!--                        Thông tin vé-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <li class="nav-item active p-4">
+
+                <a class="nav-link  " th:href="@{/chuyen}">
+                    <i class="fas fa-table"></i>
+                    Thông tin chuyến xe
+                </a>
+            </li>
+            <li class="nav-item active p-4">
+                <a class="nav-link" th:href="@{/loai}">
+                    <i class="fas fa-table"></i>
+                    Thiết lập giá vé
+                </a>
+            </li>
+            <li class="nav-item active p-4">
+                <a class="nav-link" th:href="@{/xe}">
+                    <i class="fas fa-table"></i>
+                    Thông tin xe
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
         return myUserDetail;
     }
 
+    @Override
+    public void xoaUser(Integer id) {
+        User user = userRepository.findById(id).get();
+        user.setStatus(false);
+    }
 }

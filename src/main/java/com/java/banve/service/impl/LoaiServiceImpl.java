@@ -32,8 +32,10 @@ public class LoaiServiceImpl implements LoaiService {
     }
 
     @Override
+
     public void xoaLoai(Integer id) {
-        this.loaiRepository.deleteById(id);
+        Loai loai = loaiRepository.findById(id).get();
+        loai.setStatus(false);
     }
 
     @Override

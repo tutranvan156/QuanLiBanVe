@@ -22,6 +22,8 @@ public class Ve {
     private Chuyen chuyen;
     @Column(name = "vitri")
     private String vitri;
+    @Column(name = "status")
+    private Boolean status;
 
 
 }

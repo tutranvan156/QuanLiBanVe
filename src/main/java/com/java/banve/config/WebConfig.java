@@ -22,23 +22,25 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.authorizeRequests()
+
+                .antMatchers("/dang-nhap", "/dang-ky", "/admin").permitAll()
+                .antMatchers("/").hasAnyAuthority("USER", "EMPLOYEE", "ADMIN")
+                .antMatchers("/employee").hasAnyAuthority("EMPLOYEE", "ADMIN")
+                .antMatchers("/admin").hasAnyAuthority("ADMIN")
+                .anyRequest().authenticated();
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
-                .loginPage("/user/dang-nhap")
-                .defaultSuccessUrl("/user")
-                .failureUrl("/user/dang-nhap")
+                .loginPage("/dang-nhap")
+                .defaultSuccessUrl("/")
+                .failureUrl("/dang-nhap?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/user/dang-nhap");
-        http
-                .authorizeRequests().antMatchers("/user/dang-nhap", "/user/dang-ky", "/mat-khau")
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/dang-nhap");
+        http.authorizeRequests().and()
+                .rememberMe().tokenRepository(this.persistentTokenRepository())
+                .tokenValiditySeconds(1 * 24 * 60 * 60);
 
-        http.authorizeRequests().and() //
-                .rememberMe().tokenRepository(this.persistentTokenRepository()) //
-                .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
     }
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {

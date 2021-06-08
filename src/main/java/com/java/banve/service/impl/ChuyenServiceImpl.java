@@ -42,7 +42,8 @@ public class ChuyenServiceImpl implements ChuyenService {
 
     @Override
     public void xoaChuyen(Integer id) {
-        this.chuyenRepository.deleteById(id);
+        Chuyen chuyen = chuyenRepository.findById(id).get();
+        chuyen.setStatus(false);
     }
 
     @Override

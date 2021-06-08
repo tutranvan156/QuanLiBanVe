@@ -9,4 +9,5 @@ public interface UserService {
     Boolean checkIfEmailExist(String email);
     Boolean checkIfUsernameExist(String username);
     MyUserDetail findUserDetailByUsername(String username);
+    void xoaUser(Integer id);
 }

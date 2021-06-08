@@ -6,11 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @CrossOrigin
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/employee")
+public class EmployeeController {
 
-    @RequestMapping("")
-    public String user() {
-        return "index";
-    }
 }

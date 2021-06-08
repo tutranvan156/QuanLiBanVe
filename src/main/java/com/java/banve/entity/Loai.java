@@ -23,6 +23,8 @@ public class Loai {
     private Integer gia;
     @Column(name = "ngay")
     private String date;
+    @Column(name = "status")
+    private Boolean status;
     @OneToMany(mappedBy = "loai", fetch = FetchType.EAGER)
     private Collection<Xe> xes;
 

@@ -33,7 +33,8 @@ public class TuyenServiceImpl implements TuyenService {
 
     @Override
     public void xoaTuyenXe(Integer id) {
-        this.tuyenRepository.deleteById(id);
+        Tuyen tuyen = tuyenRepository.findById(id).get();
+        tuyen.setStatus(false);
     }
 
     @Override

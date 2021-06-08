@@ -17,6 +17,8 @@ public class Tuyen {
     private Integer id;
     @Column(name = "tentuyen")
     private String tentuyen;
+    @Column(name = "status")
+    private Boolean status;
 
 
     @Column(name = "gio")

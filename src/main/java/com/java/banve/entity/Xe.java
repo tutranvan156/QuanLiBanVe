@@ -27,4 +27,6 @@ public class Xe {
     private Loai loai;
     @OneToMany(mappedBy = "xe", fetch = FetchType.EAGER)
     private Collection<Chuyen> chuyen;
+    @Column(name = "status")
+    private Boolean status;
 }

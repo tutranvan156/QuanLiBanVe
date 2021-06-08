@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    mua ve o day
+<!--    <div sec:authentication="hasAnyAuthority('ADMIN')">-->
+<!--        <a th:href="@{/admin}">Tao moi</a>-->
+<!--    </div>-->
+    <span sec:authentication="name"></span>
+    <span sec:authentication="principal.authorities">Roles</span>
+    <div sec:authorize="hasAnyAuthority('EMPLOYEE')">
+        <a th:href="@{/admin}">Employee</a>
+    </div>
+    <div sec:authorize="hasAnyAuthority('ADMIN')">
+        <a th:href="@{/admin}">Admin</a>
+    </div>
+
+</body>
+</html>

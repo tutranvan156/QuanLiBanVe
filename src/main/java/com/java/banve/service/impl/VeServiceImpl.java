@@ -30,7 +30,9 @@ public class VeServiceImpl implements VeService {
 
     @Override
     public void xoaVe(Integer id) {
-        this.veRepository.deleteById(id);
+        Ve ve = veRepository.findById(id).get();
+        ve.setStatus(false);
+
     }
 
     @Override

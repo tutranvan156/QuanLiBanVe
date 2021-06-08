@@ -14,7 +14,7 @@
 <br>
 <h2 style="text-align: center">ĐĂNG KÍ</h2>
 <div class="container" style="padding: 0px 0 100px 280px">
-    <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 10px; padding-left: 50px" th:action="@{/user/dang-ky}" method="post" th:object="${user}">
+    <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 10px; padding-left: 50px" th:action="@{/index/dang-ky}" method="post" th:object="${user}">
         <div class="form-row">
             <input type="text" class="form-control " hidden th:field="*{id}">
            <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">

@@ -17,6 +17,8 @@ public class Chuyen {
     private Integer id;
     @Column(name = "ngay")
     private String date;
+    @Column(name = "status")
+    private Boolean status;
 
     @ManyToOne
     @JoinColumn(name = "tuyen_id")
