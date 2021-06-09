@@ -18,6 +18,13 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
+    public Role(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
 
+    public Role() {
+
+    }
 }

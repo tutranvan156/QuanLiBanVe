@@ -14,6 +14,7 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     @Override
     public Boolean dangKy(User user){
+        user.setStatus(true);
         this.userRepository.save(user);
         return true;
     }

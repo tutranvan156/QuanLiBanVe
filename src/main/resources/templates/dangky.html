@@ -14,7 +14,7 @@
 <br>
 <h2 style="text-align: center">ĐĂNG KÍ</h2>
 <div class="container" style="padding: 0px 0 100px 280px">
-    <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 10px; padding-left: 50px" th:action="@{/index/dang-ky}" method="post" th:object="${user}">
+    <form style="width: 800px;border: 1px solid black; padding: 30px; border-radius: 10px; padding-left: 50px" th:action="@{/dang-ky}" method="post" th:object="${user}">
         <div class="form-row">
             <input type="text" class="form-control " hidden th:field="*{id}">
            <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
@@ -58,7 +58,7 @@
         <button type="submit" class="btn btn-primary mt-4">Đăng ký</button>
         <div style="float: right; padding-top: 30px">
             <span>Bạn đã có tài khoản?</span>
-            <a href="http://localhost:8080/user/dang-nhap">ĐĂNG NHẬP</a>
+            <a href="http://localhost:8080/dang-nhap">ĐĂNG NHẬP</a>
         </div>
 <!--        <p th:if="${message != null}">Vui Long nhap lai</p>-->
     </form>

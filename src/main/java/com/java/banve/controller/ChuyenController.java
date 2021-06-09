@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 @Controller
 @CrossOrigin
 @RequestMapping("/chuyen")
@@ -42,7 +44,7 @@ public class ChuyenController {
     }
 
     @PostMapping("them-chuyen")
-    public String themChuyen(@ModelAttribute("chuyenDTO") ChuyenDTO chuyenDTO) {
+    public String themChuyen(@ModelAttribute("chuyenDTO") ChuyenDTO chuyenDTO) throws ParseException {
         this.chuyenService.themChuyen(chuyenDTO);
         return "redirect:/chuyen";
     }
@@ -61,7 +63,7 @@ public class ChuyenController {
     }
 
     @PostMapping("sua-chuyen")
-    public String suaChuyen(@ModelAttribute("chuyenDTO") ChuyenDTO chuyenDTO) {
+    public String suaChuyen(@ModelAttribute("chuyenDTO") ChuyenDTO chuyenDTO) throws ParseException {
         this.chuyenService.suaChuyen(chuyenDTO);
         return "redirect:/chuyen";
     }

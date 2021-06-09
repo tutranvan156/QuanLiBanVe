@@ -9,6 +9,9 @@ import com.java.banve.service.ChuyenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,19 +25,20 @@ public class ChuyenServiceImpl implements ChuyenService {
     TuyenRepository tuyenRepository;
 
     @Override
-    public void themChuyen(ChuyenDTO chuyenDTO) {
+    public void themChuyen(ChuyenDTO chuyenDTO) throws ParseException {
         Chuyen chuyen = new Chuyen();
-        chuyen.setDate(chuyenDTO.getDate());
+
+        chuyen.setDate((Date) new SimpleDateFormat("dd/MM/yyyy").parse(chuyenDTO.getDate()));
         chuyen.setXe(xeRepository.findById(Integer.parseInt(chuyenDTO.getXe())).get());
         chuyen.setTuyen(tuyenRepository.findById(Integer.parseInt(chuyenDTO.getTuyen())).get());
         this.chuyenRepository.save(chuyen);
     }
 
     @Override
-    public void suaChuyen(ChuyenDTO chuyenDTO) {
+    public void suaChuyen(ChuyenDTO chuyenDTO) throws ParseException {
         Chuyen chuyen = new Chuyen();
         chuyen.setId(chuyenDTO.getId());
-        chuyen.setDate(chuyenDTO.getDate());
+        chuyen.setDate((Date) new SimpleDateFormat("dd/MM/yyyy").parse(chuyenDTO.getDate()));
         chuyen.setTuyen(tuyenRepository.findById(Integer.parseInt(chuyenDTO.getTuyen())).get());
         chuyen.setXe(xeRepository.findById(Integer.parseInt(chuyenDTO.getXe())).get());
         this.chuyenRepository.save(chuyen);
@@ -61,7 +65,7 @@ public class ChuyenServiceImpl implements ChuyenService {
         chuyenDTO.setGia(chuyen.getXe().getLoai().getGia());
         chuyenDTO.setXe(String.valueOf(chuyen.getXe().getId()));
         chuyenDTO.setTuyen(String.valueOf(chuyen.getTuyen().getId()));
-        chuyenDTO.setDate(chuyen.getDate());
+        chuyenDTO.setDate(new SimpleDateFormat().format(chuyen.getDate()));
         chuyenDTO.setTenTuyen(chuyen.getTuyen().getTentuyen());
         chuyenDTO.setTenXe(chuyen.getXe().getTen());
         return chuyenDTO;

@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin
-@RequestMapping("/mail/")
+@RequestMapping("/")
 public class MailController {
-
     @Autowired
     MailService mailService;
-
     @Autowired
     UserService userService;
 
@@ -32,8 +30,8 @@ public class MailController {
             String password = this.mailService.generateRandomPassword(8);
             this.mailService.sendEmail(user.getEmail(), password);
             this.mailService.thayMatKhau(user.getEmail(), password);
-            return "redirect:/user";
+            return "redirect:/dang-nhap";
         }
-        return "redirect:/user";
+        return "redirect:/dang-nhap";
     }
 }

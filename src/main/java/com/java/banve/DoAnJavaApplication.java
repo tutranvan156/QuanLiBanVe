@@ -15,7 +15,7 @@ public class DoAnJavaApplication {
     private static void index() {
         Runtime runtime = Runtime.getRuntime();
         try {
-            runtime.exec("cmd /c start chrome.exe http://localhost:8080/");
+            runtime.exec("cmd /c start chrome.exe http://localhost:8080/index");
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

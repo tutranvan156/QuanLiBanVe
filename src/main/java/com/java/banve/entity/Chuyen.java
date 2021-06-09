@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "chuyen")
@@ -16,7 +17,8 @@ public class Chuyen {
     @Column(name = "id")
     private Integer id;
     @Column(name = "ngay")
-    private String date;
+    @Temporal(TemporalType.DATE)
+    private Date date;
     @Column(name = "status")
     private Boolean status;
 

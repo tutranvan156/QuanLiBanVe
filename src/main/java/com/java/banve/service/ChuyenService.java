@@ -4,15 +4,16 @@ import com.java.banve.entity.Chuyen;
 import com.java.banve.model.ChuyenDTO;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.text.ParseException;
 import java.util.List;
 
 public interface ChuyenService {
 
     List<Chuyen> tatCaChuyen();
 
-    void themChuyen(ChuyenDTO chuyenDTO);
+    void themChuyen(ChuyenDTO chuyenDTO) throws ParseException;
 
-    void suaChuyen(ChuyenDTO chuyenDTO);
+    void suaChuyen(ChuyenDTO chuyenDTO) throws ParseException;
 
     void xoaChuyen(Integer id);
 

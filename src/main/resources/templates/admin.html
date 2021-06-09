@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -33,61 +33,9 @@
 
 </style>
 <body class="sb-nav-fixed" style="height:100%">
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="position: sticky; top: 0; z-index: 2 ">
-    <a class="navbar-brand" th:href="@{/user}">Nhi Oanh admin</a>
-    <a class="navbar-brand text-light">Xin chào: </a>
-    <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-            <div sec:authentication="principal.fullName" class="navbar-brand"></div>
-        </li>
-        <a class="btn btn-primary" th:href="@{/logout}" role="button">Đăng xuất</a>
-    </ul>
-</nav>
+<div th:include="~{head.html}"></div>
 <div class="content d-flex justify-content-start w-100 ">
-    <div class="left-content bg-dark" style="flex-wrap: wrap; width:300px; z-index: -1"></div>
-    <div class="left-content bg-dark" style="flex-wrap: wrap; width:300px; z-index: 0; position: fixed">
-        <nav class="navbar bg-dark navbar-dark" style="width:100%;">
-            <ul class="navbar-nav flex-column">
-                <li class="nav-item active p-4">
-                    <a class="nav-link droptab" th:href="@{/user}" style="ho">
-                        <i class="fas fa-tachometer-alt"></i> Trang chủ
-                    </a>
-                </li>
-                <li class="nav-item active p-4">
-                    <a class="nav-link " th:href="@{/tuyen}">
-                        <i class="fas fa-chart-area"></i>
-                        Thông tin tuyến xe
-                    </a>
-                </li>
-                <!--                <li class="nav-item active p-4">-->
-                <!--                    <a class="nav-link  " th:href="@{/ve}">-->
-                <!--                        <i class="fas fa-table"></i>-->
-                <!--                        Thông tin vé-->
-                <!--                    </a>-->
-                <!--                </li>-->
-                <li class="nav-item active p-4">
-
-                    <a class="nav-link  " th:href="@{/chuyen}">
-                        <i class="fas fa-table"></i>
-                        Thông tin chuyến xe
-                    </a>
-                </li>
-                <li class="nav-item active p-4">
-                    <a class="nav-link" th:href="@{/loai}">
-                        <i class="fas fa-table"></i>
-                        Thiết lập giá vé
-                    </a>
-                </li>
-                <li class="nav-item active p-4">
-                    <a class="nav-link" th:href="@{/xe}">
-                        <i class="fas fa-table"></i>
-                        Thông tin xe
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
+    <div th:include="~{left.html}"></div>
     <div class="right-content w-75 ml-5 my-5">
         <div class="form-0">
 

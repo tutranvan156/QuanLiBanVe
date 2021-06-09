@@ -2,6 +2,7 @@ package com.java.banve.controller;
 
 import com.java.banve.entity.User;
 import com.java.banve.service.UserService;
+import com.java.banve.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,8 +20,10 @@ public class IndexController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    RoleService roleService;
 
-    @GetMapping("")
+    @GetMapping("/index")
     public String index() {
         return "index";
     }
@@ -53,6 +56,7 @@ public class IndexController {
 
     @GetMapping("dang-nhap")
     public String dangNhap() {
+        this.roleService.addDefaultRole();
         return "dangnhap";
     }
 }
