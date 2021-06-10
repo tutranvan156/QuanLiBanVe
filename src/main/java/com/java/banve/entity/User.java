@@ -65,6 +65,6 @@ public class User {
                     name = "role_id", referencedColumnName = "id"
             )
     )
-    private Set<Role> roles = new HashSet<>();
+    Set<Role> roles = new HashSet<>();
 
 }

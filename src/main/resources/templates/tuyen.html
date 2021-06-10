@@ -65,8 +65,9 @@
                                             <a class="btn btn-primary mb-4 mr-4"
                                                th:href="@{/tuyen/sua-tuyen/{id}(id=${item.getId()})}"
                                                role="button">Sửa</a>
-                                            <!--                                            <a class="btn btn-danger mb-4"-->
-                                            <!--                                               th:href="@{/tuyen/xoa-tuyen/{id}(id=${item.getId()})}" role="button"onclick="return confirm('Bạn có chắc muốn xóa ?')" >Xóa</a>-->
+                                            <a class="btn btn-danger mb-4"
+                                               th:href="@{/tuyen/xoa-tuyen/{id}(id=${item.getId()})}" role="button"
+                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -94,7 +95,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Thời gian</label>
-                                    <input type="time" class="form-control" th:field="*{gio}">
+                                    <input type="time" class="form-control" th:field="*{gio}" required>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Sửa</button>
@@ -117,7 +118,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Thời gian</label>
-                                    <input type="time" class="form-control" th:field="*{gio}">
+                                    <input type="time" class="form-control" th:field="*{gio}" required>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Thêm</button>
@@ -133,5 +134,4 @@
 </div>
 
 </body>
-</script>
 </html>

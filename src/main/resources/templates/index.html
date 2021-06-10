@@ -1,31 +1,333 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<!--<head>-->
+<!--    <meta charset="utf-8"/>-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>-->
+<!--    <meta name="description" content=""/>-->
+<!--    <meta name="author" content=""/>-->
+<!--    <title>Đại lí xe Nhi Oanh</title>-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"-->
+<!--          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"-->
+<!--            crossorigin="anonymous"></script>-->
+
+<!--</head>-->
+<!--<body>-->
+<!--<div th:include="~{head.html}"></div>-->
+<!--<span sec:authentication="name"></span>-->
+<!--<span sec:authentication="principal.authorities">Roles</span>-->
+<!--<div sec:authorize="hasAnyAuthority('EMPLOYEE')">-->
+<!--    <a th:href="@{/admin}">Employee</a>-->
+<!--</div>-->
+<!--<div sec:authorize="hasAnyAuthority('ADMIN')">-->
+<!--    <a th:href="@{/admin}">Admin</a>-->
+<!--</div>-->
+<!--<div sec:authorize="hasAnyAuthority('USER')">-->
+<!--    <a th:href="@{/user}">User</a>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <title>Đại lí xe Nhi Oanh</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
-            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <style type="text/css">
+        #menu1 ul {
+            background: #212529;
+            list-style-type: none;
+            float: left;
+        }
 
+        #menu1 li {
+            color: #f1f1f1;
+            display: inline-block;
+            width: 180px;
+            height: 40px;
+            line-height: 40px;
+            margin-left: -5px;
+        }
+
+        #menu1 a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #fff;
+
+            display: block;
+        }
+
+        #menu1 a:hover {
+            background: #212529;
+            color: red;
+        }
+
+        .sub-menu1 li {
+            display: none;
+        }
+
+        #menu1 li {
+            position: relative;
+        }
+
+        .sub-menu1 {
+            display: none;
+            position: absolute;
+        }
+
+        #menu1 li:hover .sub-menu1 {
+            display: block;
+        }
+
+        .sub-menu1 li {
+
+            width: 100px;
+        }
+
+        #menu1 {
+            margin-bottom: 2px;
+        }
+
+
+        .img1 {
+            margin-top: 0 !important;
+        }
+    </style>
 </head>
 <body>
-<div th:include="~{head.html}"></div>
-<span sec:authentication="name"></span>
-<span sec:authentication="principal.authorities">Roles</span>
-<div sec:authorize="hasAnyAuthority('EMPLOYEE')">
-    <a th:href="@{/admin}">Employee</a>
-</div>
-<div sec:authorize="hasAnyAuthority('ADMIN')">
-    <a th:href="@{/admin}">Admin</a>
-</div>
-<div sec:authorize="hasAnyAuthority('USER')">
-    <a th:href="@{/user}">User</a>
-</div>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/admin}">Nhi Oanh</a>
+    <a class="navbar-brand text-light">Xin chào: </a>
+    <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+            <div sec:authentication="principal.fullName" class="navbar-brand"></div>
+        </li>
+        <a class="btn btn-primary" th:href="@{/logout}" role="button">Đăng xuất</a>
 
+    </ul>
+
+    <i style="color: white;margin-left: 10px;" class="fas fa-user-friends"></i>
+    <div id="menu1">
+        <li>
+            <a href="">Thông Tin</a>
+            <ul class="sub-menu1" style="float: left;">
+                <li><a href="">Thông Tin Cá Nhân</a>
+                </li>
+                <li><a href="">Thông Tin Vé</a>
+                </li>
+            </ul>
+        </li>
+    </div>
+
+    <div sec:authorize="hasAnyAuthority('ADMIN')">
+<!--        <a th:href="@{/admin}">Employee</a>-->
+        <div style="margin-left: 900px;"><a class="btn btn-primary" th:href="@{/tuyen}" role="button">Quản Lý</a></div>
+    </div>
+
+</nav>
+
+
+<div style="margin-left: 150px; margin-top: 120px;" class="container position-absolute">
+    <div class="text-center animate-box-hide fadeInUp animated-fast">
+        <h1></h1>
+        <p></p>
+    </div>
+    <div class="search_box mt-5 animate-box-hide fadeInUp animated-fast">
+        <div style="background-color: #383743;background-image: linear-gradient(to bottom right, #383743, pink); opacity: 0.8;"
+             class="tab-content p-4 pl-5 pr-5 ">
+            <div id="oneway" class="tab-pane animated  fadeIn active box-search">
+                <input type="hidden" class="currentDate" value="04/04/2021">
+                <form action="#" method="post" class="search-form">
+                    <input class="agencyType" type="hidden" name="agencyType" value="1">
+                    <div style="margin-top: 20px;" class="row no-gutters">
+
+                        <div class="col-md-3">
+                            <p>Điểm Đi</p>
+                            <div class="form-group">
+                                <div class="form-field">
+
+                                    <select id="fromAddress"
+                                            style="width: 300px; margin-bottom: 10px; border-radius: 3px;height: 38px !important;">
+
+                                        <optgroup style="color: red;" label="Sài Gòn"></optgroup>
+                                        <optgroup label="Quận 9">
+
+                                            <option>Quận 9-Tăng Nhơn Phú A</option>
+                                            <option>Quận 9-Phước Long A</option>
+                                            <option>Quận 9-Hiệp Phú</option>
+                                        </optgroup>
+
+                                        <optgroup label="Thủ Đức">
+                                            <option>Thủ Đức-An Phú</option>
+                                            <option>Thủ Đức-Linh Chiểu</option>
+                                            <option>Thủ Đức-Tân Phú</option>
+                                            <optgroup style="color: red;" label="Phú Yên"></optgroup>
+                                            <optgroup label="Phú Hòa">
+
+                                                <option>Phú Hòa-Xã Hòa Hội</option>
+                                                <option>Phú Hòa-Thị Trấn Phú Hòa</option>
+                                                <option>Phú Hòa-Xã Hòa Thắng</option>
+                                            </optgroup>
+
+                                            <optgroup label="Tuy An">
+                                                <option>Tuy An -An Dân</option>
+                                                <option>Tuy An -An Cư</option>
+                                                <option>Tuy An -An Định</option>
+
+
+                                            </optgroup>
+
+
+                                        </optgroup>
+
+                                    </select>
+                                    <ul id="ui-id-1" tabindex="0"
+                                        class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front"
+                                        style="display: none;"></ul>
+                                    <ul tabindex="0"
+                                        class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front"
+                                        style="display: none;"></ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-1">
+
+
+                            <a href=""><i style=";margin-top: 42px;margin-left: 30px;font-size: 30px;color: black;"
+                                          class="fas fa-arrows-alt-h"></i></a>
+
+                        </div>
+                        <div class="col-md-3">
+                            <p>Điểm Đến</p>
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <select id="toAddress"
+                                            style="width: 300px; margin-bottom: 10px; border-radius: 3px;height: 38px !important;">
+                                        <optgroup style="color: red;" label="Sài Gòn"></optgroup>
+                                        <optgroup label="Quận 9">
+
+                                            <option>Quận 9-Tăng Nhơn Phú A</option>
+                                            <option>Quận 9-Phước Long A</option>
+                                            <option>Quận 9-Hiệp Phú</option>
+                                        </optgroup>
+
+                                        <optgroup label="Thủ Đức">
+                                            <option>Thủ Đức-An Phú</option>
+                                            <option>Thủ Đức-Linh Chiểu</option>
+                                            <option>Thủ Đức-Tân Phú</option>
+
+
+                                        </optgroup>
+                                        <optgroup style="color: red;" label="Phú Yên"></optgroup>
+                                        <optgroup label="Phú Hòa">
+
+                                            <option>Phú Hòa-Xã Hòa Hội</option>
+                                            <option>Phú Hòa-Thị Trấn Phú Hòa</option>
+                                            <option>Phú Hòa-Xã Hòa Thắng</option>
+                                        </optgroup>
+
+                                        <optgroup label="Tuy An">
+                                            <option>Tuy An -An Dân</option>
+                                            <option>Tuy An -An Cư</option>
+                                            <option>Tuy An -An Định</option>
+
+
+                                        </optgroup>
+
+
+                                    </select>
+                                    <ul tabindex="0"
+                                        class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front"
+                                        style="display: none;"></ul>
+                                    <ul id="ui-id-2" tabindex="0"
+                                        class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front"
+                                        style="display: none;"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <i class="icon-before icon-icon-date"></i> <input type="date" id="num16"
+                                                                                      value="2021-06-03"
+                                                                                      class="form-control start-date date pl-5 hasDatepicker"><label></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 pl-3 d-flex" style="margin-top: 40px !important;margin-left: 100px;">
+                            <a href="" style="width: 150px; height: 40px;" type="submit"
+                               class="btn btn-primary btn-block btn-search">Tìm Vé</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="twoway" class="tab-pane animated  fadeIn hide">
+                <form method="post" class="search-form">
+                    <div class="row no-gutters">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="form-field" id="from-location">
+                                    <i class="icon-before icon-Vector-1"></i> <input type="text"
+                                                                                     id="twoway-fromLocation"
+                                                                                     required="required"
+                                                                                     class="form-control pl-5 from-location ui-autocomplete-input"
+                                                                                     autocomplete="off" province="18"
+                                                                                     code="thai-nguyen"> <label>Điểm
+                                    đi</label> <i id="btn-switch-location" class="icon-special icon-Group-20"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="form-field" id="to-location">
+                                    <i class="icon-before icon-Vector-1"></i> <input type="text" id="twoway-toLocation"
+                                                                                     required="required"
+                                                                                     class="form-control pl-5 to-location ui-autocomplete-input"
+                                                                                     autocomplete="off" province="95"
+                                                                                     code="HN - BM"> <label
+                                        for="twoway-toLocation">Điểm đến</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <i class="icon-before icon-icon-date"></i> <input type="text" id="twoway-fromDate"
+                                                                                      required="required"
+                                                                                      class="form-control date pl-5 hasDatepicker">
+                                    <label for="twoway-fromDate"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <i class="icon-before icon-icon-date"></i> <input type="text" id="twoway-toDate"
+                                                                                      required="required"
+                                                                                      class="form-control date pl-5 hasDatepicker">
+                                    <label for="twoway-toDate">Ngày đi</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 pl-3 d-flex">
+                            <input type="submit" name="submit" value="Tìm Vé1" class="btn btn-primary btn-block">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<img style=" width: 100%; height:100% ;" class="img1" src="https://i.imgur.com/jGOBDkn.png">
 </body>
 </html>

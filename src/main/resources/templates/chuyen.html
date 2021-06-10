@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Ngày</label>
-                                    <input type="date" class="form-control" th:field="*{date}">
+                                    <input type="date" class="form-control" th:field="*{date}" required>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Sửa</button>
@@ -132,21 +132,21 @@
                             <form th:action="@{/chuyen/them-chuyen}" method="post" th:object="${chuyenDTO}">
                                 <div class="form-group">
                                     <label class="form-label">Tuyến xe</label>
-                                    <select th:field="*{tuyen}" class="form-control text-secondary">
+                                    <select th:field="*{tuyen}" class="form-control text-secondary" required>
                                         <option th:each="item : ${tuyens}" th:value="${item.getId()}"
-                                                th:text="${item.getTentuyen()}"/>
+                                                th:text="${item.getTentuyen()}" />
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Xe</label>
-                                    <select th:field="*{xe}" class="form-control text-secondary">
+                                    <select th:field="*{xe}" class="form-control text-secondary" required>
                                         <option th:each="item : ${xes}" th:value="${item.getId()}"
                                                 th:text="${item.getTen()}"/>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Ngày</label>
-                                    <input type="date" class="form-control" th:field="*{date}">
+                                    <input type="date" class="form-control" th:field="*{date}" required>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Thêm</button>

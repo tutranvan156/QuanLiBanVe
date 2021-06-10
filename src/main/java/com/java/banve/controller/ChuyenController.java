@@ -1,6 +1,7 @@
 package com.java.banve.controller;
 
 import com.java.banve.entity.Chuyen;
+import com.java.banve.entity.Xe;
 import com.java.banve.model.ChuyenDTO;
 import com.java.banve.service.ChuyenService;
 import com.java.banve.service.TuyenService;
@@ -39,7 +40,7 @@ public class ChuyenController {
         model.addAttribute("mode", "THEM");
         model.addAttribute("chuyenDTO", new ChuyenDTO());
         model.addAttribute("tuyens", this.tuyenService.tatCaTuyenXe());
-        model.addAttribute("xes", this.xeService.tatCaXe());
+        model.addAttribute("xes", this.xeService.findAllXeFree());
         return "chuyen";
     }
 

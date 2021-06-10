@@ -4,9 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "loai")
@@ -22,7 +21,8 @@ public class Loai {
     @Column(name = "gia")
     private Integer gia;
     @Column(name = "ngay")
-    private String date;
+    @Temporal(TemporalType.DATE)
+    private Date date;
     @Column(name = "status")
     private Boolean status;
     @OneToMany(mappedBy = "loai", fetch = FetchType.EAGER)

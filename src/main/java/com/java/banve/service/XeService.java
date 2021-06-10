@@ -9,6 +9,7 @@ public interface XeService {
 
     List<Xe> tatCaXe();
 
+
     void themXe(XeDTO xeDTO);
 
     void suaXe(XeDTO xeDTO);
@@ -18,4 +19,5 @@ public interface XeService {
     Xe timXe(Integer id);
     XeDTO timXeDTO(Integer id);
     List<Xe> findXeLimit();
+    List<Xe> findAllXeFree();
 }

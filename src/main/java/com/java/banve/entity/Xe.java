@@ -26,7 +26,7 @@ public class Xe {
     @JoinColumn(name = "loai_id")
     private Loai loai;
     @OneToMany(mappedBy = "xe", fetch = FetchType.EAGER)
-    private Collection<Chuyen> chuyen;
+    private Collection<Chuyen> chuyens;
     @Column(name = "status")
     private Boolean status;
 }

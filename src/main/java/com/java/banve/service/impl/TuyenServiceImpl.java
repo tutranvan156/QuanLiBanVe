@@ -17,6 +17,7 @@ public class TuyenServiceImpl implements TuyenService {
 
     @Override
     public void themTuyenXe(Tuyen tuyen) {
+        tuyen.setStatus(true);
         this.tuyenRepository.save(tuyen);
     }
 
@@ -26,6 +27,7 @@ public class TuyenServiceImpl implements TuyenService {
         Integer id = tuyen.getId();
         Tuyen tuyenTemp = timTuyen(id);
         tuyenTemp.setId(id);
+        tuyenTemp.setStatus(true);
         tuyenTemp.setTentuyen(tuyen.getTentuyen());
         tuyenTemp.setGio(tuyen.getGio());
         return this.tuyenRepository.save(tuyenTemp);
@@ -35,6 +37,7 @@ public class TuyenServiceImpl implements TuyenService {
     public void xoaTuyenXe(Integer id) {
         Tuyen tuyen = tuyenRepository.findById(id).get();
         tuyen.setStatus(false);
+        this.tuyenRepository.save(tuyen);
     }
 
     @Override
@@ -45,7 +48,7 @@ public class TuyenServiceImpl implements TuyenService {
 
     @Override
     public List<Tuyen> tatCaTuyenXe() {
-        return (List<Tuyen>) this.tuyenRepository.findAll();
+        return (List<Tuyen>) this.tuyenRepository.findAllByStatusEqualsTrue();
 
     }
 

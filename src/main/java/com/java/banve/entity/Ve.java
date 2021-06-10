@@ -17,13 +17,19 @@ public class Ve {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
-    @JoinColumn(name = "chuyen_id")
-    private Chuyen chuyen;
-    @Column(name = "vitri")
-    private String vitri;
+//    @ManyToOne
+//    @JoinColumn(name = "chuyen_id")
+//    private Chuyen chuyen;
+    @Column(name = "diemdi")
+    private String diemDi;
+    @Column(name = "diemden")
+    private String diemDen;
     @Column(name = "status")
     private Boolean status;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seat_id", referencedColumnName = "id")
+    private Seat seat;
 
 
 }

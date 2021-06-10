@@ -1,4 +1,5 @@
 package com.java.banve.service.impl;
+import com.java.banve.entity.Role;
 import com.java.banve.entity.User;
 import com.java.banve.model.MyUserDetail;
 import com.java.banve.repository.UserRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,6 +17,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean dangKy(User user){
         user.setStatus(true);
+//        user.setRoles();
+        Role role = new Role(1, "ADMIN");
+
+        user.setRoles(Set.of(role));
+
         this.userRepository.save(user);
         return true;
     }

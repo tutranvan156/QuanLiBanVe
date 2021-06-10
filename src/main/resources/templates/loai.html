@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -67,9 +67,9 @@
                                             <a class="btn btn-primary mb-4 mr-4"
                                                th:href="@{/loai/sua-loai/{id}(id=${item.getId()})}"
                                                role="button">Sửa</a>
-                                            <!--                                            <a class="btn btn-danger mb-4"-->
-                                            <!--                                               th:href="@{/loai/xoa-loai/{id}(id=${item.getId()})}" role="button"-->
-                                            <!--                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>-->
+                                            <a class="btn btn-danger mb-4"
+                                               th:href="@{/loai/xoa-loai/{id}(id=${item.getId()})}" role="button"
+                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -91,17 +91,18 @@
                                 <input hidden=""/>
                                 <div class="form-group">
                                     <input th:field="*{id}" hidden/>
-                                    <label class="control-label" for="firstName"> Tên loại </label>
-                                    <input id="firstName" class="form-control" th:field="*{ten}"
+                                    <input th:field="*{status}" hidden>
+                                    <label class="control-label"> Tên loại </label>
+                                    <input class="form-control" th:field="*{ten}"
                                            required autofocus="autofocus"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Giá</label>
-                                    <input type="number" class="form-control" th:field="*{gia}">
+                                    <input type="number" class="form-control" th:field="*{gia}" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Ngày</label>
-                                    <input type="date" class="form-control" th:field="*{date}">
+                                    <input type="date" class="form-control" th:field="*{date}" required/>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Sửa</button>
@@ -118,9 +119,8 @@
                             <h1>Thêm loại</h1>
                             <form th:action="@{/loai/them-loai}" method="post" th:object="${loai}">
                                 <div class="form-group">
-                                    <label class="control-label" for="firstName"> Tên loại</label>
-                                    <input class="form-control" th:field="*{ten}"
-                                           required autofocus="autofocus"/>
+                                    <label class="control-label"> Tên loại</label>
+                                    <input class="form-control" th:field="*{ten}" required autofocus="autofocus"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Giá</label>
@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Ngày</label>
-                                    <input type="date" class="form-control" th:field="*{date}">
+                                    <input type="date" class="form-control" th:field="*{date}" required>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Thêm</button>

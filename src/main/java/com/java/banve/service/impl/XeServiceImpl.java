@@ -23,6 +23,7 @@ public class XeServiceImpl implements XeService {
     public void themXe(XeDTO xeDTO) {
         Xe xe = new Xe();
         xe.setTen(xeDTO.getTen());
+        xe.setStatus(true);
         xe.setSoghe(xeDTO.getSoghe());
         xe.setTrangthai(xeDTO.getTrangthai());
         xe.setLoai(this.loaiRepository.findById(Integer.parseInt(xeDTO.getLoai())).get());
@@ -35,6 +36,7 @@ public class XeServiceImpl implements XeService {
         xe.setId(xeDTO.getId());
         xe.setTen(xeDTO.getTen());
         xe.setSoghe(xeDTO.getSoghe());
+        xe.setStatus(true);
         xe.setLoai(this.loaiRepository.findById(Integer.parseInt(xeDTO.getLoai())).get());
         xe.setTrangthai(xeDTO.getTrangthai());
         xeRepository.save(xe);
@@ -44,6 +46,7 @@ public class XeServiceImpl implements XeService {
     public void xoaXe(Integer id){
         Xe xe = xeRepository.findById(id).get();
         xe.setStatus(false);
+        xeRepository.save(xe);
     }
 
     @Override
@@ -67,11 +70,16 @@ public class XeServiceImpl implements XeService {
 
     @Override
     public List<Xe> tatCaXe() {
-        return (List<Xe>) this.xeRepository.findAll();
+        return (List<Xe>) this.xeRepository.findAllByStatusEqualsTrue();
     }
 
     @Override
     public List<Xe> findXeLimit() {
         return this.xeRepository.findXeLimit();
+    }
+
+    @Override
+    public List<Xe> findAllXeFree() {
+        return this.xeRepository.findAllXeFree();
     }
 }

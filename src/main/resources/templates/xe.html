@@ -53,6 +53,7 @@
                                     <th scope="col">Tên xe</th>
                                     <th scope="col">Số ghế</th>
                                     <th scope="col">Loại xe</th>
+                                    <th scope="col">Giá ghế</th>
                                     <th scope="col">Trạng thái</th>
                                 </tr>
                                 </thead>
@@ -62,14 +63,15 @@
                                     <td th:text="${item.getTen()}"></td>
                                     <td th:text="${item.getSoghe()}"></td>
                                     <td th:text="${item.getLoai().getTen()}"></td>
+                                    <td th:text="${item.getLoai().getGia()}"></td>
                                     <td th:text="${item.getTrangthai()} ? 'Rảnh' : 'Không rảnh'"></td>
                                     <td class="d-flex justify-content-end">
                                         <div class="btn-toolbar" role="group" aria-label="Basic example">
                                             <a class="btn btn-primary mb-4 mr-4"
                                                th:href="@{/xe/sua-xe/{id}(id=${item.getId()})}" role="button">Sửa</a>
-                                            <!--                                            <a class="btn btn-danger mb-4"-->
-                                            <!--                                               th:href="@{/xe/xoa-xe/{id}(id=${item.getId()})}" role="button"-->
-                                            <!--                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>-->
+                                            <a class="btn btn-danger mb-4"
+                                               th:href="@{/xe/xoa-xe/{id}(id=${item.getId()})}" role="button"
+                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -138,7 +140,7 @@
                                     <label class="control-label">Giá chuyến xe</label>
                                     <select th:field="*{loai}" class="form-control text-secondary" required>
                                         <th:block th:each="item : ${loais}">
-                                            <option th:text="${item.getTen()}" th:value="${item.getId()}"/>
+                                            <option th:text="${item.getGia()}" th:value="${item.getId()}"/>
                                         </th:block>
                                     </select>
                                 </div>
