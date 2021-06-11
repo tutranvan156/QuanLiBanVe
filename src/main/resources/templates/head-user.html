@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+
+    <a class="navbar-brand" th:href="@{/user}">Nhi Oanh</a>
+    <a class="navbar-brand text-light">Xin chào: </a>
+    <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+            <div sec:authentication="principal.fullName" class="navbar-brand"></div>
+        </li>
+        <a class="btn btn-primary" th:href="@{/logout}" role="button">Đăng xuất</a>
+
+    </ul>
+    <i style="color: white;margin-left: 20px;" class="fas fa-user-friends"></i>
+    <div id="menu1">
+        <li>
+            <a href="">Thông Tin</a>
+            <ul class="sub-menu1" style="float: left;">
+                <li>
+                    <a th:href="@{/user/user-infor/{username} (username = ${#authentication.getPrincipal().getUsername()})}">Thông
+                        Tin Cá Nhân</a>
+                </li>
+                <li><a th:href="@{/user/user-ticket-infor}">Thông Tin Vé</a>
+                </li>
+            </ul>
+        </li>
+    </div>
+    <div style="margin-left: 860px;" sec:authorize="hasAnyAuthority('ADMIN', 'EMPLOYEE')"><a class="btn btn-primary"
+                                                                                             th:href="@{/admin}"
+                                                                                             role="button">Quản lí nhà
+        xe</a></div>
+
+</nav>
+</body>
+</html>

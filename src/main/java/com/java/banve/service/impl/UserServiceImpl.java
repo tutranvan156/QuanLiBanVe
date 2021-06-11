@@ -5,6 +5,7 @@ import com.java.banve.model.MyUserDetail;
 import com.java.banve.repository.UserRepository;
 import com.java.banve.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,8 +63,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserByUserName(String username) {
+        return this.userRepository.findByUsername(username);
+    }
+
+    @Override
     public void xoaUser(Integer id) {
         User user = userRepository.findById(id).get();
         user.setStatus(false);
+        this.userRepository.save(user);
+    }
+    @Override
+    public void changUserInfor(User user) {
+        this.userRepository.save(user);
     }
 }

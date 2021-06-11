@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&display=swap" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-image: linear-gradient(to bottom right, #EAEBEF, white);
+        }
+
+        #menu1 ul {
+            background: #212529;
+            list-style-type: none;
+            float: left;
+        }
+
+        #menu1 li {
+            color: #f1f1f1;
+            display: inline-block;
+            width: 180px;
+            height: 40px;
+            line-height: 40px;
+            margin-left: -5px;
+        }
+
+        #menu1 a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #fff;
+
+            display: block;
+        }
+
+        #menu1 a:hover {
+            background: #212529;
+            color: red;
+        }
+
+        .sub-menu1 li {
+            display: none;
+        }
+
+        #menu1 li {
+            position: relative;
+        }
+
+        .sub-menu1 {
+            display: none;
+            position: absolute;
+        }
+
+        #menu1 li:hover .sub-menu1 {
+            display: block;
+        }
+
+        .sub-menu1 li {
+
+            width: 100px;
+        }
+
+        #menu1 {
+            margin-bottom: 2px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            background-color: lightgrey;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: grey;
+            border-radius: 5px;
+        }
+
+        .scroll {
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .collapsible {
+            margin-left: 1040px;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 160px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #FDF6F6;
+        }
+
+        .collapsible:after {
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        .form {
+            background-color: white;
+        }
+
+        .img1 {
+            margin-top: 0 !important;
+        }
+    </style>
+</head>
+<body style="background-image: url('https://i.imgur.com/SCia1hc.png')">
+<div th:include="~{head-user.html}"></div>
+<div style="margin-top: 40px; margin-left: 30px;"><a class="btn btn-primary" th:href="@{/user}"
+                                                     role="button">Quay lại</a>
+</div>
+<div th:switch="${mode}">
+    <div th:case="USER_INFOR">
+        <div style="top: -20px !important; z-index: 0;">
+            <form class="form" th:object="${user}"
+                  style="width: 740px;height: 580px;margin-top: 20px;margin-bottom: 50px;margin-left: 460px;box-shadow: 1px 1px 20px 20px grey;border-radius: 15px;">
+                <p style="text-align: center;font-size: 40px;font-family: 'Baloo Tammudu 2', cursive;color: blue;padding-top: 30px;">
+                    Thông Tin Khách Hàng</p>
+                <span style="font-size: 30px;font-family: 'Baloo Tammudu 2', cursive;margin-left: 30px;">Xin Chào, </span><span
+                    style="font-family: 'Baloo Tammudu 2', cursive;font-size: 30px;"
+                    th:text="${user.getFullName()}"></span>
+                <div class=""
+                     style="font-family: 'Baloo Tammudu 2', cursive;font-size: 18px;margin-left: 30px;margin-right: 120px;">
+                    <div class="form-group row" style="margin-top: 40px;">
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-user-circle"></i> Tên Đăng Nhập:</label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                                   th:value="${user.getUsername()}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-phone-alt"></i> Số Điện Thoại:</label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                                   th:value="${user.getUser().getSdt()}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-map-pin"></i> Địa Chỉ:</label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                                   th:value="${user.getUser().getDiachi()}" disabled>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-envelope"></i> Email:</label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                                   th:value="${user.getUser().getEmail()}" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <a style="margin-left: 220px;margin-top: 60px;" class="btn btn-primary" th:href="@{/user/{username}/thay-thong-tin (username = ${#authentication.getPrincipal().getUsername()})}" role="button">Thay đổi thông tin</a>
+                <a style="margin-left: 60px;margin-top: 60px;" class="btn btn-success"
+                   th:href="@{/user/{username}/thay-mat-khau (username = ${#authentication.getPrincipal().getUsername()})}" role="button">Thay đổi mật khẩu</a>
+            </form>
+        </div>
+    </div>
+    <div th:case="USER_CHANGE_PASS">
+
+        <div style="top: -20px !important; z-index: 0;">
+            <form class="form" th:object="${user}"
+                  style="width: 740px;height: 580px;margin-top: 20px;margin-bottom: 50px;margin-left: 460px;box-shadow: 1px 1px 20px 20px grey;border-radius: 15px;">
+                <p style="text-align: center;font-size: 40px;font-family: 'Baloo Tammudu 2', cursive;color: blue;padding-top: 30px;">
+                <p style="text-align: center;font-size: 40px;font-family: 'Baloo Tammudu 2', cursive;color: blue;padding-top: 30px;">Thay Đổi Mật Khẩu</p>
+                <div class="" style="font-family: 'Baloo Tammudu 2', cursive;font-size: 18px;margin-left: 40px;margin-right: 110px;">
+                    <div class="form-group row" style="margin-top: 80px;">
+                        <label  class="col-sm-4 col-form-label"> Mật Khẩu Cũ:</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control"  >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="col-sm-4 col-form-label"> Mật Khẩu Mới:</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <label  class="col-sm-4 col-form-label">  Nhập Lại Mật Khẩu :</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control"  >
+                        </div>
+                    </div>
+                </div>
+
+                <a style="margin-left: 410px;margin-top: 60px;" class="btn btn-success" href="#" role="button" >Thay đổi</a>
+                <a style="margin-left: 60px;margin-top: 60px;" class="btn btn-danger" href="#" role="button" >Hủy bỏ</a>
+
+            </form>
+        </div>
+
+    </div>
+    <div th:case="USER_CHANGE_INFOR">
+        <div style="top: -20px !important; z-index: 0;">
+            <form class="form" th:object="${user}" method="post" th:action="@{/user/thay-thong-tin}"
+                  style="width: 740px;height: 580px;margin-top: 20px;margin-bottom: 50px;margin-left: 460px;box-shadow: 1px 1px 20px 20px grey;border-radius: 15px;">
+                <p style="text-align: center;font-size: 40px;font-family: 'Baloo Tammudu 2', cursive;color: blue;padding-top: 30px;">
+                    Thay đổi thông tin</p>
+<!--                <span style="font-size: 30px;font-family: 'Baloo Tammudu 2', cursive;margin-left: 30px;">Xin Chào, </span><span-->
+<!--                    style="font-family: 'Baloo Tammudu 2', cursive;font-size: 30px;"-->
+<!--                    th:text="${user.getFullName()}"></span>-->
+                <div style="font-family: 'Baloo Tammudu 2', cursive;font-size: 18px;margin-left: 30px;margin-right: 120px;">
+                    <div class="form-group row" style="margin-top: 40px;">
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-user-circle"></i>Tên Đăng Nhập:</label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                                   th:field="*{username}" disabled>
+                        </div>
+                    </div>
+                    <input th:field="*{id}" hidden/>
+                    <input th:field="*{email}" hidden/>
+                    <input th:field="*{password}" hidden/>
+                    <input th:field="*{username}" hidden/>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-user-circle"></i>Họ: </label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control " required th:field="*{ho}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-user-circle"></i>Tên: </label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                                    th:field="*{ten}"required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-phone-alt"></i> Số Điện Thoại:</label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                                    th:field="*{sdt}" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <label class="col-sm-4 col-form-label"><i class="fas fa-map-pin"></i> Địa Chỉ:</label>
+                        <div class="col-sm-8">
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                                    th:field="*{diachi}" required>
+                        </div>
+                    </div>
+                </div>
+                <button  style="margin-left: 220px;margin-top: 60px;" class="btn btn-success" type="submit">Thay đổi</button>
+                <a style="margin-left: 60px;margin-top: 60px;" class="btn btn-danger"
+                   th:href="@{/user/{username}/thay-mat-khau (username = ${#authentication.getPrincipal().getUsername()})}" role="button">Hủy bỏ</a>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+</body>
+</html>
