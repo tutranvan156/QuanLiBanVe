@@ -17,12 +17,12 @@ public class Seat {
     @Column(name = "code")
     private Integer code;
 
-    @ManyToOne()
-    @JoinColumn(name = "chuyen_id", nullable = false)
-    private Chuyen chuyen;
-
     @OneToOne(mappedBy = "seat")
     private Ve ve;
+
+    @ManyToOne
+    @JoinColumn(name = "chuyen_id")
+    private Chuyen chuyen;
 
     @Column(name = "status")
     private Boolean status;

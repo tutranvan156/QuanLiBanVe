@@ -133,20 +133,20 @@
 <div th:switch="${mode}">
     <div th:case="USER_INFOR">
         <div style="top: -20px !important; z-index: 0;">
-            <form class="form" th:object="${user}"
+            <form class="form" th:object="${userDTO}"
                   style="width: 740px;height: 580px;margin-top: 20px;margin-bottom: 50px;margin-left: 460px;box-shadow: 1px 1px 20px 20px grey;border-radius: 15px;">
                 <p style="text-align: center;font-size: 40px;font-family: 'Baloo Tammudu 2', cursive;color: blue;padding-top: 30px;">
                     Thông Tin Khách Hàng</p>
                 <span style="font-size: 30px;font-family: 'Baloo Tammudu 2', cursive;margin-left: 30px;">Xin Chào, </span><span
                     style="font-family: 'Baloo Tammudu 2', cursive;font-size: 30px;"
-                    th:text="${user.getFullName()}"></span>
+                    th:text="${userDTO.getFullName()}"></span>
                 <div class=""
                      style="font-family: 'Baloo Tammudu 2', cursive;font-size: 18px;margin-left: 30px;margin-right: 120px;">
                     <div class="form-group row" style="margin-top: 40px;">
                         <label class="col-sm-4 col-form-label"><i class="fas fa-user-circle"></i> Tên Đăng Nhập:</label>
                         <div class="col-sm-8">
                             <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
-                                   th:value="${user.getUsername()}" disabled>
+                                   th:field="*{username}" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -154,7 +154,7 @@
                         <label class="col-sm-4 col-form-label"><i class="fas fa-phone-alt"></i> Số Điện Thoại:</label>
                         <div class="col-sm-8">
                             <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
-                                   th:value="${user.getUser().getSdt()}" disabled>
+                                   th:field="*{sdt}" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -162,7 +162,7 @@
                         <label class="col-sm-4 col-form-label"><i class="fas fa-map-pin"></i> Địa Chỉ:</label>
                         <div class="col-sm-8">
                             <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
-                                   th:value="${user.getUser().getDiachi()}" disabled>
+                                   th:field="*{diachi}" disabled>
 
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                         <label class="col-sm-4 col-form-label"><i class="fas fa-envelope"></i> Email:</label>
                         <div class="col-sm-8">
                             <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
-                                   th:value="${user.getUser().getEmail()}" disabled>
+                                   th:field="*{email}" disabled>
                         </div>
                     </div>
                 </div>
@@ -183,62 +183,47 @@
         </div>
     </div>
     <div th:case="USER_CHANGE_PASS">
-
         <div style="top: -20px !important; z-index: 0;">
-            <form class="form" th:object="${user}"
+            <form class="form" th:object="${userDTO}" method="post" th:action="@{/user/thay-mat-khau}"
                   style="width: 740px;height: 580px;margin-top: 20px;margin-bottom: 50px;margin-left: 460px;box-shadow: 1px 1px 20px 20px grey;border-radius: 15px;">
                 <p style="text-align: center;font-size: 40px;font-family: 'Baloo Tammudu 2', cursive;color: blue;padding-top: 30px;">
                 <p style="text-align: center;font-size: 40px;font-family: 'Baloo Tammudu 2', cursive;color: blue;padding-top: 30px;">Thay Đổi Mật Khẩu</p>
                 <div class="" style="font-family: 'Baloo Tammudu 2', cursive;font-size: 18px;margin-left: 40px;margin-right: 110px;">
-                    <div class="form-group row" style="margin-top: 80px;">
-                        <label  class="col-sm-4 col-form-label"> Mật Khẩu Cũ:</label>
-                        <div class="col-sm-8">
-                            <input type="password" class="form-control"  >
-                        </div>
-                    </div>
+                    <p th:text="${message}"></p>
                     <div class="form-group row">
                         <label  class="col-sm-4 col-form-label"> Mật Khẩu Mới:</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" >
+                            <input type="password" class="form-control" th:field="*{passwordFirst}" required>
                         </div>
                     </div>
+                    <input th:field="*{username}" hidden>
                     <div class="form-group row">
-
                         <label  class="col-sm-4 col-form-label">  Nhập Lại Mật Khẩu :</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control"  >
+                            <input type="password" class="form-control"  th:field="*{passwordSecond}" required>
                         </div>
                     </div>
                 </div>
-
-                <a style="margin-left: 410px;margin-top: 60px;" class="btn btn-success" href="#" role="button" >Thay đổi</a>
-                <a style="margin-left: 60px;margin-top: 60px;" class="btn btn-danger" href="#" role="button" >Hủy bỏ</a>
-
+                <button style="margin-left: 410px;margin-top: 60px;" class="btn btn-success" type="submit">Thay đổi</button>
+                <a style="margin-left: 60px;margin-top: 60px;" class="btn btn-danger" th:href="@{/user/}" role="button" >Hủy bỏ</a>
             </form>
         </div>
 
     </div>
     <div th:case="USER_CHANGE_INFOR">
         <div style="top: -20px !important; z-index: 0;">
-            <form class="form" th:object="${user}" method="post" th:action="@{/user/thay-thong-tin}"
+            <form class="form" th:object="${userDTO}" method="post" th:action="@{/user/thay-thong-tin}"
                   style="width: 740px;height: 580px;margin-top: 20px;margin-bottom: 50px;margin-left: 460px;box-shadow: 1px 1px 20px 20px grey;border-radius: 15px;">
                 <p style="text-align: center;font-size: 40px;font-family: 'Baloo Tammudu 2', cursive;color: blue;padding-top: 30px;">
                     Thay đổi thông tin</p>
-<!--                <span style="font-size: 30px;font-family: 'Baloo Tammudu 2', cursive;margin-left: 30px;">Xin Chào, </span><span-->
-<!--                    style="font-family: 'Baloo Tammudu 2', cursive;font-size: 30px;"-->
-<!--                    th:text="${user.getFullName()}"></span>-->
                 <div style="font-family: 'Baloo Tammudu 2', cursive;font-size: 18px;margin-left: 30px;margin-right: 120px;">
                     <div class="form-group row" style="margin-top: 40px;">
+                        <input th:field="*{username}" hidden>
                         <label class="col-sm-4 col-form-label"><i class="fas fa-user-circle"></i>Tên Đăng Nhập:</label>
                         <div class="col-sm-8">
-                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
-                                   th:field="*{username}" disabled>
+                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control" th:field="*{username}"  disabled>
                         </div>
                     </div>
-                    <input th:field="*{id}" hidden/>
-                    <input th:field="*{email}" hidden/>
-                    <input th:field="*{password}" hidden/>
-                    <input th:field="*{username}" hidden/>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label"><i class="fas fa-user-circle"></i>Họ: </label>
                         <div class="col-sm-8">
@@ -255,7 +240,7 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label"><i class="fas fa-phone-alt"></i> Số Điện Thoại:</label>
                         <div class="col-sm-8">
-                            <input style="font-size: 20px; padding-top: 15px;" type="text" class="form-control "
+                            <input style="font-size: 20px; padding-top: 15px;" type="number" class="form-control "
                                     th:field="*{sdt}" required>
                         </div>
                     </div>

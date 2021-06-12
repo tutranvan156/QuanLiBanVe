@@ -29,8 +29,6 @@ public class Chuyen {
     @JoinColumn(name = "xe_id")
     private Xe xe;
 
-//    @OneToMany(mappedBy = "chuyen", fetch = FetchType.EAGER)
-//    private Collection<Ve> ves;
     @OneToMany(mappedBy = "chuyen", fetch = FetchType.EAGER)
     private Collection<Seat> seats;
 }

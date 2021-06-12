@@ -1,7 +1,10 @@
 package com.java.banve.service.impl;
 
+import com.java.banve.entity.User;
 import com.java.banve.entity.Ve;
+import com.java.banve.model.SearchListVeDTO;
 import com.java.banve.model.VeDTO;
+import com.java.banve.repository.UserRepository;
 import com.java.banve.repository.VeRepository;
 import com.java.banve.service.VeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import java.util.*;
 public class VeServiceImpl implements VeService {
     @Autowired
     VeRepository veRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public void themVe(Ve ve) {
@@ -55,7 +60,6 @@ public class VeServiceImpl implements VeService {
         veDTO.setDiemDen(ve.getDiemDen());
         veDTO.setDiemDi(ve.getDiemDi());
         veDTO.setMaGhe(ve.getSeat().getCode());
-        veDTO.setGia(ve.getSeat().getChuyen().getXe().getLoai().getGia());
         return veDTO;
 
 
@@ -88,10 +92,19 @@ public class VeServiceImpl implements VeService {
             veDTO.setDiemDen(ve.getDiemDen());
             veDTO.setDiemDi(ve.getDiemDi());
             veDTO.setMaGhe(ve.getSeat().getCode());
-            veDTO.setGia(ve.getSeat().getChuyen().getXe().getLoai().getGia());
-            veDTO.setNgay(new SimpleDateFormat("yyyy-MM-dd").format(ve.getSeat().getChuyen().getDate()));
             temp.add(veDTO);
         }
         return temp;
+    }
+
+    @Override
+    public List<Ve> findAllVeByUserID(Integer id) {
+        return this.veRepository.findAllVeByUserId(id);
+    }
+
+    @Override
+    public List<Ve> findAllVeByUsername(String username) {
+        User user = this.userRepository.findByUsername(username);
+        return this.veRepository.findAllVeByUserId(user.getId());
     }
 }

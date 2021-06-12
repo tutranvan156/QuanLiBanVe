@@ -17,9 +17,6 @@ public class Ve {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-//    @ManyToOne
-//    @JoinColumn(name = "chuyen_id")
-//    private Chuyen chuyen;
     @Column(name = "diemdi")
     private String diemDi;
     @Column(name = "diemden")

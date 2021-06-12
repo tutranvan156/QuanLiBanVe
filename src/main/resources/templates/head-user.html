@@ -25,7 +25,7 @@
                     <a th:href="@{/user/user-infor/{username} (username = ${#authentication.getPrincipal().getUsername()})}">Thông
                         Tin Cá Nhân</a>
                 </li>
-                <li><a th:href="@{/user/user-ticket-infor}">Thông Tin Vé</a>
+                <li><a th:href="@{/user/user-ticket-infor/{username} (username = ${#authentication.getPrincipal().getUsername()})}">Thông Tin Vé</a>
                 </li>
             </ul>
         </li>
