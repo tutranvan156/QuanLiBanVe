@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableWebSecurity
 public class WebConfig extends WebSecurityConfigurerAdapter {
 
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -26,8 +25,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/dang-nhap", "/dang-ky", "/mat-khau").permitAll()
                 .antMatchers("/index").hasAnyAuthority("USER", "EMPLOYEE", "ADMIN")
-                .antMatchers("/employee").hasAnyAuthority("EMPLOYEE", "ADMIN")
-                .antMatchers("/admin").hasAnyAuthority("ADMIN")
+                .antMatchers("/employee/**","/chung/**", "/tuyen/**", "/chuyen/**", "/loai/**", "/ve/**", "/xe/**", "/doanh-thu/**").hasAnyAuthority("EMPLOYEE", "ADMIN")
+                .antMatchers("/admin/**" ).hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated();
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
@@ -40,9 +39,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().and()
                 .rememberMe().tokenRepository(this.persistentTokenRepository())
                 .tokenValiditySeconds(1 * 24 * 60 * 60);
-
     }
-
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         InMemoryTokenRepositoryImpl memoryTokenRepository = new InMemoryTokenRepositoryImpl();

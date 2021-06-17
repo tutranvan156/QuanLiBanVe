@@ -5,12 +5,20 @@ import com.java.banve.model.SearchListVeDTO;
 import com.java.banve.model.UserDTO;
 import com.java.banve.model.UserInforDTO;
 import com.java.banve.repository.SeatRepository;
+import com.java.banve.service.ChuyenService;
+import com.java.banve.service.SeatService;
 import com.java.banve.service.UserService;
 import com.java.banve.service.VeService;
+import com.mysql.cj.xdevapi.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @CrossOrigin
@@ -18,10 +26,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    ChuyenService chuyenService;
 
     @Autowired
     VeService veService;
 
+    @Autowired
+    SeatService seatService;
     @RequestMapping("")
     public String user() {
         return "index";
@@ -83,9 +95,52 @@ public class UserController {
 //    @PostMapping("/search-list-ve/{username}")
 //    public String searchListVe()
 
-//    @GetMapping("/user-ticket-infor/{id}")
-//    public String thongTinVeChiTiet(@PathVariable("id") Integer id, ModelMap modelMap) {
-//        modelMap.addAttribute("mode", "VE_INFOR");
-//        return "user-ticket-infor";
+    @GetMapping("/user-ticket-infor-detail/{id}")
+    public String thongTinVeChiTiet(@PathVariable("id") Integer id, ModelMap modelMap) {
+        modelMap.addAttribute("mode", "VE_INFOR");
+        modelMap.addAttribute("veDTO", this.veService.timVeDTO(id));
+        return "user-ticket-infor";
+    }
+
+
+    @GetMapping("/user-chuyen-infor")
+    public String thongTinChuyen(ModelMap modelMap) {
+        modelMap.addAttribute("chuyens", this.chuyenService.tatCaChuyen());
+        return "user-select-chuyen";
+    }
+
+    @GetMapping("/mua-ve/{id}")
+    public String muaVe(@PathVariable("id") Integer id, ModelMap modelMap) {
+        modelMap.addAttribute("seats", this.seatService.findAllSeatByChuyenID(id));
+        return "user-select-seat";
+    }
+
+//    @PostMapping("/luu-thong-tin-ve")
+//    public String luuVeDaMua(@RequestParam("vitri") String vitri) {
+//        System.out.println(vitri);
+//        System.out.println("co chay toi day ne");
+//        return "redirect:/user";
 //    }
+
+    @PostMapping("/luu")
+    public String save(@RequestParam("danhsach") String danhsach) {
+        System.out.println("Day la so tui can " + danhsach);
+        return "redirect:/user";
+    }
+
+    @PostMapping("/test")
+    public void test(@RequestParam("seat") String[] seat){
+        for(String i: seat){
+            System.out.println(i);
+        }
+
+    }
+
+
+
+
+
+
+
+
 }

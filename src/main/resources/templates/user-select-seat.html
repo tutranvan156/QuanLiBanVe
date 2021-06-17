@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <style type="text/css">
+
+        #menu1 ul {
+            background: #212529;
+            list-style-type: none;
+            float: left;
+        }
+
+        #menu1 li {
+            color: #f1f1f1;
+            display: inline-block;
+            width: 180px;
+            height: 40px;
+            line-height: 40px;
+            margin-left: -5px;
+        }
+
+        #menu1 a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #fff;
+
+            display: block;
+        }
+
+        #menu1 a:hover {
+            background: #212529;
+            color: red;
+        }
+
+        .sub-menu1 li {
+            display: none;
+        }
+
+        #menu1 li {
+            position: relative;
+        }
+
+        .sub-menu1 {
+            display: none;
+            position: absolute;
+        }
+
+        #menu1 li:hover .sub-menu1 {
+            display: block;
+        }
+
+        .sub-menu1 li {
+
+            width: 100px;
+        }
+
+        #menu1 {
+            margin-bottom: 2px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            background-color: lightgrey;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: grey;
+            border-radius: 5px;
+        }
+
+        .scroll {
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .collapsible {
+            margin-left: 1040px;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 160px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #FDF6F6;
+        }
+
+        .collapsible:after {
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        /*đánh giá*/
+        div.stars {
+            width: 270px;
+            display: inline-block;
+        }
+
+        input.star {
+            display: none;
+        }
+
+        label.star {
+            float: right;
+            padding: 10px;
+            font-size: 36px;
+            color: #444;
+            transition: all .2s;
+        }
+
+        input.star:checked ~ label.star:before {
+            content: '\f005';
+            color: #FD4;
+            transition: all .25s;
+        }
+
+        input.star-5:checked ~ label.star:before {
+            color: #FE7;
+            text-shadow: 0 0 20px #952;
+        }
+
+        input.star-1:checked ~ label.star:before {
+            color: #F62;
+        }
+
+        label.star:hover {
+            transform: rotate(-15deg) scale(1.3);
+        }
+
+        label.star:before {
+            content: '\f006';
+            font-family: FontAwesome;
+        }
+
+        /**/
+        @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+        .movie-container {
+            margin: 20px 0;
+        }
+
+        .movie-container select {
+            background-color: #fff;
+            border: 0;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-left: 10px;
+            padding: 5px 15px 5px 15px;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .container {
+            perspective: 1000px;
+            margin-bottom: 20px;
+            width: 500px;
+            margin-top: 20px;
+            margin-left: 100px;
+        }
+
+        .seat {
+            background-color: yellow;
+            height: 30px;
+            width: 40px;
+            margin: 3px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            text-align: center;
+            padding-top: 4px;
+        }
+
+        .seat.selected {
+            background-color: red;
+        }
+
+        .seat.occupied {
+            background-color: red;
+        }
+
+        .seat:nth-of-type(2) {
+            margin-right: 18px;
+        }
+
+        .seat:nth-last-of-type(2) {
+            margin-left: 18px;
+        }
+
+        .seat:not(.occupied):hover {
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+
+        .showcase .seat:not(.occupied):hover {
+            cursor: default;
+            transform: scale(1);
+        }
+
+        .showcase {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #777;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .showcase li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+        }
+
+        .showcase li small {
+            margin-left: 2px;
+        }
+
+        .row {
+
+            display: flex;
+        }
+
+        p.text {
+            margin: 5px 0;
+        }
+
+        p.text span {
+            color: red;
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+<body onload="myFunction()">
+<div th:include="~{head-user.html}"></div>
+<div style="position: fixed; top: 80px !important;margin-left: 30px;"><a class="btn btn-primary" href="" role="button">Quay
+    Lại</a></div>
+<div class="col-md-3"
+     style="position: fixed; top: 120px !important;margin-left: 10px;margin-top: 40px; border-right: thick double #ff0000;height: 590px; ">
+    <ul class="list-group " style="height: 590px;background-color: #F1F3F4;box-shadow: 1px 1px 5px 5px grey;">
+        <!-- nội dung bên trái -->
+        <p style="text-align: center;font-size: 14px;font-weight: bold;margin-top: 10px;">Nhà Xe hân hạnh được phục vụ
+            quý khách</p>
+        <img style="margin: 5px 5px 5px 5px;box-shadow:1px 1px 2px 2px grey;border-radius: 5px;"
+             src="https://i.imgur.com/09zHao9.jpg">
+
+        <p style="margin-top: 20px; text-align: center;color: blue;font-style: italic;margin-left: 10px;margin-right: 10px;">
+            Quý Khách Vui Lòng Chọn Ghế Và Điền Đầy Đủ Thông Tin Cá Nhân</p>
+        <!-- đánh giá -->
+        <h4 style="text-align: center;margin-top: 40px;">Đánh giá của bạn</h4>
+        <div class="stars" style="margin-left:40px;">
+            <form action="">
+                <input class="star star-5" id="star-5" type="radio" name="star"/>
+                <label class="star star-5" for="star-5"></label>
+                <input class="star star-4" id="star-4" type="radio" name="star"/>
+                <label class="star star-4" for="star-4"></label>
+                <input class="star star-3" id="star-3" type="radio" name="star"/>
+                <label class="star star-3" for="star-3"></label>
+                <input class="star star-2" id="star-2" type="radio" name="star"/>
+                <label class="star star-2" for="star-2"></label>
+                <input class="star star-1" id="star-1" type="radio" name="star"/>
+                <label class="star star-1" for="star-1"></label>
+            </form>
+        </div>
+        <p style="margin-top: 20px; text-align: center;color: blue;margin-left: 10px;margin-right: 10px;">Cảm Ơn Quý
+            Khách Đã Tin Tưởng Và Đồng Hành Cùng Chúng Tôi !!!</p>
+    </ul>
+</div>
+<div style="margin-left: 460px;margin-top: 100px;height: 590px;width: 1100px;box-shadow: 5px 5px 5px 10px grey;border-radius: 5px;">
+    <!-- nhập thông tin người đi -->
+    <div style="float: right;width: 300px;height: 590px;background-color: #F1F3F4;border-radius: 5px;">
+        <p style="margin-top: 20px; text-align: center;color: blue;font-style: italic;">Thông tin khách hàng</p>
+        <p style="margin-top: 20px;margin-left: 5px;">Họ Tên Khách Hàng</p>
+        <input type="text" name="" class="form-control" placeholder="Nguyễn Văn A">
+        <p style="margin-left: 5px;">Số Điện Thoại</p>
+        <input type="text" name="" class="form-control" placeholder="0123456789"
+               maxlength="11" autocomplete="off"
+               onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
+        <p style="margin-left: 5px;">Địa Chỉ</p>
+        <input type="text" name="" class="form-control" placeholder="Quận 9, HCM">
+        <p style="margin-left: 5px;">Email</p>
+        <input type="Email" name="" class="form-control" placeholder="abc@gmail.com">
+        <p style="margin-left: 5px;">Vị Trí Ngồi</p>
+        <input type="text" name="" class="form-control" placeholder="123">
+        <p style="margin-left: 5px;">Tổng Tiền</p>
+        <input type="text" name="" class="form-control" placeholder="120.000 VND">
+        <a style="margin-top: 40px;margin-left: 120px;" class="btn btn-primary" href="" role="button">Đặt Vé</a>
+    </div>
+    <div style="width: 500px;float: right;margin-top: 20px;border-radius: 30px;height: 540px;margin-right: 120px;background-color: #E6E6E6">
+        <!-- form chỗ -->
+        <div class="movie-container">
+            <label style="margin-left: 20px;">
+                Giá Vé:
+            </label>
+            <select id="movie">
+                <option value="150">150.000 VND</option>
+            </select>
+        </div>
+        <ul class="showcase">
+            <li>
+                <div style="background-color: grey;" class="seat"></div>
+                <small>Không Thể Chọn</small>
+            </li>
+            <li>
+                <div class="seat"></div>
+                <small>Có Thể Chọn</small>
+            </li>
+            <li>
+                <div class="seat occupied"></div>
+                <small>Đang Chọn</small>
+            </li>
+        </ul>
+        <p>hello</p>
+        <div class="container">
+<!--            <form th:action="" method="post" th:object="${seats}">-->
+<!--             <div th:each="item : ${seats}">-->
+<!--                 <p>ayyo</p>-->
+<!--                 <input type="text" name="seat" value="${item}"/>-->
+<!--                 <div id="" class="seat"></div>-->
+<!--             </div>-->
+<!--            </form>-->
+            <div class="row">
+                <div id="0" class="seat">0</div>
+                <div id="1" class="seat">1</div>
+                <div id="2" class="seat">2</div>
+                <div id="3" class="seat">3</div>
+                <div id="4" class="seat">4</div>
+                <div id="5" class="seat">5</div>
+            </div>
+            <form th:action="@{/user/test}" method="POST">
+            <div class="row">
+                <div id="6" class="seat">6</div>
+                <div id="7" class="seat">7</div>
+                <div id="8" class="seat">8</div>
+                <div id="9" class="seat">9</div>
+                <div id="10" class="seat">10</div>
+                <div id="11" class="seat">11</div>
+            </div>
+            <div class="row">
+                <div id="12" class="seat">12</div>
+                <div id="13" class="seat">13</div>
+                <div id="14" class="seat">14</div>
+                <div id="15" class="seat">15</div>
+                <div id="16" class="seat">16</div>
+                <div id="17" class="seat">17</div>
+            </div>
+            <div class="row">
+                <input name="seat" type="text" id="input-18" value="sel">
+                <div id="18" class="seat">18</div>
+                <input name="seat" type="text" id="input-19" value="khong">
+                <div id="19" class="seat">19</div>
+                <input name="seat" type="text" id="input-20" value="sel">
+                <div id="20" class="seat">20</div>
+                <input name="seat" type="text" id="input-21" value="khong">
+                <div id="21" class="seat">21</div>
+                <input name="seat" type="text" id="input-22" value="sel">
+                <div id="22" class="seat">22</div>
+                <input name="seat" type="text" id="input-23" value="khong">
+                <div id="23" class="seat">23</div>
+            </div>
+            <div class="row">
+                <div id="24" class="seat">24</div>
+                <div id="25" class="seat">25</div>
+                <div id="26" class="seat">26</div>
+                <div id="27" class="seat">27</div>
+                <div id="28" class="seat">28</div>
+                <div id="29" class="seat">29</div>
+            </div>
+            <div class="row">
+                <div id="30" class="seat">30</div>
+                <div id="31" class="seat">31</div>
+                <div id="32" class="seat">32</div>
+                <div id="33" class="seat">33</div>
+                <div id="34" class="seat">34</div>
+                <div id="35" class="seat">35</div>
+
+            </div>
+            <div class="row">
+                <div id="36" class="seat">36</div>
+                <div id="37" class="seat">37</div>
+                <div id="38" class="seat">38</div>
+                <div id="39" class="seat">39</div>
+                <div id="40" class="seat">40</div>
+                <div id="41" class="seat">41</div>
+            </div>
+        <button type="submit">Luu</button>
+
+        </form>
+        </div>
+        <p style="text-align: center;" class="text">Bạn Đã Chọn <span id="count">0</span>
+            Chỗ Và Tổng Giá Là: <span id="total">0</span><span>.000 VND</span>
+        </p>
+        <form action="/user/luu" method="post">
+            <p style="text-align: center;">Vị Trí: </p>
+            <p class="form-control" type="text" id="vitri" > </p>
+            <!--    <button class="btn-success btn" onclick="testAjax()">test script</button>-->
+            <button class="btn-success btn" type="submit">test script</button>
+        </form>
+        <!--  -->
+    </div>
+</div>
+<script type="text/javascript">
+    function testAjax() {
+
+        const data = localStorage.getItem("selectedSeats");
+        alert(typeof data);
+        alert(data);
+        $.ajax({
+                type: "POST",
+                url: "/user/luu-ve-da-mua" + data,
+                data: JSON.stringify(localStorage.getItem("selectedSeats")),
+                success: function (data) {
+
+                    alert("Thanh cong");
+                }
+            }
+        )
+    }
+
+    localStorage.clear();
+    /*chỗ ngồi đã được đặt*/
+    var arr = [4, 2, 30, 11, 26, 33, 6];
+    for (var i = 0; i < arr.length; i++) {
+        var m = document.getElementById(arr[i]);
+        m.style.backgroundColor = "grey";
+        m.style.pointerEvents = "none";
+        m.style.cursor = "default";
+    }
+    /*form chỗ*/
+    const container = document.querySelector('.container');
+    const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+    const count = document.getElementById('count');
+    const total = document.getElementById('total');
+    const vitri = document.getElementById('vitri');
+    const movieSelect = document.getElementById('movie');
+    populateUI();
+    let ticketPrice = +movieSelect.value;
+
+    // Save selected movie index and price
+    function setMovieData(movieIndex, moviePrice) {
+        localStorage.setItem('selectedMovieIndex', movieIndex);
+        localStorage.setItem('selectedMoviePrice', moviePrice);
+    }
+
+    // Update total and count
+    function updateSelectedCount() {
+        const selectedSeats = document.querySelectorAll('.row .seat.selected');
+        const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat));
+        const seatsIndex1 = [...selectedSeats].map(seat => [...seats].indexOf(seat));
+        localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+        const selectedSeatsCount = selectedSeats.length;
+        count.innerText = selectedSeatsCount;
+        total.innerText = selectedSeatsCount * ticketPrice;
+        vitri.innerText = seatsIndex1;
+
+
+    }
+
+    // Get data from localstorage and populate UI
+    function populateUI() {
+        const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+
+        if (selectedSeats !== null && selectedSeats.length > 0) {
+            seats.forEach((seat, index) => {
+                if (selectedSeats.indexOf(index) > -1) {
+                    seat.classList.add('selected');
+                }
+            });
+        }
+
+        const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+
+        if (selectedMovieIndex !== null) {
+            movieSelect.selectedIndex = selectedMovieIndex;
+        }
+    }
+
+    // Movie select event
+    movieSelect.addEventListener('change', e => {
+        ticketPrice = +e.target.value;
+        setMovieData(e.target.selectedIndex, e.target.value);
+        updateSelectedCount();
+    });
+
+    // Seat click event
+    container.addEventListener('click', e => {
+        if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+            e.target.classList.toggle('selected');
+            updateSelectedCount();
+        }
+        document.getElementById("input-22").value = "selected";
+    });
+    // Initial count and total set
+    updateSelectedCount();
+    localStorage.clear();
+</script>
+</body>
+</html>

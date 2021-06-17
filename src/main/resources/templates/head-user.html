@@ -30,11 +30,10 @@
             </ul>
         </li>
     </div>
-    <div style="margin-left: 860px;" sec:authorize="hasAnyAuthority('ADMIN', 'EMPLOYEE')"><a class="btn btn-primary"
-                                                                                             th:href="@{/admin}"
-                                                                                             role="button">Quản lí nhà
-        xe</a></div>
-
+    <div style="margin-left: 860px;" sec:authorize="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
+        <a class="btn btn-primary " th:href="@{/chung}" role="button">Quản lí nhà xe</a>
+    </div>
+    <a class="btn btn-primary" sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}" role="button">Quản lí nhân viên</a></div>
 </nav>
 </body>
 </html>

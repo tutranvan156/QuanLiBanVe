@@ -163,15 +163,14 @@
                     <td th:text="${item.getSeat().getChuyen().getDate()}"></td>
                     <td th:text="${item.getSeat().getChuyen().getXe().getLoai().getGia()}"></td>
                     <td>
-                        <a style="float: right;" class="btn btn-success" href="#" role="button"><i
+                        <a style="float: right;" class="btn btn-success" th:href="@{/user/user-ticket-infor-detail/{id} (id = ${item.getId()})}" role="button"><i
                                 class="fas fa-info-circle"></i> Chi Tiết</a>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-    <div th:case="VE_INFOR">
-
+    <div th:case="VE_INFOR" th:object="${veDTO}">
         <div style="position: fixed; top: 10px !important;">
             <div style="text-align: center; margin-left: 120px;margin-top: 120px;width: 200px;">
                 <div style="width: 800px; margin-left: 200px;margin-top: 100px;box-shadow: 5px 5px 20px 20px grey;border-radius: 15px;">
@@ -190,7 +189,7 @@
                                                                                    class="fas fa-user-injured"></i> Tên
                                             Khách:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{fullName}" disabled>
                                         </div>
                                     </div>
 
@@ -199,7 +198,7 @@
                                         <label class="col-sm-4 col-form-label"> <i style="float: left;"
                                                                                    class="fas fa-map-pin"></i> Địa Chỉ:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{diachi}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -208,16 +207,16 @@
                                                 style="float: left;margin-right: 1px;" class="fas fa-phone-alt"></i> Số
                                             Điện Thoại:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{sdt}" disabled>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
 
                                         <label style="float: left;" class="col-sm-4 col-form-label"> <i
-                                                style="float: left;" class="fas fa-envelope"></i> Email:</label>
+                                                style="float: left;" class="fas fa-envelope"></i> Vị trí ngồi:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{maGhe}" disabled>
                                         </div>
                                     </div>
 
@@ -227,7 +226,7 @@
                                                                                    class="fas fa-tags"></i> Giá
                                             Vé:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{gia}" disabled>
                                         </div>
                                     </div>
 
@@ -237,18 +236,18 @@
                                     <div class="form-group row">
 
                                         <label class="col-sm-4 col-form-label"> <i style="float: left;"
-                                                                                   class="fas fa-bus-alt"></i> Chuyến
+                                                                                   class="fas fa-bus-alt"></i> Tuyến
                                             Xe:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{tenTuyen}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
 
                                         <label class="col-sm-4 col-form-label"><i style="float: left;"
-                                                                                  class="fas fa-couch"></i> Vị Trí Ngồi:</label>
+                                                                                  class="fas fa-couch"></i> Chuyến xe:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{tenXe}" disabled>
                                         </div>
                                     </div>
 
@@ -256,14 +255,14 @@
                                         <label style="float: left;" class="col-sm-4 col-form-label"><i
                                                 style="float: left;" class="far fa-calendar-alt"></i> Ngày đi:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{ngay}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label style="float: left;" class="col-sm-4 col-form-label"><i
                                                 style="float: left;" class="fas fa-map-marker-alt"></i> Điểm Đi:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{diemDi}" disabled>
                                         </div>
                                     </div>
 
@@ -272,11 +271,9 @@
                                                                                   class="fas fa-map-marker"></i> Điểm
                                             Đến:</label>
                                         <div class="col-sm-8">
-                                            <input style="width: 220px;" type="text" class="form-control">
+                                            <input style="width: 220px;" type="text" class="form-control" th:field="*{diemDen}" disabled>
                                         </div>
                                     </div>
-
-
                                 </div>
 
                             </div>

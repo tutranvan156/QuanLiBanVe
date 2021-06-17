@@ -6,6 +6,8 @@ import com.java.banve.model.UserDTO;
 import com.java.banve.model.UserInforDTO;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.List;
+
 public interface UserService {
     Boolean dangKy(User user);
     Boolean dangNhap(String userName, String password);
@@ -19,4 +21,7 @@ public interface UserService {
     void changeUserInforDTO(UserDTO userDTO);
     Boolean confirmPassword(String passwordFirst, String passwordSecond);
     void changePassword(String username, String password);
+    void themEmployee(Integer id);
+    void xoaEmployee(Integer id);
+    List<UserInforDTO> findAllUserStatusEqualsTrue();
 }

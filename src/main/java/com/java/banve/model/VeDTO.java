@@ -10,7 +10,12 @@ public class VeDTO {
     public String fullName;
     public String diemDi;
     public String diemDen;
-    public Integer gia;
+    public String gia;
     public Integer maGhe;
     public String ngay;
+    public String sdt;
+    public String tenXe;
+    public String tenTuyen;
+    public String diachi;
+    public String email;
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -22,11 +23,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean dangKy(User user) {
         user.setStatus(true);
-//        user.setRoles();
-        Role role = new Role(1, "ADMIN");
-
+        Role role = new Role(3, "USER");
         user.setRoles(Set.of(role));
-
         this.userRepository.save(user);
         return true;
     }
@@ -120,5 +118,38 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(password));
         this.userRepository.save(user);
+    }
+
+
+    @Override
+    public void themEmployee(Integer id) {
+        User user = this.userRepository.findById(id).get();
+        Role role1 = new Role(2, "EMPLOYEE");
+        Role role2 = new Role(3, "USER");
+        user.setRoles(Set.of(role1, role2));
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public void xoaEmployee(Integer id) {
+       User user = this.userRepository.findById(id).get();
+       user.setStatus(false);
+       this.userRepository.save(user);
+    }
+
+    @Override
+    public List<UserInforDTO> findAllUserStatusEqualsTrue() {
+        List<User> listUser =this.userRepository.findAllByStatusEqualsTrue();
+        ArrayList<UserInforDTO> userInforDTOArrayList = new ArrayList<>();
+        for (int i = 0; i < listUser.size(); i++) {
+            UserInforDTO temp = new UserInforDTO();
+            temp.setId(listUser.get(i).getId());
+            temp.setFullName(listUser.get(i).getHo() + " " + listUser.get(i).getTen());
+            temp.setUsername(listUser.get(i).getUsername());
+            temp.setSdt(listUser.get(i).getSdt());
+            temp.setDiachi(listUser.get(i).getDiachi());
+            userInforDTOArrayList.add(temp);
+        }
+        return userInforDTOArrayList;
     }
 }

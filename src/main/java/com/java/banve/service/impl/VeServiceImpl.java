@@ -60,9 +60,13 @@ public class VeServiceImpl implements VeService {
         veDTO.setDiemDen(ve.getDiemDen());
         veDTO.setDiemDi(ve.getDiemDi());
         veDTO.setMaGhe(ve.getSeat().getCode());
+        veDTO.setGia(String.valueOf(ve.getSeat().getChuyen().getXe().getLoai().getGia()));
+        veDTO.setNgay(new SimpleDateFormat("yyyy-MM-dd").format(ve.getSeat().getChuyen().getDate()));
+        veDTO.setDiachi(ve.getUser().getDiachi());
+        veDTO.setSdt(ve.getUser().getSdt());
+        veDTO.setTenTuyen(ve.getSeat().getChuyen().getTuyen().getTentuyen());
+        veDTO.setTenXe(ve.getSeat().getChuyen().getXe().getTen());
         return veDTO;
-
-
     }
 
 

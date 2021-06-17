@@ -16,7 +16,6 @@ public interface VeService {
     List<VeDTO> tatCaVeChuaDuyet();
     void xacNhanVe(Integer id);
     List<VeDTO> convert(List<Ve> list);
-
     List<Ve> findAllVeByUserID(Integer id);
     List<Ve> findAllVeByUsername(String username);
 }

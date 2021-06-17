@@ -47,7 +47,6 @@ public class IndexController {
             model.addAttribute("user", user);
             return "dangky";
         }
-
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         this.userService.dangKy(user);
