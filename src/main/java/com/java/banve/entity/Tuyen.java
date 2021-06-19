@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "tuyen")
@@ -20,9 +21,9 @@ public class Tuyen {
     @Column(name = "status")
     private Boolean status;
 
-
     @Column(name = "gio")
-    private String gio;
+    @Temporal(TemporalType.TIME)
+    private Date gio;
     @OneToMany(mappedBy = "tuyen", fetch = FetchType.EAGER)
     private Collection<Chuyen> chuyens;
 

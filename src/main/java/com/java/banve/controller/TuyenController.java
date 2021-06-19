@@ -1,11 +1,15 @@
 package com.java.banve.controller;
 
 import com.java.banve.entity.Tuyen;
+import com.java.banve.model.PathDTO;
+import com.java.banve.model.TuyenDTO;
 import com.java.banve.service.TuyenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 
 @Controller
@@ -25,14 +29,14 @@ public class TuyenController {
 
     @GetMapping("them-tuyen")
     public String themTuyen(ModelMap model) {
-        model.addAttribute("tuyen", new Tuyen());
+        model.addAttribute("tuyenDTO", new TuyenDTO());
         model.addAttribute("mode", "THEM");
+        model.addAttribute("path", new PathDTO());
         return "tuyen";
     }
-
     @PostMapping("them-tuyen")
-    public String themTuyen(@ModelAttribute("tuyen") Tuyen tuyen) {
-        this.tuyenService.themTuyenXe(tuyen);
+    public String themTuyen(@ModelAttribute("tuyenDTO") TuyenDTO tuyenDTO) throws ParseException {
+        this.tuyenService.themTuyenDTO(tuyenDTO);
         return "redirect:/tuyen";
     }
 
@@ -44,14 +48,15 @@ public class TuyenController {
 
     @GetMapping("sua-tuyen/{id}")
     public String suaTuyen(@PathVariable("id") Integer id, ModelMap model) {
-        model.addAttribute("tuyen", tuyenService.timTuyen(id));
+        model.addAttribute("tuyenDTO", tuyenService.timTuyenDTO(id));
+        model.addAttribute("path", new PathDTO());
         model.addAttribute("mode", "SUA");
         return "tuyen";
     }
 
     @PostMapping("sua-tuyen")
-    public String suaTuyen(@ModelAttribute("tuyen") Tuyen tuyen) {
-        this.tuyenService.suaTuyenXe(tuyen);
+    public String suaTuyen(@ModelAttribute("tuyenDTO") TuyenDTO tuyenDTO) throws ParseException {
+        this.tuyenService.suaTuyenDTO(tuyenDTO);
         return "redirect:/tuyen";
     }
 

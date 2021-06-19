@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tìm chuyến xe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -56,31 +56,25 @@
         #menu1 li:hover .sub-menu1 {
             display: block;
         }
-
         .sub-menu1 li {
 
             width: 100px;
         }
-
         #menu1 {
             margin-bottom: 2px;
         }
-
         ::-webkit-scrollbar {
             width: 10px;
             background-color: lightgrey;
         }
-
         ::-webkit-scrollbar-thumb {
             background-color: grey;
             border-radius: 5px;
         }
-
         .scroll {
             overflow-y: scroll;
             overflow-x: hidden;
         }
-
         .collapsible {
             margin-left: 1040px;
             color: white;
@@ -92,18 +86,15 @@
             outline: none;
             font-size: 15px;
         }
-
         .active, .collapsible:hover {
             background-color: #FDF6F6;
         }
-
         .collapsible:after {
             color: white;
             font-weight: bold;
             float: right;
             margin-left: 5px;
         }
-
         .content {
             padding: 0 18px;
             max-height: 0;
@@ -116,10 +107,7 @@
 <div th:include="~{head-user.html}"></div>
 <div style="position: fixed; top: 80px !important;margin-left: 30px;"><a class="btn btn-primary" href="" role="button">Quay
     Lại</a>
-
 </div>
-
-
 <div class="col-md-3"
      style="position: fixed; top: 120px !important; margin-left: 10px;border-right: thick double #ff0000; ">
     <ul class="list-group ">
@@ -127,82 +115,74 @@
 							<h6 style="color: red; font-weight: bold;font-size: 15px;"
                                 class="text-dark-light">BỘ LỌC</h6>
 					</span></li>
-
-
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">Giá
-            Vé</a>
-        <div class="collapse" id="collapseExample">
+        <a class="btn btn-primary" role="button" aria-expanded="false">Giá Vé</a>
+        <div id="collapseExample">
             <div class="card card-body">
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input styled-checkbox" id="chkStartHour1"
-                               data-id="0000_0559"> <label class="form-check-label" for="chkStartHour1"> <i
-                            class="icon-Group-9"></i> <span>Dưới 100.000 VND</span>
+                        <input name="gia" type="radio" class="form-check-input styled-checkbox" value="100"> <label
+                            class="form-check-label"> <i class="icon-Group-9"></i> <span>Dưới 100.000 VND</span>
                     </label>
                     </div>
                 </div>
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input styled-checkbox" id="chkStartHour1"
-                               data-id="0000_0559"> <label class="form-check-label" for="chkStartHour1"> <i
-                            class="icon-Group-9"></i> <span>Từ 100.000 - 200.000 VND</span>
-                    </label>
+                        <input name="gia" type="radio" class="form-check-input styled-checkbox" value="150" id="gia">
+                        <label class="form-check-label"> <i class="icon-Group-9"></i>
+                            <span>Từ 100.000 - 200.000 VND</span>
+                        </label>
                     </div>
                 </div>
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input styled-checkbox" id="chkStartHour1"
-                               data-id="0000_0559"> <label class="form-check-label" for="chkStartHour1"> <i
-                            class="icon-Group-9"></i> <span>Trên 200.000 VND</span>
+                        <input name="gia" type="radio" class="form-check-input styled-checkbox" value="200"> <label
+                            class="form-check-label"> <i class="icon-Group-9"></i> <span>Trên 200.000 VND</span>
                     </label>
                     </div>
                 </div>
             </div>
         </div>
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="true">GIỜ
-            XUẤT HÀNH</a>
-        <div class="collapse" id="collapseExample1">
+        <a class="btn btn-primary" role="button" aria-expanded="true">GIỜ XUẤT HÀNH</a>
+        <div>
             <div class="card card-body">
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input styled-checkbox" id="chkStartHour1"
-                               data-id="0000_0559"> <label class="form-check-label" for="chkStartHour1"> <i
-                            class="fas fa-mug-hot"></i> <span>Trước 6:00 sáng</span>
-                    </label>
+                        <input name="gio" type="radio" class="form-check-input styled-checkbox" value="trước 6:00">
+                        <label class="form-check-label"> <i class="fas fa-mug-hot"></i> <span>Trước 6:00 sáng</span>
+                        </label>
                     </div>
                 </div>
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input styled-checkbox" id="chkStartHour1"
-                               data-id="0000_0559"> <label class="form-check-label" for="chkStartHour1"> <i
-                            class="fas fa-sun"></i> <span>6:00 - 12:00</span>
-                    </label>
+                        <input name="gio" type="radio" class="form-check-input styled-checkbox" value="6:00-12:00">
+                        <label class="form-check-label"> <i class="fas fa-sun"></i> <span>6:00 - 12:00</span>
+                        </label>
                     </div>
                 </div>
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input styled-checkbox" id="chkStartHour1"
-                               data-id="0000_0559"> <label class="form-check-label" for="chkStartHour1"> <i
-                            class="fas fa-cloud-sun"></i> <span>12:00 - 18:00</span>
-                    </label>
+                        <input name="gio" type="radio" class="form-check-input styled-checkbox" value="12:00-18:00">
+                        <label class="form-check-label"> <i class="fas fa-cloud-sun"></i> <span>12:00 - 18:00</span>
+                        </label>
                     </div>
                 </div>
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input styled-checkbox" id="chkStartHour1"
-                               data-id="0000_0559"> <label class="form-check-label" for="chkStartHour1"> <i
-                            class="fas fa-moon"></i> <span>Sau 18:00</span>
-                    </label>
+                        <input name="gio" type="radio" class="form-check-input styled-checkbox" value="sau 18:00">
+                        <label class="form-check-label"> <i class="fas fa-moon"></i> <span>Sau 18:00</span>
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
 
-        <a class="btn btn-danger" data-toggle="collapse" href="#" role="button" aria-expanded="true">Tìm Kiếm</a>
+        <a class="btn btn-danger" data-toggle="collapse" href="#" role="button" aria-expanded="true" id="btn">Tìm
+            Kiếm</a>
 
+
+    </ul>
 
 </div>
-
 </ul>
 
 </div>
@@ -217,24 +197,22 @@
             <th>Số ghế</th>
             <th>Ngày</th>
         </tr>
-        <tr th:each="item : ${chuyens}">
-           <td th:text="${item.getId()}"></td>
-            <td th:text="${item.getTuyen().getTentuyen()}"></td>
-            <td th:text="${item.getTuyen().getGio()}"></td>
-            <td th:text="${item.getXe().getLoai().getGia()}"></td>
-            <td th:text="${item.getXe().getSoghe()}"></td>
+        <tr th:each="item : ${listChuyenDTO}">
+            <td th:text="${item.getId()}"></td>
+            <td th:text="${item.getTenTuyen()}"></td>
+            <td th:text="${item.getGio()}"></td>
+            <td th:text="${item.getGia()}"></td>
+            <td th:text="${item.getGhe()}"></td>
             <td th:text="${item.getDate()}"></td>
             <td class="d-flex justify-content-end">
                 <div style="margin-right: 20px;" class="btn-toolbar" role="group" aria-label="Basic example">
                     <a class="btn btn-success mb-4 mr-4"
-                       th:href="@{/user/mua-ve/{id}(id=${item.getId()})}"
+                       th:href="@{/user/mua-ve/{id}/{username}(id = ${item.getId()}, username = ${#authentication.getPrincipal().getUsername()}) }"
                        role="button">Mua vé</a>
                 </div>
             </td>
         </tr>
     </table>
 </div>
-
-
 </body>
 </html>

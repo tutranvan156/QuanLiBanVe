@@ -1,6 +1,8 @@
 package com.java.banve.controller;
 
 import com.java.banve.entity.User;
+import com.java.banve.model.Location;
+import com.java.banve.model.SearchChuyenDTO;
 import com.java.banve.service.UserService;
 import com.java.banve.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,12 @@ public class IndexController {
     @Autowired
     RoleService roleService;
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
+//    @GetMapping("/index")
+//    public String index(ModelMap modelMap) {
+//        modelMap.addAttribute("location", new Location());
+//        modelMap.addAttribute("searchChuyenDTO", new SearchChuyenDTO());
+//        return "index";
+//    }
 
 
     @GetMapping("dang-ky")

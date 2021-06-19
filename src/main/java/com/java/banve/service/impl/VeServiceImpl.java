@@ -1,11 +1,14 @@
 package com.java.banve.service.impl;
 
+import com.java.banve.entity.Chuyen;
+import com.java.banve.entity.Seat;
 import com.java.banve.entity.User;
 import com.java.banve.entity.Ve;
 import com.java.banve.model.SearchListVeDTO;
 import com.java.banve.model.VeDTO;
 import com.java.banve.repository.UserRepository;
 import com.java.banve.repository.VeRepository;
+import com.java.banve.service.ChuyenService;
 import com.java.banve.service.VeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,9 @@ public class VeServiceImpl implements VeService {
     VeRepository veRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ChuyenService chuyenService;
+
 
     @Override
     public void themVe(Ve ve) {
@@ -110,5 +116,13 @@ public class VeServiceImpl implements VeService {
     public List<Ve> findAllVeByUsername(String username) {
         User user = this.userRepository.findByUsername(username);
         return this.veRepository.findAllVeByUserId(user.getId());
+    }
+
+
+    @Override
+    public Boolean checkHopLe(Integer chuyen_id, Integer seat_id) {
+        Chuyen chuyen = this.chuyenService.timChuyen(chuyen_id);
+        List<Seat> seats = (List) chuyen.getSeats();
+        return seats.get(seat_id).getStatus();
     }
 }

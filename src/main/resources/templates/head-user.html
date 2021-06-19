@@ -7,7 +7,7 @@
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
-    <a class="navbar-brand" th:href="@{/user}">Nhi Oanh</a>
+    <a style="margin-left: 20px" class="navbar-brand" th:href="@{/user}">Nhi Oanh</a>
     <a class="navbar-brand text-light">Xin chào: </a>
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
@@ -30,7 +30,7 @@
             </ul>
         </li>
     </div>
-    <div style="margin-left: 860px;" sec:authorize="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
+    <div style="margin-left: 700px; margin-right: 20px" sec:authorize="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
         <a class="btn btn-primary " th:href="@{/chung}" role="button">Quản lí nhà xe</a>
     </div>
     <a class="btn btn-primary" sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}" role="button">Quản lí nhân viên</a></div>

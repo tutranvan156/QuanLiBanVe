@@ -2,14 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Trang Chủ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-
     <style type="text/css">
         #menu1 ul {
             background: #212529;
@@ -82,70 +81,48 @@
         <div style="background-color: #383743;background-image: linear-gradient(to bottom right, #4365FF, #7EBEFF);"
              class="tab-content p-4 pl-5 pr-5 ">
             <div id="oneway" class="tab-pane animated  fadeIn active box-search">
-                <div class="row no-gutters">
-                    <div class="col-md-3">
-                        <p style="color: white;text-align: center;"><i class="fas fa-map-marker-alt"></i> Điểm Đi</p>
-                        <div class="form-group">
-                            <div class="form-field">
-                                <select id="fromAddress"
-                                        style="width: 300px; margin-bottom: 10px; border-radius: 3px;height: 38px !important;">
-                                    <optgroup style="color: red;" label="Sài Gòn"></optgroup>
-                                    <optgroup label="Quận 9">
-                                        <option>Quận 9-Tăng Nhơn Phú A</option>
-                                        <option>Quận 9-Phước Long A</option>
-                                        <option>Quận 9-Hiệp Phú</option>
-                                    </optgroup>
-
-                                    <optgroup label="Thủ Đức">
-                                        <option>Thủ Đức-An Phú</option>
-                                        <option>Thủ Đức-Linh Chiểu</option>
-                                        <option>Thủ Đức-Tân Phú</option>
-                                    </optgroup>
-
-
-                                </select>
+                <p th:text="${message}"></p>
+                <form th:object="${searchChuyenDTO}" th:action="@{/user/user-chuyen-infor}" method="post">
+                    <div class="row no-gutters">
+                        <div class="col-md-3">
+                            <p style="color: white;text-align: center;"><i class="fas fa-map-marker-alt"></i> Điểm Đi</p>
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <select th:field="*{diemDi}" style="width: 300px; margin-bottom: 10px; border-radius: 3px;height: 38px !important;">
+                                        <option th:value="${location.getPhuYen()}" th:text="${location.getPhuYen()}"></option>
+                                        <option th:value="${location.getSaiGon()}" th:text="${location.getSaiGon()}"></option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-1">
-                        <a href=""><i style=";margin-top: 42px;margin-left: 30px;font-size: 30px;color: white;"
-                                      class="fas fa-arrows-alt-h"></i></a>
-                    </div>
-                    <div class="col-md-3">
-                        <p style="color: white;text-align: center;"><i class="fas fa-map-marker-alt"></i> Điểm Đến</p>
-                        <div class="form-group">
-                            <div class="form-field">
-                                <select style="width: 300px; margin-bottom: 10px; border-radius: 3px;height: 38px !important;">
-                                    <optgroup style="color: red;" label="Phú Yên"></optgroup>
-                                    <optgroup label="Phú Hòa">
-                                        <option>Phú Hòa-Xã Hòa Hội</option>
-                                        <option>Phú Hòa-Thị Trấn Phú Hòa</option>
-                                        <option>Phú Hòa-Xã Hòa Thắng</option>
-                                    </optgroup>
-
-                                    <optgroup label="Tuy An">
-                                        <option>Tuy An -An Dân</option>
-                                        <option>Tuy An -An Cư</option>
-                                        <option>Tuy An -An Định</option>
-                                    </optgroup>
-                                </select>
+                        <div class="col-md-1">
+                            <a href=""><i style=";margin-top: 42px;margin-left: 30px;font-size: 30px;color: white;"
+                                          class="fas fa-arrows-alt-h"></i></a>
+                        </div>
+                        <div class="col-md-3">
+                            <p style="color: white;text-align: center;"><i class="fas fa-map-marker-alt"></i> Điểm Đến</p>
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <select th:field="*{diemDen}" style="width: 300px; margin-bottom: 10px; border-radius: 3px;height: 38px !important;">
+                                        <option th:value="${location.getSaiGon()}" th:text="${location.getSaiGon()}"></option>
+                                        <option th:value="${location.getPhuYen()}" th:text="${location.getPhuYen()}"></option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <!-- <p>Ngày Đi</p> -->
-                        <div class="form-group" style="margin-top: 40px;">
-                            <div class="form-field">
-                                <i class="icon-before icon-icon-date"></i> <input type="date" value="2021-06-03"
-                                                                                  class="form-control start-date date pl-5 hasDatepicker"><label></label>
+                        <div class="col-md-2" style="margin-left: 30px">
+                            <p style="color: white;text-align: center;"><i class="fas fa-calendar-week"></i> Ngày</p>
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <i class="icon-before icon-icon-date"></i> <input type="date" min="2021-06-18" class="form-control" th:field="*{ngay}" required><label></label>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-md-2 pl-3 d-flex" style="margin-top: 40px !important;margin-left: 60px;">
+                            <button class="btn btn-warning" type="submit" style="width: 150px; height: 40px;">Tìm Vé</button>
+                        </div>
                     </div>
-                    <div class="col-md-2 pl-3 d-flex" style="margin-top: 40px !important;margin-left: 100px;">
-                        <a th:href="@{user/user-chuyen-infor}" style="width: 150px; height: 40px;" type="submit"
-                           class="btn btn-warning btn-block btn-search">Tìm Vé</a>
-                    </div>
-                </div>
+                </form>
 
             </div>
 
@@ -154,9 +131,6 @@
     <p style="text-align: center;font-size: 20px; color: blue;margin-top: 20px;font-weight: bold;">Vé Xe Rẻ - Cam Kết
         hoàn 150% nếu nhà xe không giữ vé</p>
 </div>
-
 <img style=" width: 100%;" class="img1" src="https://i.imgur.com/SCia1hc.png">
-
-
 </body>
 </html>

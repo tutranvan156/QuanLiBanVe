@@ -17,4 +17,6 @@ public class ChuyenDTO {
     private String tenXe;
     private Integer gia;
     private Integer ghe;
+    private String gio;
+    private Integer chuyen_id;
 }

@@ -2,10 +2,9 @@ package com.java.banve.service.impl;
 
 import com.java.banve.entity.Role;
 import com.java.banve.entity.User;
-import com.java.banve.model.MyUserDetail;
-import com.java.banve.model.UserDTO;
-import com.java.banve.model.UserInforDTO;
+import com.java.banve.model.*;
 import com.java.banve.repository.UserRepository;
+import com.java.banve.service.ChuyenService;
 import com.java.banve.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +18,9 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ChuyenService chuyenService;
 
     @Override
     public Boolean dangKy(User user) {
@@ -136,7 +138,6 @@ public class UserServiceImpl implements UserService {
        user.setStatus(false);
        this.userRepository.save(user);
     }
-
     @Override
     public List<UserInforDTO> findAllUserStatusEqualsTrue() {
         List<User> listUser =this.userRepository.findAllByStatusEqualsTrue();
@@ -151,5 +152,19 @@ public class UserServiceImpl implements UserService {
             userInforDTOArrayList.add(temp);
         }
         return userInforDTOArrayList;
+    }
+    @Override
+    public UserTicketDTO findUserTicketDTO(String username, Integer chuyen_id) {
+        UserInforDTO userInforDTO = this.findUserInforDTOByUsername(username);
+        ChuyenDTO chuyenDTO = this.chuyenService.timChuyenDTO(chuyen_id);
+        UserTicketDTO userTicketDTO = new UserTicketDTO();
+        userTicketDTO.setDiachi(userInforDTO.getDiachi());
+        userTicketDTO.setSdt(userInforDTO.getSdt());
+        userTicketDTO.setFullName(userInforDTO.getFullName());
+        userTicketDTO.setGia(chuyenDTO.getGia());
+        userTicketDTO.setTenTuyen(chuyenDTO.getTenTuyen());
+        userTicketDTO.setTenXe(chuyenDTO.getXe());
+        userTicketDTO.setThoiGian(chuyenDTO.getGio());
+        return userTicketDTO;
     }
 }

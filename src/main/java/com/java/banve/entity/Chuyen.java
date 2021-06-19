@@ -21,14 +21,12 @@ public class Chuyen {
     private Date date;
     @Column(name = "status")
     private Boolean status;
-
     @ManyToOne
     @JoinColumn(name = "tuyen_id")
     private Tuyen tuyen;
     @ManyToOne
     @JoinColumn(name = "xe_id")
     private Xe xe;
-
     @OneToMany(mappedBy = "chuyen", fetch = FetchType.EAGER)
     private Collection<Seat> seats;
 }

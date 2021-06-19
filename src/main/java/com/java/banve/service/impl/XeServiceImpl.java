@@ -82,4 +82,7 @@ public class XeServiceImpl implements XeService {
     public List<Xe> findAllXeFree() {
         return this.xeRepository.findAllXeFree();
     }
+
+
+
 }

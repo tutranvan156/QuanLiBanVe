@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Trang chủ</title>
+    <title>Quản lí nhân viên</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
             crossorigin="anonymous"></script>
-
 </head>
 <style>
     #layoutSidenav_nav .nav {
@@ -19,136 +18,100 @@
         flex-direction: column;
         background: black;
     }
-
     * {
         padding: 0;
         margin: 0;
     }
-
     a:hover {
         border-radius: 5px;
         border: solid 1px azure;
         font-size: 110%;
     }
-
 </style>
 <body class="sb-nav-fixed" style="height:100%">
 <div th:include="~{head.html}"></div>
 <div class="content d-flex justify-content-start w-100 ">
     <div th:include="~{left.html}"></div>
     <div class="right-content w-75 ml-5 my-5">
-        <div class="form-0">
-
-            <div class="table-responsive">
-
-                <button type="button" class="btn btn-primary">Thông tin tuyến xe</button>
-                <a class="btn btn-warning" th:href="@{/tuyen}" role="button"
-                   style="position:absolute; right: 5%; width: 150px; z-index: 0">Chi tiết</a>
-                <table class="table table-hover mt-3">
-                    <thead>
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Tên tuyến</th>
-                        <th scope="col">Thời gian</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="item : ${tuyens}">
-                        <td th:text="${item.getId()}"></td>
-                        <td th:text="${item.getTentuyen()}"></td>
-                        <td th:text="${item.getGio()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div th:switch="${mode}">
+            <div th:case="MAIN">
+                <a class="btn btn-primary mb-4" th:href="@{/admin/them-employee}" role="button">Thêm nhân viên</a>
+                <div class="card mb-4 w-100">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Họ và tên</th>
+                                    <th scope="col">Tên đăng nhập</th>
+                                    <th scope="col">Số điện thoại</th>
+                                    <th scope="col">Địa chỉ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="item : ${employees}">
+                                    <td th:text="${item.getId()}"></td>
+                                    <td th:text="${item.getFullName()}"></td>
+                                    <td th:text="${item.getUsername()}"></td>
+                                    <td th:text="${item.getSdt()}"></td>
+                                    <td th:text="${item.getDiachi()}"></td>
+                                    <td class="d-flex justify-content-end">
+                                        <div class="btn-toolbar" role="group" aria-label="Basic example">
+                                            <a class="btn btn-danger mb-4"
+                                               th:href="@{/admin/xoa-employee/{id}(id=${item.getId()})}" role="button"
+                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa nhân viên</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:case="THEM">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <h1>Thêm nhân viên</h1>
+                            <form th:action="@{/admin/them-employee}" method="post" th:object="${employee}">
+                                <div class="form-group">
+                                    <label class="form-label">Họ</label>
+                                    <input type="text" class="form-control" th:field="*{ho}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tên</label>
+                                    <input type="text" class="form-control" th:field="*{ten}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" th:field="*{username}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Mật khẩu</label>
+                                    <input type="password" class="form-control" th:field="*{password}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" th:field="*{diachi}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input type="number" class="form-control" th:field="*{sdt}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" th:field="*{email}" required>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-success" value="Submit">Thêm</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="form-1">
-            <button type="button" class="btn btn-primary">Thông tin chuyến xe</button>
-
-            <a class="btn btn-warning" th:href="@{/chuyen}" role="button"
-               style="position:absolute; right: 5%; width: 150px; z-index: 0">Chi tiết</a>
-            <table class="table table-hover mt-3">
-                <thead>
-                <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Tên chuyến xe</th>
-                    <th scope="col">Tên xe</th>
-                    <th scope="col">Giá tiền</th>
-                    <th scope="col">Số ghế</th>
-                    <th scope="col">Ngày</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <tr th:each="item : ${chuyens}">
-                    <td th:text="${item.getId()}"></td>
-                    <td th:text="${item.getTuyen().getTentuyen()}"></td>
-                    <td th:text="${item.getXe().getTen()}"></td>
-                    <td th:text="${item.getXe().getLoai().getGia()}"></td>
-                    <td th:text="${item.getXe().getSoghe()}"></td>
-                    <td th:text="${item.getDate()}"></td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div>
-        <div class="form-2">
-            <button type="button" class="btn btn-primary">Thiết lập giá vé</button>
-
-            <a class="btn btn-warning" th:href="@{/loai}" role="button"
-               style="position:absolute; right: 5%; width: 150px; z-index: 0">Chi tiết</a>
-            <div class="table-responsive mt-3">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Tên loại</th>
-                        <th scope="col">Giá vé</th>
-                        <th scope="col">Thời gian</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="item : ${loais}">
-                        <td th:text="${item.getId()}"></td>
-                        <td th:text="${item.getTen()}"></td>
-                        <td th:text="${item.getGia()}"></td>
-                        <td th:text="${item.getDate()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="form-3">
-            <button type="button" class="btn btn-primary">Thông tin xe</button>
-            <a class="btn btn-warning" th:href="@{/xe}" role="button"
-               style="position:absolute; right: 5%; width: 150px; z-index: 0">Chi tiết</a>
-            <div class="table-responsive mt-3">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Tên xe</th>
-                        <th scope="col">Số ghế</th>
-                        <th scope="col">Loại xe</th>
-                        <th scope="col">Trạng thái</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="item : ${xes}">
-                        <td th:text="${item.getId()}"></td>
-                        <td th:text="${item.getTen()}"></td>
-                        <td th:text="${item.getSoghe()}"></td>
-                        <td th:text="${item.getLoai().getTen()}"></td>
-                        <td th:text="${item.getTrangthai()} ? 'Rảnh' : 'Không rảnh'"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
     </div>
 </div>
 

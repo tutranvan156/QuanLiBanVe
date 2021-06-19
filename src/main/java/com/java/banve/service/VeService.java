@@ -18,4 +18,5 @@ public interface VeService {
     List<VeDTO> convert(List<Ve> list);
     List<Ve> findAllVeByUserID(Integer id);
     List<Ve> findAllVeByUsername(String username);
+    Boolean checkHopLe(Integer chuyen_id, Integer seat_id);
 }

@@ -38,9 +38,7 @@
 <div class="content d-flex justify-content-start w-100 ">
     <div th:include="~{left.html}"></div>
     <div class="right-content w-75 ml-5 my-5">
-
         <div th:switch="${mode}">
-
             <div th:case="MAIN">
                 <a class="btn btn-primary mb-4" href="chuyen/them-chuyen" role="button">Thêm chuyến</a>
                 <div class="card mb-4 w-100">
@@ -81,7 +79,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div th:case="SUA">
                 <div class="container-fluid">

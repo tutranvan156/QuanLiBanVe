@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chọn Chỗ Ngồi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -181,14 +181,14 @@
             margin-bottom: 20px;
             width: 500px;
             margin-top: 20px;
-            margin-left: 100px;
+            margin-left: 15px;
         }
 
         .seat {
             background-color: yellow;
             height: 30px;
             width: 40px;
-            margin: 3px;
+            margin: 15px;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             text-align: center;
@@ -198,19 +198,9 @@
         .seat.selected {
             background-color: red;
         }
-
         .seat.occupied {
             background-color: red;
         }
-
-        .seat:nth-of-type(2) {
-            margin-right: 18px;
-        }
-
-        .seat:nth-last-of-type(2) {
-            margin-left: 18px;
-        }
-
         .seat:not(.occupied):hover {
             cursor: pointer;
             transform: scale(1.2);
@@ -241,24 +231,20 @@
         .showcase li small {
             margin-left: 2px;
         }
-
         .row {
 
             display: flex;
         }
-
         p.text {
             margin: 5px 0;
         }
-
         p.text span {
             color: red;
             font-size: 20px;
         }
-
     </style>
 </head>
-<body onload="myFunction()">
+<body>
 <div th:include="~{head-user.html}"></div>
 <div style="position: fixed; top: 80px !important;margin-left: 30px;"><a class="btn btn-primary" href="" role="button">Quay
     Lại</a></div>
@@ -293,233 +279,63 @@
             Khách Đã Tin Tưởng Và Đồng Hành Cùng Chúng Tôi !!!</p>
     </ul>
 </div>
-<div style="margin-left: 460px;margin-top: 100px;height: 590px;width: 1100px;box-shadow: 5px 5px 5px 10px grey;border-radius: 5px;">
-    <!-- nhập thông tin người đi -->
-    <div style="float: right;width: 300px;height: 590px;background-color: #F1F3F4;border-radius: 5px;">
-        <p style="margin-top: 20px; text-align: center;color: blue;font-style: italic;">Thông tin khách hàng</p>
-        <p style="margin-top: 20px;margin-left: 5px;">Họ Tên Khách Hàng</p>
-        <input type="text" name="" class="form-control" placeholder="Nguyễn Văn A">
-        <p style="margin-left: 5px;">Số Điện Thoại</p>
-        <input type="text" name="" class="form-control" placeholder="0123456789"
-               maxlength="11" autocomplete="off"
-               onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
-        <p style="margin-left: 5px;">Địa Chỉ</p>
-        <input type="text" name="" class="form-control" placeholder="Quận 9, HCM">
-        <p style="margin-left: 5px;">Email</p>
-        <input type="Email" name="" class="form-control" placeholder="abc@gmail.com">
-        <p style="margin-left: 5px;">Vị Trí Ngồi</p>
-        <input type="text" name="" class="form-control" placeholder="123">
-        <p style="margin-left: 5px;">Tổng Tiền</p>
-        <input type="text" name="" class="form-control" placeholder="120.000 VND">
-        <a style="margin-top: 40px;margin-left: 120px;" class="btn btn-primary" href="" role="button">Đặt Vé</a>
-    </div>
-    <div style="width: 500px;float: right;margin-top: 20px;border-radius: 30px;height: 540px;margin-right: 120px;background-color: #E6E6E6">
-        <!-- form chỗ -->
-        <div class="movie-container">
-            <label style="margin-left: 20px;">
+<div style="margin-left: 460px;margin-top: 100px;height: 590px;width: 1200px;box-shadow: 5px 5px 5px 10px grey;border-radius: 5px;">
+
+    <div style="width: 500px;margin-left: 180px; border-radius: 30px;height: 590px;background-color: #E6E6E6">
+        <div class="movie-container" >
+            <label style="margin-left: 140px;font-size: 20px ;margin-top: 20px;">
                 Giá Vé:
             </label>
-            <select id="movie">
-                <option value="150">150.000 VND</option>
-            </select>
+            <span th:text="${userTicketDTO.getGia()}" style="margin-left: 5px; font-size: 20px"></span>
+            <span style="margin-left: 2px; font-size: 20px">VNĐ</span>
         </div>
         <ul class="showcase">
-            <li>
-                <div style="background-color: grey;" class="seat"></div>
-                <small>Không Thể Chọn</small>
-            </li>
             <li>
                 <div class="seat"></div>
                 <small>Có Thể Chọn</small>
             </li>
             <li>
                 <div class="seat occupied"></div>
-                <small>Đang Chọn</small>
+                <small>Không thể chọn</small>
             </li>
         </ul>
-        <p>hello</p>
-        <div class="container">
-<!--            <form th:action="" method="post" th:object="${seats}">-->
-<!--             <div th:each="item : ${seats}">-->
-<!--                 <p>ayyo</p>-->
-<!--                 <input type="text" name="seat" value="${item}"/>-->
-<!--                 <div id="" class="seat"></div>-->
-<!--             </div>-->
-<!--            </form>-->
-            <div class="row">
-                <div id="0" class="seat">0</div>
-                <div id="1" class="seat">1</div>
-                <div id="2" class="seat">2</div>
-                <div id="3" class="seat">3</div>
-                <div id="4" class="seat">4</div>
-                <div id="5" class="seat">5</div>
-            </div>
-            <form th:action="@{/user/test}" method="POST">
-            <div class="row">
-                <div id="6" class="seat">6</div>
-                <div id="7" class="seat">7</div>
-                <div id="8" class="seat">8</div>
-                <div id="9" class="seat">9</div>
-                <div id="10" class="seat">10</div>
-                <div id="11" class="seat">11</div>
-            </div>
-            <div class="row">
-                <div id="12" class="seat">12</div>
-                <div id="13" class="seat">13</div>
-                <div id="14" class="seat">14</div>
-                <div id="15" class="seat">15</div>
-                <div id="16" class="seat">16</div>
-                <div id="17" class="seat">17</div>
-            </div>
-            <div class="row">
-                <input name="seat" type="text" id="input-18" value="sel">
-                <div id="18" class="seat">18</div>
-                <input name="seat" type="text" id="input-19" value="khong">
-                <div id="19" class="seat">19</div>
-                <input name="seat" type="text" id="input-20" value="sel">
-                <div id="20" class="seat">20</div>
-                <input name="seat" type="text" id="input-21" value="khong">
-                <div id="21" class="seat">21</div>
-                <input name="seat" type="text" id="input-22" value="sel">
-                <div id="22" class="seat">22</div>
-                <input name="seat" type="text" id="input-23" value="khong">
-                <div id="23" class="seat">23</div>
-            </div>
-            <div class="row">
-                <div id="24" class="seat">24</div>
-                <div id="25" class="seat">25</div>
-                <div id="26" class="seat">26</div>
-                <div id="27" class="seat">27</div>
-                <div id="28" class="seat">28</div>
-                <div id="29" class="seat">29</div>
-            </div>
-            <div class="row">
-                <div id="30" class="seat">30</div>
-                <div id="31" class="seat">31</div>
-                <div id="32" class="seat">32</div>
-                <div id="33" class="seat">33</div>
-                <div id="34" class="seat">34</div>
-                <div id="35" class="seat">35</div>
-
-            </div>
-            <div class="row">
-                <div id="36" class="seat">36</div>
-                <div id="37" class="seat">37</div>
-                <div id="38" class="seat">38</div>
-                <div id="39" class="seat">39</div>
-                <div id="40" class="seat">40</div>
-                <div id="41" class="seat">41</div>
-            </div>
-        <button type="submit">Luu</button>
-
-        </form>
+        <div class="container row ">
+                <span th:each="item : ${seats}" class="seat">
+                    <div th:switch="${item.getStatus()}" >
+                        <div th:case='true'>
+                            <div th:text="${item.getCode()}"></div>
+                        </div>
+                        <div th:case='false' style="  height: 30px;width: 40px;margin-left: -12px;margin-top: -4px;border-top-left-radius: 10px;border-top-right-radius: 10px;  background-color: red !important;">
+                            <div th:text="${item.getCode()}"></div>
+                        </div>
+                    </div>
+                </span>
         </div>
-        <p style="text-align: center;" class="text">Bạn Đã Chọn <span id="count">0</span>
-            Chỗ Và Tổng Giá Là: <span id="total">0</span><span>.000 VND</span>
-        </p>
-        <form action="/user/luu" method="post">
-            <p style="text-align: center;">Vị Trí: </p>
-            <p class="form-control" type="text" id="vitri" > </p>
-            <!--    <button class="btn-success btn" onclick="testAjax()">test script</button>-->
-            <button class="btn-success btn" type="submit">test script</button>
+    </div>
+    <!-- nhập thông tin người đi -->
+    <div style="margin-top: -610px;">
+        <form th:object="${userTicketDTO}" th:action="@{/user/luu-ve-da-mua}" th:method="post">
+            <div style="margin-left: 880px;top: 100px; width: 300px;height: 590px;background-color: #F1F3F4;border-radius: 15px;">
+                <p style="margin-top: 20px; font-size: 20px; text-align: center;color: blue;font-style: italic;">Thông tin vé</p>
+                <p style="margin-top: -10px;margin-left: 5px;">Họ tên khách hàng</p>
+                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{fullName}" disabled>
+                <p style="margin-left: 5px;">Số điện thoại</p>
+                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{sdt}" disabled>
+                <p style="margin-left: 5px;">Địa chỉ</p>
+                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{diachi}" disabled>
+                <p style="margin-left: 5px;">Tên tuyến xe</p>
+                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{tenTuyen}" disabled>
+                <p style="margin-left: 5px;">Tên xe</p>
+                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{tenXe}" disabled>
+                <p style="margin-left: 5px;">Giá vé</p>
+                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{gia}" disabled>
+                <p style="margin-left: 5px;">Vị trí ngồi</p>
+                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{seatCode}" required>
+                <button style="margin-top: 20px;margin-left: 100px;" class="btn btn-success" type="submit">Đặt Vé</button>
+            </div>
         </form>
-        <!--  -->
     </div>
 </div>
-<script type="text/javascript">
-    function testAjax() {
 
-        const data = localStorage.getItem("selectedSeats");
-        alert(typeof data);
-        alert(data);
-        $.ajax({
-                type: "POST",
-                url: "/user/luu-ve-da-mua" + data,
-                data: JSON.stringify(localStorage.getItem("selectedSeats")),
-                success: function (data) {
-
-                    alert("Thanh cong");
-                }
-            }
-        )
-    }
-
-    localStorage.clear();
-    /*chỗ ngồi đã được đặt*/
-    var arr = [4, 2, 30, 11, 26, 33, 6];
-    for (var i = 0; i < arr.length; i++) {
-        var m = document.getElementById(arr[i]);
-        m.style.backgroundColor = "grey";
-        m.style.pointerEvents = "none";
-        m.style.cursor = "default";
-    }
-    /*form chỗ*/
-    const container = document.querySelector('.container');
-    const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-    const count = document.getElementById('count');
-    const total = document.getElementById('total');
-    const vitri = document.getElementById('vitri');
-    const movieSelect = document.getElementById('movie');
-    populateUI();
-    let ticketPrice = +movieSelect.value;
-
-    // Save selected movie index and price
-    function setMovieData(movieIndex, moviePrice) {
-        localStorage.setItem('selectedMovieIndex', movieIndex);
-        localStorage.setItem('selectedMoviePrice', moviePrice);
-    }
-
-    // Update total and count
-    function updateSelectedCount() {
-        const selectedSeats = document.querySelectorAll('.row .seat.selected');
-        const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat));
-        const seatsIndex1 = [...selectedSeats].map(seat => [...seats].indexOf(seat));
-        localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
-        const selectedSeatsCount = selectedSeats.length;
-        count.innerText = selectedSeatsCount;
-        total.innerText = selectedSeatsCount * ticketPrice;
-        vitri.innerText = seatsIndex1;
-
-
-    }
-
-    // Get data from localstorage and populate UI
-    function populateUI() {
-        const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
-
-        if (selectedSeats !== null && selectedSeats.length > 0) {
-            seats.forEach((seat, index) => {
-                if (selectedSeats.indexOf(index) > -1) {
-                    seat.classList.add('selected');
-                }
-            });
-        }
-
-        const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
-
-        if (selectedMovieIndex !== null) {
-            movieSelect.selectedIndex = selectedMovieIndex;
-        }
-    }
-
-    // Movie select event
-    movieSelect.addEventListener('change', e => {
-        ticketPrice = +e.target.value;
-        setMovieData(e.target.selectedIndex, e.target.value);
-        updateSelectedCount();
-    });
-
-    // Seat click event
-    container.addEventListener('click', e => {
-        if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
-            e.target.classList.toggle('selected');
-            updateSelectedCount();
-        }
-        document.getElementById("input-22").value = "selected";
-    });
-    // Initial count and total set
-    updateSelectedCount();
-    localStorage.clear();
-</script>
 </body>
 </html>

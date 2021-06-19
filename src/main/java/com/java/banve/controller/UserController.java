@@ -1,24 +1,16 @@
 package com.java.banve.controller;
 
-import com.java.banve.model.Search;
-import com.java.banve.model.SearchListVeDTO;
-import com.java.banve.model.UserDTO;
-import com.java.banve.model.UserInforDTO;
-import com.java.banve.repository.SeatRepository;
+import com.java.banve.model.*;
 import com.java.banve.service.ChuyenService;
 import com.java.banve.service.SeatService;
 import com.java.banve.service.UserService;
 import com.java.banve.service.VeService;
-import com.mysql.cj.xdevapi.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
 
 @Controller
 @CrossOrigin
@@ -34,9 +26,24 @@ public class UserController {
 
     @Autowired
     SeatService seatService;
+
     @RequestMapping("")
-    public String user() {
+    public String user(ModelMap modelMap) {
+        modelMap.addAttribute("location", new Location());
+        modelMap.addAttribute("message", "");
+        modelMap.addAttribute("searchChuyenDTO", new SearchChuyenDTO());
         return "index";
+    }
+    @PostMapping("/user-chuyen-infor")
+    public String timChuyen(@ModelAttribute("searchChuyenDTO") SearchChuyenDTO searchChuyenDTO, ModelMap modelMap) throws ParseException {
+        if (searchChuyenDTO.getDiemDi().equals(searchChuyenDTO.getDiemDen())) {
+           modelMap.addAttribute("message", "Điểm đến và điểm đi phải khác nhau");
+            modelMap.addAttribute("location", new Location());
+            modelMap.addAttribute("searchChuyenDTO", new SearchChuyenDTO());
+           return "index";
+        }
+        modelMap.addAttribute("listChuyenDTO", this.chuyenService.listSearchChuyenDTO(searchChuyenDTO.getDiemDi(), searchChuyenDTO.getDiemDen(), searchChuyenDTO.getNgay()));
+        return "user-select-chuyen";
     }
 
     @GetMapping("/user-infor/{username}")
@@ -82,65 +89,40 @@ public class UserController {
         return "redirect:/dang-nhap";
     }
 
-
-
     @GetMapping("/user-ticket-infor/{username}")
-    public String thongTinVe(@PathVariable("username") String username,  ModelMap modelMap ) {
+    public String thongTinVe(@PathVariable("username") String username, ModelMap modelMap) {
         modelMap.addAttribute("mode", "LIST_VE");
         modelMap.addAttribute("ves", this.veService.findAllVeByUsername(username));
         modelMap.addAttribute("search", new Search());
         return "user-ticket-infor";
     }
-
-//    @PostMapping("/search-list-ve/{username}")
-//    public String searchListVe()
-
     @GetMapping("/user-ticket-infor-detail/{id}")
     public String thongTinVeChiTiet(@PathVariable("id") Integer id, ModelMap modelMap) {
         modelMap.addAttribute("mode", "VE_INFOR");
         modelMap.addAttribute("veDTO", this.veService.timVeDTO(id));
         return "user-ticket-infor";
     }
-
-
     @GetMapping("/user-chuyen-infor")
+
+
+
+
+
     public String thongTinChuyen(ModelMap modelMap) {
         modelMap.addAttribute("chuyens", this.chuyenService.tatCaChuyen());
         return "user-select-chuyen";
     }
 
-    @GetMapping("/mua-ve/{id}")
-    public String muaVe(@PathVariable("id") Integer id, ModelMap modelMap) {
+    @GetMapping("/mua-ve/{id}/{username}")
+    public String muaVe(@PathVariable("id") Integer id, @PathVariable("username") String username, ModelMap modelMap) {
         modelMap.addAttribute("seats", this.seatService.findAllSeatByChuyenID(id));
+        modelMap.addAttribute("userTicketDTO", this.userService.findUserTicketDTO(username, id));
+        modelMap.addAttribute("message", "");
         return "user-select-seat";
     }
-
-//    @PostMapping("/luu-thong-tin-ve")
-//    public String luuVeDaMua(@RequestParam("vitri") String vitri) {
-//        System.out.println(vitri);
-//        System.out.println("co chay toi day ne");
-//        return "redirect:/user";
-//    }
-
-    @PostMapping("/luu")
-    public String save(@RequestParam("danhsach") String danhsach) {
-        System.out.println("Day la so tui can " + danhsach);
-        return "redirect:/user";
+    @PostMapping("/luu-ve-da-mua/")
+    public String luuVe(@ModelAttribute("userTicketDTO") UserTicketDTO userTicketDTO) {
+//        if (this.veService.checkHopLe())
+        return null;
     }
-
-    @PostMapping("/test")
-    public void test(@RequestParam("seat") String[] seat){
-        for(String i: seat){
-            System.out.println(i);
-        }
-
-    }
-
-
-
-
-
-
-
-
 }

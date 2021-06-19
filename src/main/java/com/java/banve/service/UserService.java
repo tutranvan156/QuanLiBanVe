@@ -4,6 +4,7 @@ import com.java.banve.entity.User;
 import com.java.banve.model.MyUserDetail;
 import com.java.banve.model.UserDTO;
 import com.java.banve.model.UserInforDTO;
+import com.java.banve.model.UserTicketDTO;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -24,4 +25,5 @@ public interface UserService {
     void themEmployee(Integer id);
     void xoaEmployee(Integer id);
     List<UserInforDTO> findAllUserStatusEqualsTrue();
+    UserTicketDTO findUserTicketDTO(String username, Integer chuyen_id);
 }

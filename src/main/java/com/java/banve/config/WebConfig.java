@@ -31,7 +31,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/dang-nhap")
-                .defaultSuccessUrl("/index")
+                .defaultSuccessUrl("/user")
                 .failureUrl("/dang-nhap?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
