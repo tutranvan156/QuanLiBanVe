@@ -3,6 +3,7 @@ package com.java.banve.controller;
 import com.java.banve.entity.Loai;
 import com.java.banve.entity.Xe;
 import com.java.banve.model.XeDTO;
+import com.java.banve.model.XeSeatNumber;
 import com.java.banve.service.LoaiService;
 import com.java.banve.service.XeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class XeController {
     public String themXe(ModelMap model) {
         model.addAttribute("mode", "THEM");
         model.addAttribute("xeDTO", new XeDTO());
+        model.addAttribute("xeSeatNumber", new XeSeatNumber());
         model.addAttribute("loais", this.loaiService.tatCaLoai());
         return "xe";
     }
@@ -56,6 +58,7 @@ public class XeController {
         XeDTO xeDTO = this.xeService.timXeDTO(id);
         model.addAttribute("mode", "SUA");
         model.addAttribute("xeDTO", xeDTO);
+        model.addAttribute("xeSeatNumber", new XeSeatNumber());
         model.addAttribute("loais", this.loaiService.tatCaLoai());
         return "xe";
     }

@@ -53,26 +53,30 @@
                                     <th scope="col">Giá vé</th>
                                     <th scope="col">Điểm đi</th>
                                     <th scope="col">Điểm đến</th>
+                                    <th scope="col">Tên xe</th>
                                     <th scope="col">Mã ghế</th>
                                     <th scope="col">Ngày</th>
+                                    <th scope="col">Thời gian</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="item : ${ves}">
+                                <tr th:each="item : ${veDTO}">
                                     <td th:text="${item.getId()}"></td>
                                     <td th:text="${item.getFullName()}"></td>
                                     <td th:text="${item.getGia()}"></td>
                                     <td th:text="${item.getDiemDi()}"></td>
                                     <td th:text="${item.getDiemDen()}"></td>
+                                    <td th:text="${item.getTenXe()}"></td>
                                     <td th:text="${item.getMaGhe()}"></td>
                                     <td th:text="${item.getNgay()}"></td>
+                                    <td th:text="${item.getGio()}"></td>
                                     <td class="d-flex justify-content-end">
                                         <div class="btn-toolbar" role="group" aria-label="Basic example">
-                                            <a class="btn btn-warning mb-4 mr-4"
-                                               th:href="@{/ve/xac-nhan/{id}(id=${item.getId()})}" role="button">Xác nhận</a>
-<!--                                            <a class="btn btn-danger mb-4"-->
-<!--                                               th:href="@{/xe/xoa-xe/{id}(id=${item.getId()})}" role="button"-->
-<!--                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>-->
+                                            <a class="btn btn-success mb-4 mr-4"
+                                               th:href="@{/ve/xac-nhan/{id}(id=${item.getVeID()})}" role="button">Xác nhận</a>
+                                            <a class="btn btn-danger mb-4"
+                                               th:href="@{/ve/xoa-ve/{id}(id=${item.getVeID()})}" role="button"
+                                               onclick="return confirm('Bạn có chắc muốn xóa vé?')">Xóa vé</a>
                                         </div>
                                     </td>
                                 </tr>

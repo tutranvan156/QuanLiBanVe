@@ -28,5 +28,8 @@ public class Ve {
     @JoinColumn(name = "seat_id", referencedColumnName = "id")
     private Seat seat;
 
+    @Column(name = "xoa")
+    private Boolean xoa;
+
 
 }

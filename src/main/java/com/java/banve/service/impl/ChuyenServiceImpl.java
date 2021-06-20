@@ -71,7 +71,6 @@ public class ChuyenServiceImpl implements ChuyenService {
         Optional<Chuyen> chuyen = this.chuyenRepository.findById(id);
         return chuyen.get();
     }
-
     @Override
     public ChuyenDTO timChuyenDTO(Integer id) {
         Chuyen chuyen = timChuyen(id);
@@ -85,6 +84,7 @@ public class ChuyenServiceImpl implements ChuyenService {
         chuyenDTO.setDate(new SimpleDateFormat("yyyy-MM-dd").format(chuyen.getDate()));
         chuyenDTO.setTenTuyen(chuyen.getTuyen().getTentuyen());
         chuyenDTO.setTenXe(chuyen.getXe().getTen());
+        chuyenDTO.setGio(new SimpleDateFormat("hh:mm").format(chuyen.getTuyen().getGio()));
         return chuyenDTO;
     }
     @Override

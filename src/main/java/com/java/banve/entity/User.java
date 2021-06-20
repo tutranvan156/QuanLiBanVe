@@ -40,7 +40,7 @@ public class User {
     private String email;
     @Column(name = "sdt")
     @NotEmpty(message = "Vui lòng điền số điện thoại")
-    @Size(max = 10)
+    @Size(max = 20)
     private String sdt;
     @Column(name = "username", unique = true)
     @NotEmpty(message = "Vui lòng điền tên đăng nhập")

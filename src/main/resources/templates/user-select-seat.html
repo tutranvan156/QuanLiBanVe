@@ -246,7 +246,7 @@
 </head>
 <body>
 <div th:include="~{head-user.html}"></div>
-<div style="position: fixed; top: 80px !important;margin-left: 30px;"><a class="btn btn-primary" href="" role="button">Quay
+<div style="position: fixed; top: 80px !important;margin-left: 30px;"><a class="btn btn-primary" th:href="@{/user}" role="button">Quay
     Lại</a></div>
 <div class="col-md-3"
      style="position: fixed; top: 120px !important;margin-left: 10px;margin-top: 40px; border-right: thick double #ff0000;height: 590px; ">
@@ -314,23 +314,35 @@
     </div>
     <!-- nhập thông tin người đi -->
     <div style="margin-top: -610px;">
-        <form th:object="${userTicketDTO}" th:action="@{/user/luu-ve-da-mua}" th:method="post">
+        <form  th:action="@{/user/luu-ve-da-mua}" th:method="post" th:object="${userTicketDTO}">
             <div style="margin-left: 880px;top: 100px; width: 300px;height: 590px;background-color: #F1F3F4;border-radius: 15px;">
                 <p style="margin-top: 20px; font-size: 20px; text-align: center;color: blue;font-style: italic;">Thông tin vé</p>
                 <p style="margin-top: -10px;margin-left: 5px;">Họ tên khách hàng</p>
-                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{fullName}" disabled>
+                <input style="margin-top: -10px;" type="text"  class="form-control" th:field="*{fullName}" disabled>
                 <p style="margin-left: 5px;">Số điện thoại</p>
-                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{sdt}" disabled>
+                <input style="margin-top: -10px;" type="text"  class="form-control" th:field="*{sdt}" disabled/>
                 <p style="margin-left: 5px;">Địa chỉ</p>
-                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{diachi}" disabled>
+                <input style="margin-top: -10px;" type="text"  class="form-control" th:field="*{diachi}" disabled>
                 <p style="margin-left: 5px;">Tên tuyến xe</p>
-                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{tenTuyen}" disabled>
+                <input style="margin-top: -10px;" type="text"  class="form-control" th:field="*{tenTuyen}" disabled>
                 <p style="margin-left: 5px;">Tên xe</p>
-                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{tenXe}" disabled>
+                <input style="margin-top: -10px;" type="text"  class="form-control" th:field="*{tenXe}" disabled>
                 <p style="margin-left: 5px;">Giá vé</p>
-                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{gia}" disabled>
+                <input style="margin-top: -10px;" type="text"  class="form-control" th:field="*{gia}" disabled>
                 <p style="margin-left: 5px;">Vị trí ngồi</p>
-                <input style="margin-top: -10px;" type="text" name="" class="form-control" th:field="*{seatCode}" required>
+                <select th:field="*{seatCode}" class="form-control" style="margin-top: -10px">
+                    <th:block th:each="item : ${seatEnable}">
+                        <option th:text="${item.getCode()}" th:value="${item.getId()}"></option>
+                    </th:block>
+                </select>
+                <input th:field="*{username}" hidden>
+                <input th:field="*{thoiGian}" hidden>
+                <input th:field="*{fullName}" hidden>
+                <input th:field="*{sdt}" hidden>
+                <input th:field="*{diachi}" hidden>
+                <input th:field="*{tenTuyen}" hidden>
+                <input th:field="*{tenXe}" hidden>
+                <input th:field="*{gia}" hidden>
                 <button style="margin-top: 20px;margin-left: 100px;" class="btn btn-success" type="submit">Đặt Vé</button>
             </div>
         </form>

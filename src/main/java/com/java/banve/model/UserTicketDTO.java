@@ -14,4 +14,5 @@ public class UserTicketDTO {
    String tenTuyen;
    String tenXe;
    String thoiGian;
+   String username;
 }

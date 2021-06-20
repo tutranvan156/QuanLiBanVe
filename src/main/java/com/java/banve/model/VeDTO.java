@@ -18,4 +18,6 @@ public class VeDTO {
     public String tenTuyen;
     public String diachi;
     public String email;
+    public Integer veID;
+    public String gio;
 }

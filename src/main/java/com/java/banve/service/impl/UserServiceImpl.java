@@ -165,6 +165,7 @@ public class UserServiceImpl implements UserService {
         userTicketDTO.setTenTuyen(chuyenDTO.getTenTuyen());
         userTicketDTO.setTenXe(chuyenDTO.getXe());
         userTicketDTO.setThoiGian(chuyenDTO.getGio());
+        userTicketDTO.setUsername(username);
         return userTicketDTO;
     }
 }

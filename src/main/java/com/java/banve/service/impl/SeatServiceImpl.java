@@ -16,4 +16,15 @@ public class SeatServiceImpl implements SeatService {
     public List<Seat> findAllSeatByChuyenID(Integer id) {
         return this.seatRepository.findAllByChuyen_Id(id);
     }
+
+    @Override
+    public Seat findSeatById(Integer id) {
+        return this.seatRepository.findById(id).get();
+    }
+
+
+    @Override
+    public List<Seat> findAllSeatEnableByChuyenID(Integer id) {
+        return this.seatRepository.findAllSeatEnableByChuyenID(id);
+    }
 }

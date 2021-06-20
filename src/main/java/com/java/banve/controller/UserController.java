@@ -7,6 +7,7 @@ import com.java.banve.service.UserService;
 import com.java.banve.service.VeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.text.ParseException;
 @Controller
 @CrossOrigin
 @RequestMapping("/user")
+@Transactional
 public class UserController {
     @Autowired
     UserService userService;
@@ -92,8 +94,17 @@ public class UserController {
     @GetMapping("/user-ticket-infor/{username}")
     public String thongTinVe(@PathVariable("username") String username, ModelMap modelMap) {
         modelMap.addAttribute("mode", "LIST_VE");
-        modelMap.addAttribute("ves", this.veService.findAllVeByUsername(username));
+        modelMap.addAttribute("veDTOs", this.veService.findAllVeByUsername(username));
         modelMap.addAttribute("search", new Search());
+        return "user-ticket-infor";
+    }
+
+
+    @PostMapping("/user-ticket-infor/search/{username}")
+    public String thongTinVeSearch(@ModelAttribute("search") Search search, @PathVariable("username") String username,  ModelMap modelMap) throws ParseException {
+        modelMap.addAttribute("mode", "LIST_VE");
+        modelMap.addAttribute("veDTOs", this.veService.findAllVeFromDateToDate(search, username));
+        modelMap.addAttribute("search", search);
         return "user-ticket-infor";
     }
     @GetMapping("/user-ticket-infor-detail/{id}")
@@ -103,11 +114,6 @@ public class UserController {
         return "user-ticket-infor";
     }
     @GetMapping("/user-chuyen-infor")
-
-
-
-
-
     public String thongTinChuyen(ModelMap modelMap) {
         modelMap.addAttribute("chuyens", this.chuyenService.tatCaChuyen());
         return "user-select-chuyen";
@@ -117,12 +123,19 @@ public class UserController {
     public String muaVe(@PathVariable("id") Integer id, @PathVariable("username") String username, ModelMap modelMap) {
         modelMap.addAttribute("seats", this.seatService.findAllSeatByChuyenID(id));
         modelMap.addAttribute("userTicketDTO", this.userService.findUserTicketDTO(username, id));
-        modelMap.addAttribute("message", "");
-        return "user-select-seat";
+        modelMap.addAttribute("seatEnable", this.seatService.findAllSeatEnableByChuyenID(id));
+       return "user-select-seat";
     }
-    @PostMapping("/luu-ve-da-mua/")
+
+    @PostMapping("/luu-ve-da-mua")
     public String luuVe(@ModelAttribute("userTicketDTO") UserTicketDTO userTicketDTO) {
-//        if (this.veService.checkHopLe())
-        return null;
+        this.veService.luuVe(userTicketDTO);
+        //cho nay nen return ve thong tin ve cua nguoi dung
+        return "redirect:/user";
+    }
+    @GetMapping("/xoa-ve/{id}")
+    public String xoaVe(@PathVariable("id") Integer id) {
+        this.veService.xoaVe(id);
+        return "redirect:/user";
     }
 }

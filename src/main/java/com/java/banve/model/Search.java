@@ -7,6 +7,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class Search {
-    public Date start;
-    public Date end;
+    public String start;
+    public String end;
 }

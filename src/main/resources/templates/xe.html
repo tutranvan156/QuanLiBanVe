@@ -98,7 +98,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Số ghế</label>
-                                    <input type="number" class="form-control" th:field="*{soghe}">
+                                    <select th:field="*{soghe}" required class="form-control">
+                                        <option th:text="${xeSeatNumber.getType1()}" th:value="${xeSeatNumber.getType1()}"></option>
+                                        <option th:text="${xeSeatNumber.getType2()}" th:value="${xeSeatNumber.getType2()}"></option>
+                                        <option th:text="${xeSeatNumber.getType3()}" th:value="${xeSeatNumber.getType3()}"></option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <select th:field="*{loai}" name="test" class="form-control text-secondary">
@@ -133,8 +137,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Số ghế</label>
-                                    <input type="number" class="form-control" th:field="*{soghe}"
-                                           required autofocus="autofocus"/>
+                                    <select th:field="*{soghe}" required class="form-control">
+                                        <option th:text="${xeSeatNumber.getType1()}" th:value="${xeSeatNumber.getType1()}"></option>
+                                        <option th:text="${xeSeatNumber.getType2()}" th:value="${xeSeatNumber.getType2()}"></option>
+                                        <option th:text="${xeSeatNumber.getType3()}" th:value="${xeSeatNumber.getType3()}"></option>
+                                    </select>
+<!--                                    <input type="number" class="form-control" th:field="*{soghe}"-->
+<!--                                           required autofocus="autofocus"/>-->
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Giá chuyến xe</label>

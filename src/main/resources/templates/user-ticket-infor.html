@@ -115,11 +115,10 @@
 </head>
 <body>
 <div th:include="~{head-user.html}"></div>
-<div style="position: fixed; top: 80px !important;margin-left: 30px;"><a class="btn btn-primary" th:href="@{/user/}"
-                                                                         role="button">Quay Lại</a></div>
+<div style="position: fixed; top: 80px !important;margin-left: 30px; z-index: 1" ><a class="btn btn-primary" th:href="@{/user}" role="button">Quay Lại</a></div>
 <div th:switch="${mode}">
     <div th:case="LIST_VE">
-        <form method="post" th:object="${search}" th:action="@{/user/search-list-ve/{username}}">
+        <form method="post" th:object="${search}" th:action="@{/user/user-ticket-infor/search/{username} (username = ${#authentication.getPrincipal().getUsername()})}">
             <div class="col-md-3"
                  style="position: fixed; top: 120px !important; margin-left: 10px;border-right: thick double #ff0000; height: 580px;">
                 <ul class="list-group">
@@ -134,36 +133,37 @@
                             </div>
                         </div>
                         <div class="form-group row" style="margin-top: 40px;">
-
                             <label style="font-size: 17px;" class="col-sm-4 col-form-label">Đến Ngày:</label>
                             <div class="col-sm-8">
                                 <input style="font-size: 18px;" type="date" class="form-control" th:field="*{end}">
                             </div>
                         </div>
-                        <button style="margin-top: 40px;float: right;" class="btn btn-danger" type="submit">Tra cứu
-                        </button>
+                        <button style="margin-left: 20px; margin-top: 50px; width: 90%" type="submit" class="btn btn-primary">Tìm kiếm</button>
                     </li>
                 </ul>
             </div>
         </form>
         <!-- thông tin list vé -->
         <div style="margin-left: 460px;margin-top: 90px;margin-right: 20px;">
+            <a style="margin-left: 20px;margin-bottom: 10px; width: 20%" th:href="@{/user/user-ticket-infor/{username} (username = ${#authentication.getPrincipal().getUsername()})}" class="btn btn-primary">Tất cả vé</a>
             <table class="table table-hover">
                 <tr>
                     <th>STT</th>
-                    <th>Tên chuyến</th>
-                    <th>Tên xe</th>
+                    <th>Họ và tên</th>
+                    <th>Tên tuyến</th>
                     <th>Ngày</th>
+                    <th>Thời gian</th>
                     <th>Giá vé</th>
                 </tr>
-                <tr th:each="item : ${ves}">
+                <tr th:each="item : ${veDTOs}">
                     <td th:text="${item.getId()}"></td>
-                    <td th:text="${item.getSeat().getChuyen().getTuyen().getTentuyen()}"></td>
-                    <td th:text="${item.getSeat().getChuyen().getXe().getTen()}"></td>
-                    <td th:text="${item.getSeat().getChuyen().getDate()}"></td>
-                    <td th:text="${item.getSeat().getChuyen().getXe().getLoai().getGia()}"></td>
+                    <td th:text="${item.getFullName()}"></td>
+                    <td th:text="${item.getTenTuyen()}"></td>
+                    <td th:text="${item.getNgay()}"></td>
+                    <td th:text="${item.getGio()}"></td>
+                    <td th:text="${item.getGia()}"></td>
                     <td>
-                        <a style="float: right;" class="btn btn-success" th:href="@{/user/user-ticket-infor-detail/{id} (id = ${item.getId()})}" role="button"><i
+                        <a style="float: right;" class="btn btn-success" th:href="@{/user/user-ticket-infor-detail/{id} (id = ${item.getVeID()})}" role="button"><i
                                 class="fas fa-info-circle"></i> Chi Tiết</a>
                     </td>
                 </tr>
@@ -192,7 +192,6 @@
                                             <input style="width: 220px;" type="text" class="form-control" th:field="*{fullName}" disabled>
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
 
                                         <label class="col-sm-4 col-form-label"> <i style="float: left;"
@@ -273,11 +272,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-                        <a style="width: 100px;margin-top: 40px; margin-left: 440px;" class="btn btn-danger" href="#"
+                        <a style="width: 100px;margin-top: 40px; margin-left: 440px;" class="btn btn-danger" th:href="@{/user/xoa-ve/{id} (id = ${veDTO.getId()})}"
                            role="button" aria-expanded="false">Hủy Vé</a>
                     </div>
                 </div>
