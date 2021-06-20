@@ -94,7 +94,6 @@ public class VeServiceImpl implements VeService {
             temp.add(veDTO);
         }
         return temp;
-
     }
 
     @Override

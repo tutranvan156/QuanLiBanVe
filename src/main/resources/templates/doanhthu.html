@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Doanh thu</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+            crossorigin="anonymous"></script>
+    <style>
+        #layoutSidenav_nav .nav {
+            display: flex;
+            flex-direction: column;
+            background: black;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        a:hover {
+            border-radius: 5px;
+            border: solid 1px azure;
+            font-size: 110%;
+        }
+
+    </style>
+</head>
+<body class="sb-nav-fixed" style="height:100%">
+<div th:include="~{head.html}"></div>
+<div class="content d-flex justify-content-start w-100 ">
+    <div th:include="~{left.html}"></div>
+
+</div>
+</body>
+</html>

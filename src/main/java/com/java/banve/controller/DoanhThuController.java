@@ -9,4 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/doanh-thu")
 public class DoanhThuController {
 
+
+    @RequestMapping("")
+    public String doanhthu() {
+        return "doanhthu";
+    }
+
 }
