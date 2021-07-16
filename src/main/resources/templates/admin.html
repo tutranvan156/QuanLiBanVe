@@ -24,7 +24,7 @@
     }
     a:hover {
         border-radius: 5px;
-        border: solid 1px azure;
+        /*border: solid 1px azure;*/
         font-size: 110%;
     }
 </style>
@@ -33,8 +33,8 @@
 <div class="content d-flex justify-content-start w-100 ">
     <div th:include="~{left.html}"></div>
     <div class="right-content w-75 ml-5 my-5">
-        <div th:switch="${mode}">
-            <div th:case="MAIN">
+        <div th:switch="${mode}"style="margin-top: -40px;">
+            <div th:case="MAIN" >
                 <a class="btn btn-primary mb-4" th:href="@{/admin/them-employee}" role="button">Thêm nhân viên</a>
                 <div class="card mb-4 w-100">
                     <div class="card-body">
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Số điện thoại</label>
-                                    <input type="number" class="form-control" th:field="*{sdt}" required>
+                                    <input type="text" class="form-control" th:field="*{sdt}" required onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" maxlength="10">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Email</label>

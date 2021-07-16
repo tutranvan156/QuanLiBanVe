@@ -27,7 +27,7 @@
 
     a:hover {
         border-radius: 5px;
-        border: solid 1px azure;
+        /*border: solid 1px azure;*/
         font-size: 110%;
     }
 
@@ -41,7 +41,7 @@
 
         <div th:switch="${mode}">
 
-            <div th:case="MAIN">
+            <div th:case="MAIN" style="overflow-y: scroll;height: 700px;">
                 <a class="btn btn-primary mb-4" href="xe/them-xe" role="button">Thêm xe</a>
                 <div class="card mb-4 w-100">
                     <div class="card-body">
@@ -82,9 +82,7 @@
                 </div>
 
             </div>
-
             <div th:case="SUA">
-
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
