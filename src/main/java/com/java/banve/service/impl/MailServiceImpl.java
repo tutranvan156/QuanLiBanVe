@@ -42,7 +42,6 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-
     public Boolean checkUserExit(String email) {
         if (this.userRepository.findUserByEmail(email) != null) {
             return true;
