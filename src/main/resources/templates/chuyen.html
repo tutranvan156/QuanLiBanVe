@@ -39,7 +39,7 @@
     <div th:include="~{left.html}"></div>
     <div class="right-content w-75 ml-5 my-5">
         <div th:switch="${mode}">
-            <div th:case="MAIN">
+            <div th:case="MAIN" style="overflow-y: scroll;height: 700px;">
                 <a class="btn btn-primary mb-4" href="chuyen/them-chuyen" role="button">Thêm chuyến</a>
                 <div class="card mb-4 w-100">
                     <div class="card-body">
