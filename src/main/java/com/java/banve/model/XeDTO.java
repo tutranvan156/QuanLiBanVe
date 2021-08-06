@@ -11,5 +11,6 @@ public class XeDTO {
     private Integer soghe;
     private Boolean trangthai;
     private String loai;
+    private Integer gia;
 
 }

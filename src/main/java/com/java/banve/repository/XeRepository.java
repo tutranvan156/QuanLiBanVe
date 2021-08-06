@@ -17,4 +17,5 @@ public interface XeRepository extends CrudRepository<Xe, Integer> {
 
     @Query(nativeQuery = true, value = "select * from vexe.xe where trangthai = 1 and status = 1")
     List<Xe> findAllXeFree();
+
 }

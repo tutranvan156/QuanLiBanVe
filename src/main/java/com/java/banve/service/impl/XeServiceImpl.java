@@ -65,6 +65,7 @@ public class XeServiceImpl implements XeService {
         xeDTO.setSoghe(xe.getSoghe());
         xeDTO.setLoai(String.valueOf(xe.getLoai().getId()));
         xeDTO.setTrangthai(xe.getTrangthai());
+        xeDTO.setGia(xe.getLoai().getGia());
         return xeDTO;
     }
 

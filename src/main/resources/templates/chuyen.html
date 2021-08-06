@@ -91,26 +91,26 @@
                                 <div class="form-group">
                                     <label class="control-label">Tên chuyến xe</label>
                                     <input type="text" class="form-control" th:field="*{tenTuyen}"
-                                           disabled>
+                                           required readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Tên xe</label>
                                     <input type="text" class="form-control" th:field="*{tenXe}"
-                                           disabled>
+                                           required readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Giá tiền</label>
                                     <input type="number" class="form-control"
-                                           th:field="*{gia}" disabled>
+                                           th:field="*{gia}" required readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Số ghế</label>
                                     <input type="number" class="form-control" th:field="*{ghe}"
-                                           disabled>
+                                           required readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Ngày</label>
-                                    <input type="date" class="form-control" th:field="*{date}" required>
+                                    <input type="date" class="form-control" th:field="*{date}" required >
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Sửa</button>

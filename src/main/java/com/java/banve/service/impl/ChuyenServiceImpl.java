@@ -55,8 +55,9 @@ public class ChuyenServiceImpl implements ChuyenService {
     public void suaChuyen(ChuyenDTO chuyenDTO) throws ParseException {
         Chuyen chuyen = chuyenRepository.findById(chuyenDTO.getId()).get();
         chuyen.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(chuyenDTO.getDate()));
-        chuyen.setTuyen(tuyenRepository.findById(Integer.parseInt(chuyenDTO.getTuyen())).get());
-        chuyen.setXe(xeRepository.findById(Integer.parseInt(chuyenDTO.getXe())).get());
+//        chuyen.setTuyen(tuyenRepository.findById(Integer.parseInt(chuyenDTO.getTuyen())).get());
+//        chuyen.setXe(xeRepository.findById(chuyenDTO.getXe()));
+//        chuyen.setXe(xeRepository.findById(Integer.parseInt(chuyenDTO.getXe())).get().getId());
         this.chuyenRepository.save(chuyen);
     }
 

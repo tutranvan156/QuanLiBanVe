@@ -11,7 +11,6 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
             crossorigin="anonymous"></script>
-
 </head>
 <style>
     #layoutSidenav_nav .nav {
@@ -36,11 +35,8 @@
 <div th:include="~{head.html}"></div>
 <div class="content d-flex justify-content-start w-100 ">
     <div th:include="~{left.html}"></div>
-
     <div class="right-content w-75 ml-5 my-5">
-
         <div th:switch="${mode}">
-
             <div th:case="MAIN" style="overflow-y: scroll;height: 700px;">
                 <a class="btn btn-primary mb-4" href="xe/them-xe" role="button">Thêm xe</a>
                 <div class="card mb-4 w-100">
@@ -69,9 +65,18 @@
                                         <div class="btn-toolbar" role="group" aria-label="Basic example">
                                             <a class="btn btn-primary mb-4 mr-4"
                                                th:href="@{/xe/sua-xe/{id}(id=${item.getId()})}" role="button">Sửa</a>
-                                            <a class="btn btn-danger mb-4"
-                                               th:href="@{/xe/xoa-xe/{id}(id=${item.getId()})}" role="button"
-                                               onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>
+                                            <div th:switch="${item.getTrangthai()}" >
+                                              <div th:case="false">
+                                                  <a class="btn btn-danger mb-4 disabled"
+                                                     th:href="@{/xe/xoa-xe/{id}(id=${item.getId()})}" role="button"
+                                                     onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>
+                                              </div>
+                                               <div th:case="true">
+                                                   <a class="btn btn-danger mb-4"
+                                                      th:href="@{/xe/xoa-xe/{id}(id=${item.getId()})}" role="button"
+                                                      onclick="return confirm('Bạn có chắc muốn xóa ?')">Xóa</a>
+                                               </div>
+                                           </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -80,7 +85,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div th:case="SUA">
                 <div class="container-fluid">
@@ -89,31 +93,55 @@
                             <h1>Sửa xe</h1>
                             <form th:action="@{/xe/sua-xe}" method="post" th:object="${xeDTO}">
                                 <input th:field="*{id}" hidden/>
-                                <div class="form-group">
-                                    <label class="control-label"> Tên xe </label>
-                                    <input class="form-control" th:field="*{ten}" type="text"
-                                           required>
+                                <input th:field="*{loai}" hidden/>
+                                <div th:switch="${xeDTO.getTrangthai()}">
+                                    <div th:case="false">
+                                        <div class="form-group">
+                                            <label class="control-label"> Tên xe </label>
+                                            <input class="form-control" th:field="*{ten}" type="text"
+                                                   required readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Số ghế</label>
+                                            <input class="form-control" th:field="*{soghe}" type="text"
+                                                   required readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Giá</label>
+                                            <input class="form-control" th:field="*{gia}" type="text"
+                                                   required readonly>
+                                        </div>
+                                        <div class="form-check form-switch mt-3">
+                                            <input class="form-check-input" th:field="*{trangthai}" type="checkbox" checked>
+                                            <label class="form-check-label">Trạng thái rảnh</label>
+                                        </div>
+                                    </div>
+                                    <div th:case="true">
+                                        <div class="form-group">
+                                            <label class="control-label"> Tên xe </label>
+                                            <input class="form-control" th:field="*{ten}" type="text"
+                                                   required >
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Số ghế</label>
+                                            <select th:field="*{soghe}" required   class="form-control">
+                                                <option th:text="${xeSeatNumber.getType1()}" th:value="${xeSeatNumber.getType1()}"></option>
+                                                <option th:text="${xeSeatNumber.getType2()}" th:value="${xeSeatNumber.getType2()}"></option>
+                                                <option th:text="${xeSeatNumber.getType3()}" th:value="${xeSeatNumber.getType3()}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select th:field="*{loai}" name="test"  required class="form-control text-secondary">
+                                                <option th:each="item : ${loais}" th:value="${item.getId()}"
+                                                        th:text="${item.getGia()}" >
+                                            </select>
+                                        </div>
+                                        <div class="form-check form-switch mt-3">
+                                            <input class="form-check-input" th:field="*{trangthai}" type="checkbox" checked>
+                                            <label class="form-check-label">Trạng thái rảnh</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Số ghế</label>
-                                    <select th:field="*{soghe}" required class="form-control">
-                                        <option th:text="${xeSeatNumber.getType1()}" th:value="${xeSeatNumber.getType1()}"></option>
-                                        <option th:text="${xeSeatNumber.getType2()}" th:value="${xeSeatNumber.getType2()}"></option>
-                                        <option th:text="${xeSeatNumber.getType3()}" th:value="${xeSeatNumber.getType3()}"></option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select th:field="*{loai}" name="test" class="form-control text-secondary">
-                                        <option th:each="item : ${loais}" th:value="${item.getId()}"
-                                                th:text="${item.getGia()}">
-                                    </select>
-                                </div>
-                                <div class="form-check form-switch mt-3">
-                                    <input class="form-check-input" th:field="*{trangthai}" type="checkbox" checked>
-                                    <label class="form-check-label">Trạng thái rảnh</label>
-                                </div>
-
-
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Sửa</button>
                                 <a class="btn btn-danger" href="back" role="button">Trở về</a>

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DoanhThuRepository extends CrudRepository<Ve, Integer> {
+
 }

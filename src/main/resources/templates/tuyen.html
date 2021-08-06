@@ -112,7 +112,7 @@
                             <h1>Thêm tuyến</h1>
                             <form th:action="@{/tuyen/them-tuyen}" method="post" th:object="${tuyenDTO}">
                                 <div class="form-group">
-                                    <label class="control-label" for="firstName"> Tên tuyến </label>
+                                    <label class="control-label"> Tên tuyến </label>
                                     <select th:field="*{tenTuyen}"class="form-control text-secondary" required>
                                         <th:block>
                                             <option th:text="${path.getPathForward()}" th:value="${path.getPathForward()}"/>
