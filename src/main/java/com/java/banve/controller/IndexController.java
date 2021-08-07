@@ -25,14 +25,6 @@ public class IndexController {
     @Autowired
     RoleService roleService;
 
-//    @GetMapping("/index")
-//    public String index(ModelMap modelMap) {
-//        modelMap.addAttribute("location", new Location());
-//        modelMap.addAttribute("searchChuyenDTO", new SearchChuyenDTO());
-//        return "index";
-//    }
-
-
     @GetMapping("dang-ky")
     public String dangKy(@ModelAttribute("user") User user, ModelMap model, @ModelAttribute("message") String message) {
         model.addAttribute("user", user);
