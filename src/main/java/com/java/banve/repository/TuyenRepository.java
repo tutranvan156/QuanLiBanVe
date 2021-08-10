@@ -16,4 +16,6 @@ public interface TuyenRepository extends CrudRepository<Tuyen, Integer> {
     @Query(nativeQuery = true, value = "select * from vexe.tuyen where status = 1")
     List<Tuyen> findAllByStatusEqualsTrue();
 
+    List<Tuyen> findAllByTentuyen(String tenTuyen);
+
 }

@@ -31,11 +31,19 @@ public class TuyenController {
     public String themTuyen(ModelMap model) {
         model.addAttribute("tuyenDTO", new TuyenDTO());
         model.addAttribute("mode", "THEM");
+        model.addAttribute("message", "");
         model.addAttribute("path", new PathDTO());
         return "tuyen";
     }
     @PostMapping("them-tuyen")
-    public String themTuyen(@ModelAttribute("tuyenDTO") TuyenDTO tuyenDTO) throws ParseException {
+    public String themTuyen(@ModelAttribute("tuyenDTO") TuyenDTO tuyenDTO, ModelMap model) throws ParseException {
+        if (this.tuyenService.isTuyenExisted(tuyenDTO)) {
+            model.addAttribute("tuyenDTO", new TuyenDTO());
+            model.addAttribute("mode", "THEM");
+            model.addAttribute("message", "Tuyến đã tồn tại.");
+            model.addAttribute("path", new PathDTO());
+            return "tuyen";
+        }
         this.tuyenService.themTuyenDTO(tuyenDTO);
         return "redirect:/tuyen";
     }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,5 +87,17 @@ public class TuyenServiceImpl implements TuyenService {
         tuyen.setGio(new SimpleDateFormat("hh:mm").parse(tuyenDTO.getGio()));
         tuyen.setStatus(true);
         this.tuyenRepository.save(tuyen);
+    }
+
+    @Override
+    public Boolean isTuyenExisted(TuyenDTO tuyenDTO) throws ParseException {
+        List<Tuyen> temp = this.tuyenRepository.findAllByTentuyen(tuyenDTO.getTenTuyen());
+        Date tempDate = new SimpleDateFormat("hh:mm").parse(tuyenDTO.getGio());
+        for (Tuyen item: temp) {
+           if (item.getGio().equals(tempDate)) {
+               return true;
+           }
+        }
+        return false;
     }
 }
