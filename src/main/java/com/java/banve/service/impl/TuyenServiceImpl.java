@@ -100,4 +100,20 @@ public class TuyenServiceImpl implements TuyenService {
         }
         return false;
     }
+
+    @Override
+    public Boolean isTuyenExistedUpdate(TuyenDTO tuyenDTO) throws ParseException {
+        Date tempDate = new SimpleDateFormat("hh:mm").parse(tuyenDTO.getGio());
+        Tuyen tuyenOriginal = this.tuyenRepository.findById(tuyenDTO.getId()).get();
+        if (tuyenOriginal.getGio().equals(tempDate)) {
+            return false;
+        }
+        List<Tuyen> temp = this.tuyenRepository.findAllByTentuyen(tuyenDTO.getTenTuyen());
+        for (Tuyen item : temp) {
+            if (item.getGio().equals(tempDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

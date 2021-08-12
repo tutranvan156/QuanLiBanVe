@@ -84,6 +84,10 @@ public class XeServiceImpl implements XeService {
         return this.xeRepository.findAllXeFree();
     }
 
-
+    @Override
+    public Boolean isXeExisted(XeDTO xeDTO) {
+        List<Xe> temp = this.xeRepository.findAllByTenEquals(xeDTO.getTen());
+        return !temp.isEmpty();
+    }
 
 }

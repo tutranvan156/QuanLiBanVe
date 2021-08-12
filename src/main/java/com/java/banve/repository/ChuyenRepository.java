@@ -20,4 +20,11 @@ public interface ChuyenRepository extends CrudRepository<Chuyen, Integer> {
     @Query(nativeQuery = true, value = "select * from vexe.chuyen inner join vexe.tuyen on vexe.chuyen.tuyen_id = vexe.tuyen.id and vexe.tuyen.tentuyen = ?1 and vexe.chuyen.ngay = ?2")
     List<Chuyen> findChuyenDTO(String location, Date date);
 
+   @Query(nativeQuery = true, value = "select * from vexe.chuyen inner join vexe.tuyen on vexe.chuyen.tuyen_id = vexe.tuyen.id\n" +
+           "inner join vexe.xe  on vexe.chuyen.xe_id = vexe.xe.id\n" +
+           "inner join vexe.loai  on vexe.xe.loai_id = vexe.loai.id \n" +
+           "and vexe.tuyen.tentuyen = ?1  \n" +
+           "where vexe.chuyen.ngay = ?2 \n" +
+           "and vexe.loai.gia between ?3 and ?4")
+    List<Chuyen> findAllByPrice(String location, String date, Integer lowPrice, Integer highPrice);
 }

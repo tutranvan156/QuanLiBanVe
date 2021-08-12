@@ -23,6 +23,6 @@ public interface VeRepository extends CrudRepository<Ve, Integer> {
             "inner join vexe.seat\n" +
             "\ton vexe.ve.seat_id = vexe.seat.id\n" +
             "inner join vexe.chuyen\n" +
-            "\ton vexe.chuyen.id = vexe.seat.chuyen_id where vexe.ve.user_id = ?1 and xoa = 1 and vexe.chuyen.ngay between ?2 and ?3 ")
-    List<Ve> findAllVeFromDateToDate(Integer user_id, Date start, Date end);
+            "\ton vexe.chuyen.id = vexe.seat.chuyen_id where vexe.ve.user_id = ?1 and vexe.ve.xoa = 1 and vexe.chuyen.ngay between ?2 and ?3")
+    List<Ve> findAllVeFromDateToDate(Integer user_id, String start, String end);
 }

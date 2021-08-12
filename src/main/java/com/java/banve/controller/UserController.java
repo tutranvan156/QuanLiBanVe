@@ -36,17 +36,6 @@ public class UserController {
         modelMap.addAttribute("searchChuyenDTO", new SearchChuyenDTO());
         return "index";
     }
-    @PostMapping("/user-chuyen-infor")
-    public String timChuyen(@ModelAttribute("searchChuyenDTO") SearchChuyenDTO searchChuyenDTO, ModelMap modelMap) throws ParseException {
-        if (searchChuyenDTO.getDiemDi().equals(searchChuyenDTO.getDiemDen())) {
-           modelMap.addAttribute("message", "Điểm đến và điểm đi phải khác nhau");
-            modelMap.addAttribute("location", new Location());
-            modelMap.addAttribute("searchChuyenDTO", new SearchChuyenDTO());
-           return "index";
-        }
-        modelMap.addAttribute("listChuyenDTO", this.chuyenService.listSearchChuyenDTO(searchChuyenDTO.getDiemDi(), searchChuyenDTO.getDiemDen(), searchChuyenDTO.getNgay()));
-        return "user-select-chuyen";
-    }
 
     @GetMapping("/user-infor/{username}")
     public String userInfor(@PathVariable("username") String username, ModelMap modelMap) {
@@ -99,7 +88,6 @@ public class UserController {
         return "user-ticket-infor";
     }
 
-
     @PostMapping("/user-ticket-infor/search/{username}")
     public String thongTinVeSearch(@ModelAttribute("search") Search search, @PathVariable("username") String username,  ModelMap modelMap) throws ParseException {
         modelMap.addAttribute("mode", "LIST_VE");
@@ -119,6 +107,18 @@ public class UserController {
         return "user-select-chuyen";
     }
 
+    @PostMapping("/user-chuyen-infor")
+    public String timChuyen(@ModelAttribute("searchChuyenDTO") SearchChuyenDTO searchChuyenDTO, ModelMap modelMap) throws ParseException {
+        if (searchChuyenDTO.getDiemDi().equals(searchChuyenDTO.getDiemDen())) {
+            modelMap.addAttribute("message", "Điểm đến và điểm đi phải khác nhau");
+            modelMap.addAttribute("location", new Location());
+            modelMap.addAttribute("searchChuyenDTO", new SearchChuyenDTO());
+            return "index";
+        }
+        modelMap.addAttribute("listChuyenDTO", this.chuyenService.listSearchChuyenDTO(searchChuyenDTO.getDiemDi(), searchChuyenDTO.getDiemDen(), searchChuyenDTO.getNgay()));
+        return "user-select-chuyen";
+    }
+
     @GetMapping("/mua-ve/{id}/{username}")
     public String muaVe(@PathVariable("id") Integer id, @PathVariable("username") String username, ModelMap modelMap) {
         modelMap.addAttribute("seats", this.seatService.findAllSeatByChuyenID(id));
@@ -130,7 +130,6 @@ public class UserController {
     @PostMapping("/luu-ve-da-mua")
     public String luuVe(@ModelAttribute("userTicketDTO") UserTicketDTO userTicketDTO) {
         this.veService.luuVe(userTicketDTO);
-        //cho nay nen return ve thong tin ve cua nguoi dung
         return "redirect:/user";
     }
     @GetMapping("/xoa-ve/{id}")

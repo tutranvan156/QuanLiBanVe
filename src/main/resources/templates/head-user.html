@@ -31,7 +31,7 @@
         </li>
     </div>
     <div style="margin-left: 700px; margin-right: 20px" sec:authorize="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
-        <a class="btn btn-primary " th:href="@{/doanh-thu}" role="button">Quản lí nhà xe</a>
+        <a class="btn btn-primary " th:href="@{/tuyen}" role="button">Quản lí nhà xe</a>
     </div>
     <a class="btn btn-primary" sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}" role="button">Quản lí nhân viên</a></div>
 </nav>

@@ -57,13 +57,19 @@ public class TuyenController {
     @GetMapping("sua-tuyen/{id}")
     public String suaTuyen(@PathVariable("id") Integer id, ModelMap model) {
         model.addAttribute("tuyenDTO", tuyenService.timTuyenDTO(id));
-        model.addAttribute("path", new PathDTO());
+        model.addAttribute("message", "");
         model.addAttribute("mode", "SUA");
         return "tuyen";
     }
 
     @PostMapping("sua-tuyen")
-    public String suaTuyen(@ModelAttribute("tuyenDTO") TuyenDTO tuyenDTO) throws ParseException {
+    public String suaTuyen(@ModelAttribute("tuyenDTO") TuyenDTO tuyenDTO, ModelMap model) throws ParseException {
+        if (this.tuyenService.isTuyenExistedUpdate(tuyenDTO)) {
+            model.addAttribute("tuyenDTO", tuyenService.timTuyenDTO(tuyenDTO.getId()));
+            model.addAttribute("message", "Tuyến đã tồn tại.");
+            model.addAttribute("mode", "SUA");
+            return "tuyen";
+        }
         this.tuyenService.suaTuyenDTO(tuyenDTO);
         return "redirect:/tuyen";
     }

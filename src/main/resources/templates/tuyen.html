@@ -79,6 +79,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
+                            <p th:text="${message}" class="alert alert-warning"></p>
                             <h1>Sửa tuyến</h1>
                             <form th:action="@{/tuyen/sua-tuyen}" method="post" th:object="${tuyenDTO}">
                                 <input hidden=""/>
@@ -86,12 +87,7 @@
                                     <input th:field="*{id}" hidden/>
                                     <input th:field="*{status}" hidden>
                                     <label class="control-label" > Tên tuyến </label>
-                                    <select th:field="*{tenTuyen}"class="form-control text-secondary" required>
-                                        <th:block>
-                                            <option th:text="${path.getPathForward()}" th:value="${path.getPathForward()}"/>
-                                            <option th:text="${path.getPathReverse()}" th:value="${path.getPathReverse()}"/>
-                                        </th:block>
-                                    </select>
+                                    <input type="text" class="form-control" th:field="*{tenTuyen}" required readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Thời gian</label>
@@ -99,7 +95,7 @@
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success" value="Submit">Sửa</button>
-                                <a class="btn btn-danger" href="back" role="button">Trở về</a>
+                                <a class="btn btn-danger" th:href="@{/tuyen}" role="button">Trở về</a>
                             </form>
                         </div>
                     </div>
@@ -109,8 +105,8 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
+                            <p th:text="${message}" class="alert alert-danger"></p>
                             <h1>Thêm tuyến</h1>
-                            <p th:text="${message}" th:value="${message}"></p>
                             <form th:action="@{/tuyen/them-tuyen}" method="post" th:object="${tuyenDTO}">
                                 <div class="form-group">
                                     <label class="control-label"> Tên tuyến </label>

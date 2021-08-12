@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -39,9 +40,7 @@ public class VeServiceImpl implements VeService {
     @Override
     public void xoaVe(Integer id) {
         Ve ve = veRepository.findById(id).get();
-        ve.getSeat().setStatus(true);
-        ve.setXoa(false);
-        this.veRepository.save(ve);
+        this.veRepository.delete(ve);
     }
 
     @Override
@@ -156,8 +155,13 @@ public class VeServiceImpl implements VeService {
         Date start = new SimpleDateFormat("yyyy-MM-dd").parse(search.getStart());
         Date end = new SimpleDateFormat("yyyy-MM-dd").parse(search.getEnd());
 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String strStart = dateFormat.format(start);
+        String strEnd = dateFormat.format(end);
+
         User user = this.userRepository.findByUsername(username);
-        List<Ve> list = this.veRepository.findAllVeFromDateToDate(user.getId(), start, end);
+        List<Ve> list = this.veRepository.findAllVeFromDateToDate(user.getId(), strStart, strEnd);
         Ve temp = new Ve();
         List<VeDTO> veDTOList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {

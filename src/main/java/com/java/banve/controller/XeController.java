@@ -35,6 +35,7 @@ public class XeController {
     @GetMapping("/them-xe")
     public String themXe(ModelMap model) {
         model.addAttribute("mode", "THEM");
+        model.addAttribute("message", "");
         model.addAttribute("xeDTO", new XeDTO());
         model.addAttribute("xeSeatNumber", new XeSeatNumber());
         model.addAttribute("loais", this.loaiService.tatCaLoai());
@@ -42,8 +43,15 @@ public class XeController {
     }
 
     @PostMapping("/them-xe")
-    public String themXe(XeDTO xeDTO) {
-
+    public String themXe(XeDTO xeDTO, ModelMap model) {
+        if (this.xeService.isXeExisted(xeDTO)) {
+            model.addAttribute("mode", "THEM");
+            model.addAttribute("xeDTO", new XeDTO());
+            model.addAttribute("message", "Tên xe đã tồn tại.");
+            model.addAttribute("xeSeatNumber", new XeSeatNumber());
+            model.addAttribute("loais", this.loaiService.tatCaLoai());
+            return "xe";
+        }
         this.xeService.themXe(xeDTO);
         return "redirect:/xe";
     }

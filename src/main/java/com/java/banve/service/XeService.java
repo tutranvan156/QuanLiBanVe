@@ -20,4 +20,5 @@ public interface XeService {
     XeDTO timXeDTO(Integer id);
     List<Xe> findXeLimit();
     List<Xe> findAllXeFree();
+    Boolean isXeExisted(XeDTO xeDTO);
 }

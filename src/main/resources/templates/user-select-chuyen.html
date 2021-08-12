@@ -120,8 +120,8 @@
             <div class="card card-body">
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
-                        <input name="gia" type="radio" class="form-check-input styled-checkbox" value="100"> <label
-                            class="form-check-label"> <i class="icon-Group-9"></i> <span>Dưới 100.000 VND</span>
+                        <input name="gia" type="radio" class="form-check-input styled-checkbox"> <label
+                            class="form-check-label"> <i class="icon-Group-9"></i> <span>Dưới 300.000 VND</span>
                     </label>
                     </div>
                 </div>
@@ -129,48 +129,15 @@
                     <div class="form-check">
                         <input name="gia" type="radio" class="form-check-input styled-checkbox" value="150" id="gia">
                         <label class="form-check-label"> <i class="icon-Group-9"></i>
-                            <span>Từ 100.000 - 200.000 VND</span>
+                            <span>Từ 300.000 - 500.000 VND</span>
                         </label>
                     </div>
                 </div>
                 <div class="list-group-item list-group-item-action">
                     <div class="form-check">
                         <input name="gia" type="radio" class="form-check-input styled-checkbox" value="200"> <label
-                            class="form-check-label"> <i class="icon-Group-9"></i> <span>Trên 200.000 VND</span>
+                            class="form-check-label"> <i class="icon-Group-9"></i> <span>Trên 500.000 VND</span>
                     </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="btn btn-primary" role="button" aria-expanded="true">GIỜ XUẤT HÀNH</a>
-        <div>
-            <div class="card card-body">
-                <div class="list-group-item list-group-item-action">
-                    <div class="form-check">
-                        <input name="gio" type="radio" class="form-check-input styled-checkbox" value="trước 6:00">
-                        <label class="form-check-label"> <i class="fas fa-mug-hot"></i> <span>Trước 6:00 sáng</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="list-group-item list-group-item-action">
-                    <div class="form-check">
-                        <input name="gio" type="radio" class="form-check-input styled-checkbox" value="6:00-12:00">
-                        <label class="form-check-label"> <i class="fas fa-sun"></i> <span>6:00 - 12:00</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="list-group-item list-group-item-action">
-                    <div class="form-check">
-                        <input name="gio" type="radio" class="form-check-input styled-checkbox" value="12:00-18:00">
-                        <label class="form-check-label"> <i class="fas fa-cloud-sun"></i> <span>12:00 - 18:00</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="list-group-item list-group-item-action">
-                    <div class="form-check">
-                        <input name="gio" type="radio" class="form-check-input styled-checkbox" value="sau 18:00">
-                        <label class="form-check-label"> <i class="fas fa-moon"></i> <span>Sau 18:00</span>
-                        </label>
                     </div>
                 </div>
             </div>
@@ -178,16 +145,14 @@
 
         <a class="btn btn-danger" data-toggle="collapse" href="#" role="button" aria-expanded="true" id="btn">Tìm
             Kiếm</a>
-
-
     </ul>
 
 </div>
 </ul>
 
 </div>
-
 <div style="margin-left: 450px;margin-top: 80px;">
+    <a style="margin-left: 20px;margin-bottom: 10px; width: 20%" th:href="@{/user/user-chuyen-infor}" class="btn btn-primary">Tất cả chuyến</a>
     <table class="table table-hover">
         <tr>
             <th>STT</th>

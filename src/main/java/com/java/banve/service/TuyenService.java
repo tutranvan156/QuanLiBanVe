@@ -17,5 +17,6 @@ public interface TuyenService {
     void suaTuyenDTO(TuyenDTO tuyenDTO) throws ParseException;
     void themTuyenDTO(TuyenDTO tuyenDTO) throws ParseException;
     Boolean isTuyenExisted(TuyenDTO tuyenDTO) throws ParseException;
+    Boolean isTuyenExistedUpdate(TuyenDTO tuyenDTO) throws ParseException;
 
 }
